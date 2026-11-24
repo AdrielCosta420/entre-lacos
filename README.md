@@ -36,18 +36,24 @@ npm run build    # gera dist/
 
 ## Deploy
 
-`.github/workflows/deploy.yml` roda a cada push na `main`: testes → type-check → build → GitHub Pages. A URL e o caminho base vêm de `actions/configure-pages`, então nada no código depende do dono do repositório.
+`.github/workflows/deploy.yml` roda a cada push na `main`: testes → type-check → build → GitHub Pages. A URL e o caminho base vêm de `actions/configure-pages`, então nada no código depende do dono nem do nome do repositório. O Pages já está configurado (**Settings → Pages → Source: GitHub Actions**).
 
-Primeira vez: em **Settings → Pages → Source**, escolha **GitHub Actions**.
+## Repositório e acesso
 
-## Transferência para a conta da Maria Eduarda
+O repositório fica na organização [`entre-lacos`](https://github.com/entre-lacos), com o nome `entre-lacos.github.io`. Esse nome publica o site na raiz, **https://entre-lacos.github.io/**, num endereço que não depende da conta de ninguém.
 
-O repositório começa na conta do desenvolvedor e vai para a conta da Maria Eduarda, que terá o GitHub Pro do Student Developer Pack. Isso permite manter o repositório privado e o site público.
+O repositório é **público**: no plano gratuito, organizações só publicam o Pages a partir de repositórios públicos. Rascunhos nunca aparecem no site, mas ficam visíveis no GitHub, no arquivo e no histórico.
 
-1. Confirme que o Student Developer Pack dela foi **aprovado** e que o Pro está ativo na conta.
-2. **Settings → General → Danger Zone → Transfer ownership** → usuário dela. Ela precisa aceitar pelo e-mail, e o convite expira rápido.
-3. Na conta dela: **Settings → Pages**, confira se a Source continua **GitHub Actions**.
-4. Só então torne o repositório **privado** (**Danger Zone → Change visibility**). Sem o Pro, o Pages de um repositório privado para de funcionar.
-5. **Settings → Collaborators:** adicione o desenvolvedor e as demais integrantes.
-6. Em [app.pagescms.org](https://app.pagescms.org), instale o GitHub App do Pages CMS **na conta dela** e dê acesso a este repositório.
-7. Rode o deploy (**Actions → Deploy to GitHub Pages → Run workflow**). A URL nova será `https://<usuario-dela>.github.io/<repositorio>/`. A URL antiga não redireciona, então não divulgue o link antes da transferência.
+Para dar acesso a uma integrante:
+
+1. Ela cria a própria conta no GitHub.
+2. Na organização, **People → Invite member**: a Maria Eduarda como **Owner**; as demais como **Member**, com permissão de escrita no repositório.
+3. Em [app.pagescms.org](https://app.pagescms.org), instale o GitHub App do Pages CMS **na organização `entre-lacos`** e dê acesso a este repositório.
+
+### Se o grupo quiser rascunhos privados
+
+Nenhum caminho é urgente. Os três funcionam sem mudar o código:
+
+- **GitHub Pro da Maria Eduarda** (Student Developer Pack): transferir o repositório para a conta dela e torná-lo privado. A URL passa a ser `https://<usuario-dela>.github.io/<repositorio>/`, e a atual não redireciona.
+- **GitHub Team na organização** (pago): repositório privado, mesma URL.
+- **Cloudflare Pages ou Netlify** (grátis): repositório privado e endereço `*.pages.dev` ou `*.netlify.app`. Exige trocar o deploy.

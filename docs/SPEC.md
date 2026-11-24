@@ -1,7 +1,6 @@
 # Spec — Entre Laços v1
 
-**Estado em 23/11/2026:** o esqueleto está pronto e verificado: todas as páginas, o modelo de conteúdo, o filtro de rascunho, a config do painel e o workflow de deploy. A identidade visual editorial ("a revista costurada") foi aprovada na home e aplicada a todas as páginas; o sistema está registrado em `DESIGN.md` e o contexto de produto em `PRODUCT.md`. Ainda faltam:
-- repositório no GitHub (ainda não criado; nada commitado);
+**Estado em 23/11/2026:** o esqueleto está pronto e verificado: todas as páginas, o modelo de conteúdo, o filtro de rascunho, a config do painel e o workflow de deploy. A identidade visual editorial ("a revista costurada") foi aprovada na home e aplicada a todas as páginas; o sistema está registrado em `DESIGN.md` e o contexto de produto em `PRODUCT.md`. O repositório está em [`entre-lacos/entre-lacos.github.io`](https://github.com/entre-lacos/entre-lacos.github.io) e o site no ar em https://entre-lacos.github.io/, por enquanto só com conteúdo de exemplo. Ainda faltam:
 - painel testado de verdade;
 - busca;
 - calibrar a paleta pelo arquivo do logo e trocar os avatares de iniciais pelas fotos;
@@ -9,7 +8,7 @@
 
 Os próximos passos estão na [seção 6](#6-plano-de-implementação).
 
-Fontes: respostas do grupo em [levantamento.md](levantamento.md); operação (rodar, deploy, transferência) no [README](../README.md).
+Fontes: respostas do grupo em [levantamento.md](levantamento.md); operação (rodar, deploy, acesso) no [README](../README.md).
 
 ## 1. Contexto e objetivo
 
@@ -30,7 +29,7 @@ Fontes: respostas do grupo em [levantamento.md](levantamento.md); operação (ro
 | Painel (Pages CMS): criar, editar, excluir, salvar como rascunho e publicar resenhas; editar perfis | Fluxo de aprovação editorial: todas publicam direto |
 | Contato por WhatsApp individual (link wa.me) e Instagram do projeto | Permissão por autora: qualquer colaboradora edita qualquer resenha (limite aceito do CMS Git) |
 | Busca de resenhas com Pagefind (resposta 22; a implementar) | Contas de leitor, comentários, curtidas, newsletter, integração com Instagram, eventos (resposta 23: só se o projeto vingar) |
-| Deploy automático no GitHub Pages; repositório privado após a transferência | Domínio próprio (resposta 29) |
+| Deploy automático no GitHub Pages, na organização `entre-lacos` | Domínio próprio (resposta 29) |
 | Visual com a identidade do Instagram, títulos com serifa, mobile-first, sem cara de IA | Imagens no meio do texto da resenha (só capa; `media: false` no rich-text) |
 | Campos da resenha definidos pelas respostas 16–20 (pendentes) | Publicação agendada para data futura |
 
@@ -43,7 +42,7 @@ Fontes: respostas do grupo em [levantamento.md](levantamento.md); operação (ro
 | Integrante sem WhatsApp | Botão não aparece | `components/WhatsAppLink.astro` |
 | Integrante sem resenhas | A seção de resenhas some do perfil | `pages/equipe/[id].astro` |
 | Resenha sem capa | Bloco com o título do livro no lugar da imagem | `components/ReviewCard.astro` |
-| Rascunho (`draft: true`) | Não gera página nem aparece em listas. Continua no histórico do git, que fica privado depois da transferência | `lib/content.ts` → `getPublishedReviews()` |
+| Rascunho (`draft: true`) | Não gera página nem aparece em listas. Continua no arquivo e no histórico do git, visíveis no GitHub enquanto o repositório for público | `lib/content.ts` → `getPublishedReviews()` |
 | WhatsApp em formato errado | O formulário do CMS recusa (pattern). Se passar, o schema quebra o build | `.pages.yml`, `content.config.ts`, `lib/whatsapp.ts` |
 | Resenha aponta para integrante que não existe | O build falha com mensagem. Excluir ou renomear integrante está bloqueado no CMS | `lib/content.ts`, `.pages.yml` (`operations`) |
 | Build falha por dado inválido | O deploy não acontece e a versão anterior segue no ar. Corrige-se pelo painel | `.github/workflows/deploy.yml` |
@@ -65,7 +64,7 @@ Fontes: respostas do grupo em [levantamento.md](levantamento.md); operação (ro
 | Hospedagem | GitHub Pages | Netlify, Vercel, Cloudflare Pages | Grátis e já integrado ao repositório. Aceitamos não ter headers nem rewrites customizados |
 | Gerador | Astro 7, só estático | Nuxt + Nuxt Content; SPA Vue | Site de conteúdo: HTML pronto é bom para SEO e tem menos peças. Componentes Vue entram como ilhas, se precisar |
 | Painel | Pages CMS (app hospedado, baseado em Git) | Decap CMS (exige proxy OAuth; fluxo editorial desnecessário); CMS SaaS; Supabase com painel próprio; WordPress/Ghost | Zero infra, login com GitHub, conteúdo versionado no próprio repositório |
-| Privacidade dos rascunhos | Repositório privado com o GitHub Pro do Student Developer Pack (conta da Maria Eduarda) | Repositório público | Rascunhos e histórico não ficam públicos. Plano B se o Pack não sair: repositório público |
+| Onde o repositório vive | Organização gratuita `entre-lacos`, repositório público `entre-lacos.github.io` (decidido em 23/11/2026) | Conta pessoal da Maria Eduarda, privada com o Pro do Student Pack | URL sem nome de pessoa e sem depender do Pack. Custo aceito: rascunhos visíveis no GitHub, nunca no site. Caminhos para privacidade no README |
 | Testes | `node:test` nativo (o Node 24 roda `.ts` direto) | Vitest | Nenhuma dependência a mais. Só funções puras são testadas |
 | Node | 24, fixado via Volta no `package.json` | — | O Astro 7 exige Node ≥ 22.23.4, e o Node global do Adriel é o 20 (EOL). O CI lê o mesmo campo |
 
@@ -107,16 +106,13 @@ O schema em `src/content.config.ts` e o formulário em `.pages.yml` descrevem os
 - [ ] Nenhuma copy usa termos reservados a quem tem CRP (psicóloga, especialista, agendar atendimento)
 - [ ] Lighthouse mobile na página de resenha: acessibilidade ≥ 95 e performance ≥ 90 (meta proposta, a confirmar)
 - [ ] O grupo aprova o visual (paleta do logo, serifa nos títulos)
-- [ ] Repositório transferido e privado, com o site no ar na URL definitiva
+- [x] Repositório na organização `entre-lacos`, com o site no ar na URL definitiva (https://entre-lacos.github.io/)
 
 ## 6. Plano de implementação
 
 Ordem proposta. Cada passo começa com o OK do Adriel.
 
-1. **Publicar o esqueleto.**
-    - Commit inicial.
-    - Criar o repositório no GitHub. O nome entra na URL: `entre-lacos` é a sugestão, decidir.
-    - Ativar o Pages (Source: GitHub Actions) e fazer o primeiro deploy.
+1. **Publicar o esqueleto.** Feito: repositório na organização `entre-lacos`, Pages ativo, deploy rodando a cada push na `main`.
 2. **Conectar o Pages CMS** na conta do Adriel e percorrer o fluxo completo com o conteúdo de exemplo.
     - Conferir como o CMS grava cada campo: autora, capa, data, temas, objeto livro, rascunho.
     - Ajustar `toEntryId` ou o schema se algum formato divergir.
@@ -130,7 +126,7 @@ Ordem proposta. Cada passo começa com o OK do Adriel.
     - Transformar as fichas individuais em arquivos de `integrantes`.
     - Escrever o texto do Sobre, com o grupo.
     - Apagar os exemplos: `ana-exemplo`, `bia-exemplo`, `resenha-de-exemplo`, `rascunho-de-exemplo`, as quatro `exemplo-*.md` (resenhas de domínio público criadas para validar o visual) e `capa-exemplo.png`. Antes de apagar o rascunho de exemplo, considerar transformar a checagem "rascunho não vaza no build" num teste automatizado.
-7. **Transferir** para a Maria Eduarda depois que o Student Pack dela for aprovado (checklist no README). Só então divulgar o link.
+7. **Dar acesso** às integrantes: Maria Eduarda como dona da organização, as demais como membros, e o Pages CMS instalado na organização (checklist no README). Depois de apagar os exemplos, divulgar o link.
 
 ## 7. Pendências
 
@@ -141,14 +137,12 @@ Ordem proposta. Cada passo começa com o OK do Adriel.
 | Arquivo do logo | Grupo |
 | Texto da página Sobre | Grupo |
 | Número de integrantes | Grupo |
-| Nome do repositório no GitHub | Adriel |
-| Conta GitHub e Student Developer Pack da Maria Eduarda. Ela mesma cria e solicita, com o Adriel junto: o login é pessoal e a solicitação é uma declaração dela | Maria Eduarda |
+| Conta GitHub da Maria Eduarda, para entrar como dona da organização. O Student Pack só importa se o grupo quiser repositório privado | Maria Eduarda |
 | Resposta padrão para pedidos de terapia pelo WhatsApp | Grupo |
 
 ## 8. Riscos e dívidas
 
 - **Formatos do Pages CMS não verificados.** A documentação não diz o valor padrão do `reference`, nem o formato exato do `list` e do `date`. Mitigação: `toEntryId` e o passo 2 do plano.
 - **Paleta provisória.** Os tons foram estimados a olho a partir do Instagram; calibrar contra o arquivo do logo.
-- **Repositório público até a transferência.** Por enquanto só há conteúdo de exemplo nele.
+- **Repositório público.** Rascunhos e histórico ficam visíveis no GitHub (nunca no site). Por enquanto só há conteúdo de exemplo; se o grupo quiser privacidade, ver o README.
 - **Fotos originais pesadas** se acumulam no repositório. Se pesar, considerar compressão automática no upload.
-- **O Student Pack pode atrasar ou ser recusado.** O plano B é manter o repositório público: os rascunhos ficam visíveis no GitHub, mas não no site.

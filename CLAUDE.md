@@ -23,7 +23,7 @@ As integrantes são estudantes, sem CRP, e o site oferece só conteúdo.
 
 - `src/lib/*.ts` (exceto `content.ts` e `site.ts`) são funções puras, sem import do Astro, cada uma com teste em `*.test.ts` (`node:test`). Imports relativos levam a extensão `.ts`.
 - `src/lib/content.ts` é a única porta para `astro:content`. Toda leitura de resenhas passa por `getPublishedReviews()`, para que o filtro de rascunho exista num lugar só.
-- Todo link interno e asset passa por `href()` (`src/lib/site.ts`): no Pages o site roda sob `/<repo>/`.
+- Todo link interno e asset passa por `href()` (`src/lib/site.ts`). Hoje o site roda na raiz (`entre-lacos.github.io`), mas um repositório com outro nome roda sob `/<repo>/`, e o código precisa funcionar nos dois casos.
 - Datas de conteúdo são exibidas com `formatDate` (formata em UTC).
 - `src/content.config.ts` (schema) e `.pages.yml` (formulário do CMS) mudam juntos, no mesmo commit.
 
