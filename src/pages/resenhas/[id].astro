@@ -35,7 +35,7 @@ const [{ Content }, authorReviews] = await Promise.all([
 ---
 
 <BaseLayout title={title} description={summary}>
-  <article class="reading">
+  <article>
     {/* The logo's thread across the top of the screen, as long as the part of
         the text already read. Decorative: the scroll position says the same. */}
     <div class="reading-thread" aria-hidden="true"></div>
@@ -94,16 +94,8 @@ const [{ Content }, authorReviews] = await Promise.all([
 </BaseLayout>
 
 <style>
-  /* Progress follows the review text only (not the author block or the
-     footer): from the text's top reaching the top of the screen to its end
-     reaching the bottom. Browsers without scroll-driven animations show no
-     thread at all. */
-  .reading {
-    timeline-scope: --reading;
-  }
-  .prose {
-    view-timeline: --reading block;
-  }
+  /* The reading thread (script below). Hidden until the script sets its
+     length, so without JavaScript there is simply no thread. */
   .reading-thread {
     position: fixed;
     inset: 0 0 auto;
@@ -113,23 +105,6 @@ const [{ Content }, authorReviews] = await Promise.all([
     transform: scaleX(0);
     transform-origin: left;
     pointer-events: none;
-  }
-  @supports (animation-timeline: view()) {
-    /* Longhands only: the build's minifier folds an `animation` shorthand and
-       `animation-timeline` into one shorthand, which Chrome rejects whole. */
-    .reading-thread {
-      animation-name: reading-progress;
-      animation-duration: auto;
-      animation-timing-function: linear;
-      animation-fill-mode: both;
-      animation-timeline: --reading;
-      animation-range: contain 0% contain 100%;
-    }
-  }
-  @keyframes reading-progress {
-    to {
-      transform: scaleX(1);
-    }
   }
 
   .review-head {
@@ -226,3 +201,56 @@ const [{ Content }, authorReviews] = await Promise.all([
     }
   }
 </style>
+
+<script>
+  /*
+   * The reading thread: the logo's thread across the top of the screen, as
+   * long as the part of the review text already read (the author block and
+   * the footer don't count).
+   *
+   * Script, not a CSS scroll timeline: on iOS, Safari's toolbar changes the
+   * visible height whenever the reader scrolls back a little, and a range
+   * measured against that height jumped. Here the screen is measured as the
+   * large viewport (100lvh), which the toolbar doesn't change, so progress
+   * only moves with the text.
+   */
+  const thread = document.querySelector<HTMLElement>('.reading-thread');
+  const prose = document.querySelector<HTMLElement>('.prose');
+
+  if (thread && prose) {
+    const largeViewport = document.createElement('div');
+    largeViewport.style.cssText =
+      'position: fixed; top: 0; width: 0; height: 100lvh; visibility: hidden; pointer-events: none';
+    document.body.append(largeViewport);
+
+    // Layout is read only when sizes change (fonts arriving, a new text size,
+    // rotation), never while scrolling: scrolling just does arithmetic.
+    let start = 0;
+    let distance = 1;
+    const measure = () => {
+      start = prose.getBoundingClientRect().top + window.scrollY;
+      distance = Math.max(1, prose.offsetHeight - largeViewport.offsetHeight);
+      draw();
+    };
+
+    let queued = false;
+    const draw = () => {
+      queued = false;
+      const read = Math.min(1, Math.max(0, (window.scrollY - start) / distance));
+      thread.style.transform = `scaleX(${read})`;
+    };
+
+    window.addEventListener(
+      'scroll',
+      () => {
+        if (!queued) {
+          queued = true;
+          requestAnimationFrame(draw);
+        }
+      },
+      { passive: true },
+    );
+    window.addEventListener('resize', measure);
+    new ResizeObserver(measure).observe(prose);
+  }
+</script>

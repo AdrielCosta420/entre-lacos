@@ -378,6 +378,16 @@ main:has(> .flush-end:last-child) + .site-footer {
     view-transition-name: var(--cover-transition, none);
     view-transition-class: book-cover;
   }
+
+  /* Touch screens have no hover to single out the book about to be opened,
+     and iOS doesn't focus a tapped link: there, every listed book is named.
+     Lists are short and the thumbnails small, so the snapshots stay cheap. */
+  @media (hover: none) {
+    .opens-review .book {
+      view-transition-name: var(--cover-transition, none);
+      view-transition-class: book-cover;
+    }
+  }
 }
 
 /*

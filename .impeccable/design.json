@@ -319,8 +319,8 @@
       },
       {
         "name": "reading-thread",
-        "value": "scaleX 0 to 1 on a view timeline of the review prose, animation-range: contain; longhands only",
-        "purpose": "Reading progress drawn with the logo's thread; decorative; absent without scroll-driven animation support."
+        "value": "scaleX 0 to 1 set by a small script: scroll position against the prose, screen measured as 100lvh, layout read only on resize (ResizeObserver), one requestAnimationFrame per scroll burst",
+        "purpose": "Reading progress drawn with the logo's thread; decorative; absent without JavaScript. Not a CSS scroll timeline because iOS Safari's toolbar made the range jump."
       },
       {
         "name": "highlight-sweep",
