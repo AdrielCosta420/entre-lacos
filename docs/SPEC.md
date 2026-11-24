@@ -3,7 +3,7 @@
 **Estado em 23/11/2026:** o esqueleto está pronto e verificado: todas as páginas, o modelo de conteúdo, o filtro de rascunho, a config do painel e o workflow de deploy. A identidade visual editorial ("a revista costurada") foi aprovada na home e aplicada a todas as páginas; o sistema está registrado em `DESIGN.md` e o contexto de produto em `PRODUCT.md`. O repositório está em [`entre-lacos/entre-lacos.github.io`](https://github.com/entre-lacos/entre-lacos.github.io) e o site no ar em https://entre-lacos.github.io/, por enquanto só com conteúdo de exemplo. Ainda faltam:
 - painel testado de verdade;
 - busca;
-- calibrar a paleta pelo arquivo do logo e trocar os avatares de iniciais pelas fotos;
+- trocar os avatares de iniciais pelas fotos e conseguir o logo em alta resolução (o arquivo atual tem 150×150 px);
 - conteúdo real.
 
 Os próximos passos estão na [seção 6](#6-plano-de-implementação).
@@ -117,9 +117,9 @@ Ordem proposta. Cada passo começa com o OK do Adriel.
     - Conferir como o CMS grava cada campo: autora, capa, data, temas, objeto livro, rascunho.
     - Ajustar `toEntryId` ou o schema se algum formato divergir.
 3. **Busca com Pagefind** (dependência nova, confirmar antes).
-4. **Fase visual.** Feita: direção editorial aprovada, fontes Piazzolla e Archivo (hospedadas pelo próprio site, sem dependência), resenhas organizadas por categoria. Falta, quando o logo chegar:
-    - Calibrar os tons de vinho, rosa e do fio vermelho contra o arquivo.
-    - Decidir se o monograma entra no site (favicon, expediente); hoje o masthead é tipográfico.
+4. **Fase visual.** Feita: direção editorial aprovada, fontes Piazzolla e Archivo (hospedadas pelo próprio site, sem dependência), resenhas organizadas por categoria, paleta calibrada pelo arquivo do logo (vinho, rosa e o fio rosa) e o logo como favicon. Falta:
+    - Um original do logo em alta resolução (o atual tem 150×150 px).
+    - Decidir se o monograma entra em mais algum lugar além do favicon (o expediente, por exemplo); hoje o masthead é tipográfico.
     - `resenha-de-exemplo` está como rascunho nesta fase; é a única com capa enviada, então reative-a para validar o caminho de capa em imagem.
 5. **Campos da resenha** conforme as respostas 16–20: aviso de conteúdo sensível, citação, contato do CVV e o que mais vier. Schema e `.pages.yml` mudam juntos.
 6. **Conteúdo real.**
@@ -143,6 +143,6 @@ Ordem proposta. Cada passo começa com o OK do Adriel.
 ## 8. Riscos e dívidas
 
 - **Formatos do Pages CMS não verificados.** A documentação não diz o valor padrão do `reference`, nem o formato exato do `list` e do `date`. Mitigação: `toEntryId` e o passo 2 do plano.
-- **Paleta provisória.** Os tons foram estimados a olho a partir do Instagram; calibrar contra o arquivo do logo.
+- **Logo em baixa resolução.** O arquivo tem 150×150 px: serve de favicon, mas não para usos grandes. Pedir o original ao grupo.
 - **Repositório público.** Rascunhos e histórico ficam visíveis no GitHub (nunca no site). Por enquanto só há conteúdo de exemplo; se o grupo quiser privacidade, ver o README.
 - **Fotos originais pesadas** se acumulam no repositório. Se pesar, considerar compressão automática no upload.

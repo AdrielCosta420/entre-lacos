@@ -38,8 +38,8 @@ A student-run reading publication: each review is a book read by a named Psychol
 ## Brand Commitments
 
 - Name: **Entre Laços**. Team is called "Estudantes de Psicologia"; profiles list "áreas de interesse".
-- Logo (file pending): white serif "EL" monogram on a wine circle, with a thin red thread running through the letters (the "laço").
-- Palette follows the Instagram, confirmed again on 2026-11-23: the logo's wine, the light pink of the highlights, a light ground.
+- Logo (`src/assets/uploads/logo-el.jpg`, 150x150 px, a higher-resolution original is still wanted): white serif "EL" monogram on a wine circle over a pink ground, with a thin pink thread looping through the letters (the "laço"). It is the site's favicon.
+- Palette follows the Instagram and the logo: the site's wine, pink and thread were sampled from the logo file and approved on 2026-11-23, along with a light ground.
 - Titles in a serif "with the feel of a book", elegant.
 - Requested feel: welcoming, light, and humane, while modern and professional. It must **not look AI-generated**; UX and mobile first.
 - Design rules in [docs/regras-design.md](docs/regras-design.md) are binding: editorial publication, not a landing page.

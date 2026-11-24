@@ -1,87 +1,87 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-24T00:11:47+00:00",
+  "generatedAt": "2026-11-23T12:00:00+00:00",
   "title": "Design System: Entre Laços",
   "extensions": {
     "colorMeta": {
       "wine": {
         "role": "primary",
         "displayName": "Bookcloth Wine",
-        "canonical": "#6b1424",
-        "oklch": "oklch(35.0% 0.120 16.2)",
+        "canonical": "#6c0922",
+        "oklch": "oklch(34.4% 0.129 15.1)",
         "tonalRamp": [
           "#1e0004",
-          "#4b0213",
-          "#741e2b",
-          "#994049",
-          "#bf6269",
-          "#e6858b",
-          "#fdb2b5",
+          "#4b0114",
+          "#77182b",
+          "#9d3c49",
+          "#c35e69",
+          "#ea818b",
+          "#feb2b6",
           "#ffe8e9"
         ]
       },
       "wine-deep": {
         "role": "primary",
         "displayName": "Deep Wine",
-        "canonical": "#4a0d19",
-        "oklch": "oklch(27.4% 0.090 14.6)",
+        "canonical": "#4b0618",
+        "oklch": "oklch(26.9% 0.099 13.1)",
         "tonalRamp": [
-          "#1e0004",
-          "#470a17",
-          "#692a33",
-          "#8d4a51",
-          "#b26b71",
-          "#d78e93",
-          "#feb1b7",
-          "#ffe8e9"
+          "#1e0005",
+          "#490417",
+          "#6c2733",
+          "#904751",
+          "#b56871",
+          "#db8b93",
+          "#feb1b8",
+          "#ffe8ea"
         ]
       },
       "thread": {
         "role": "secondary",
-        "displayName": "Red Thread",
-        "canonical": "#c4283f",
-        "oklch": "oklch(53.8% 0.190 19.2)",
+        "displayName": "Logo Thread",
+        "canonical": "#fcb4c5",
+        "oklch": "oklch(84.2% 0.086 3.5)",
         "tonalRamp": [
-          "#1e0003",
-          "#4b020f",
-          "#7e0720",
-          "#b41032",
-          "#dd4253",
-          "#fe7279",
-          "#fdb2b2",
-          "#ffe8e8"
+          "#1e0008",
+          "#440c21",
+          "#662c3d",
+          "#894b5c",
+          "#ae6c7d",
+          "#d38e9f",
+          "#fab2c3",
+          "#ffe8ec"
         ]
       },
       "rose": {
         "role": "secondary",
         "displayName": "Highlighter Rose",
-        "canonical": "#f2b8c2",
-        "oklch": "oklch(83.8% 0.068 7.1)",
+        "canonical": "#f4aebd",
+        "oklch": "oklch(82.1% 0.084 5.0)",
         "tonalRamp": [
-          "#1d0007",
-          "#3f141f",
-          "#60323c",
-          "#83515a",
-          "#a6717b",
-          "#cb949d",
-          "#f1b7c1",
-          "#ffe8eb"
+          "#1e0008",
+          "#440e20",
+          "#662d3c",
+          "#894c5b",
+          "#ad6d7c",
+          "#d38f9e",
+          "#f9b3c2",
+          "#ffe8ec"
         ]
       },
       "endpaper": {
         "role": "tertiary",
         "displayName": "Endpaper",
-        "canonical": "#f6dfe3",
-        "oklch": "oklch(92.3% 0.026 5.7)",
+        "canonical": "#fadae1",
+        "oklch": "oklch(91.7% 0.037 3.0)",
         "tonalRamp": [
-          "#14070a",
-          "#302023",
-          "#4e3c40",
-          "#6f5b5f",
-          "#917c80",
-          "#b49fa2",
-          "#d9c3c7",
-          "#ffe8ec"
+          "#17050a",
+          "#341d23",
+          "#533a40",
+          "#74595f",
+          "#967a80",
+          "#ba9ca3",
+          "#dfc0c7",
+          "#ffe8ed"
         ]
       },
       "paper": {
@@ -135,33 +135,33 @@
       "on-wine": {
         "role": "neutral",
         "displayName": "On-Wine",
-        "canonical": "#fbeef0",
-        "oklch": "oklch(96.0% 0.014 6.7)",
+        "canonical": "#fdfcfb",
+        "oklch": "oklch(99.2% 0.002 67.8)",
         "tonalRamp": [
-          "#10090a",
-          "#2b2224",
-          "#493f41",
-          "#695e60",
-          "#8a7f81",
-          "#aea1a3",
-          "#d2c5c7",
-          "#f8ebed"
+          "#0c0b0a",
+          "#262524",
+          "#434241",
+          "#626160",
+          "#838281",
+          "#a6a5a4",
+          "#cac9c8",
+          "#efeeed"
         ]
       },
       "on-wine-muted": {
         "role": "neutral",
         "displayName": "On-Wine Muted",
-        "canonical": "#e2b3bb",
-        "oklch": "oklch(81.1% 0.055 7.0)",
+        "canonical": "#f4aebd",
+        "oklch": "oklch(82.1% 0.084 5.0)",
         "tonalRamp": [
-          "#1d0107",
-          "#3b1820",
-          "#5b353d",
-          "#7d545c",
-          "#a0757d",
-          "#c5979f",
-          "#eabbc3",
-          "#ffe8eb"
+          "#1e0008",
+          "#440e20",
+          "#662d3c",
+          "#894c5b",
+          "#ad6d7c",
+          "#d38f9e",
+          "#f9b3c2",
+          "#ffe8ec"
         ]
       },
       "cover-linen": {
@@ -339,7 +339,7 @@
       "refersTo": "link-more",
       "description": "The system's primary action: an editorial link with a drawn arrow that nudges forward on hover. There are no buttons.",
       "html": "<a class=\"ds-link ds-more\" href=\"#\">Ler a resenha<svg viewBox=\"0 0 16 16\" width=\"16\" height=\"16\" aria-hidden=\"true\"><path d=\"M3 8h9.5M8.5 4l4 4-4 4\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></a>",
-      "css": ":host{--color-wine:#6b1424;--color-wine-deep:#4a0d19;--color-thread:#c4283f;--color-rose:#f2b8c2;--color-endpaper:#f6dfe3;--color-paper:#fdfafa;--color-ink:#24161a;--color-muted:#6b585d;--color-on-wine:#fbeef0;--color-on-wine-muted:#e2b3bb;--font-serif:Piazzolla,Georgia,serif;--font-sans:Archivo,system-ui,sans-serif;--ease-out:cubic-bezier(0.16,1,0.3,1);--shadow-book:0 1px 2px rgb(36 8 14 / 0.16),0 10px 22px -10px rgb(36 8 14 / 0.45);--shadow-book-raised:0 2px 4px rgb(36 8 14 / 0.12),0 22px 34px -14px rgb(36 8 14 / 0.5);} .ds-link{color:var(--color-wine,#6b1424);text-decoration-thickness:max(1px,0.06em);text-underline-offset:0.2em;text-decoration-color:color-mix(in srgb,currentColor 40%,transparent);transition:text-decoration-color 150ms ease;}.ds-link:hover{text-decoration-color:currentColor;} .ds-link:focus-visible{outline:3px solid var(--color-wine,#6b1424);outline-offset:2px;} .ds-more{display:inline-flex;align-items:center;gap:0.35rem;min-height:44px;font-family:var(--font-sans);font-size:1rem;font-weight:500;} .ds-more svg{flex-shrink:0;transition:transform 250ms var(--ease-out);} .ds-more:hover svg{transform:translateX(3px);} @media (prefers-reduced-motion: reduce){.ds-more svg{transition:none;}.ds-more:hover svg{transform:none;}}"
+      "css": ":host{--color-wine:#6c0922;--color-wine-deep:#4b0618;--color-thread:#fcb4c5;--color-rose:#f4aebd;--color-endpaper:#fadae1;--color-paper:#fdfafa;--color-ink:#24161a;--color-muted:#6b585d;--color-on-wine:#fdfcfb;--color-on-wine-muted:#f4aebd;--font-serif:Piazzolla,Georgia,serif;--font-sans:Archivo,system-ui,sans-serif;--ease-out:cubic-bezier(0.16,1,0.3,1);--shadow-book:0 1px 2px rgb(36 8 14 / 0.16),0 10px 22px -10px rgb(36 8 14 / 0.45);--shadow-book-raised:0 2px 4px rgb(36 8 14 / 0.12),0 22px 34px -14px rgb(36 8 14 / 0.5);} .ds-link{color:var(--color-wine,#6c0922);text-decoration-thickness:max(1px,0.06em);text-underline-offset:0.2em;text-decoration-color:color-mix(in srgb,currentColor 40%,transparent);transition:text-decoration-color 150ms ease;}.ds-link:hover{text-decoration-color:currentColor;} .ds-link:focus-visible{outline:3px solid var(--color-wine,#6c0922);outline-offset:2px;} .ds-more{display:inline-flex;align-items:center;gap:0.35rem;min-height:44px;font-family:var(--font-sans);font-size:1rem;font-weight:500;} .ds-more svg{flex-shrink:0;transition:transform 250ms var(--ease-out);} .ds-more:hover svg{transform:translateX(3px);} @media (prefers-reduced-motion: reduce){.ds-more svg{transition:none;}.ds-more:hover svg{transform:none;}}"
     },
     {
       "name": "WhatsApp Link",
@@ -347,7 +347,7 @@
       "refersTo": "link-whatsapp",
       "description": "Off-site contact action: an editorial link at label size with a diagonal arrow meaning it leaves the site.",
       "html": "<a class=\"ds-link ds-whatsapp\" href=\"#\">Conversar com Ana no WhatsApp<svg viewBox=\"0 0 16 16\" width=\"14\" height=\"14\" aria-hidden=\"true\"><path d=\"M5 11 11 5M6 5h5v5\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></a>",
-      "css": ":host{--color-wine:#6b1424;--color-wine-deep:#4a0d19;--color-thread:#c4283f;--color-rose:#f2b8c2;--color-endpaper:#f6dfe3;--color-paper:#fdfafa;--color-ink:#24161a;--color-muted:#6b585d;--color-on-wine:#fbeef0;--color-on-wine-muted:#e2b3bb;--font-serif:Piazzolla,Georgia,serif;--font-sans:Archivo,system-ui,sans-serif;--ease-out:cubic-bezier(0.16,1,0.3,1);--shadow-book:0 1px 2px rgb(36 8 14 / 0.16),0 10px 22px -10px rgb(36 8 14 / 0.45);--shadow-book-raised:0 2px 4px rgb(36 8 14 / 0.12),0 22px 34px -14px rgb(36 8 14 / 0.5);} .ds-link{color:var(--color-wine,#6b1424);text-decoration-thickness:max(1px,0.06em);text-underline-offset:0.2em;text-decoration-color:color-mix(in srgb,currentColor 40%,transparent);transition:text-decoration-color 150ms ease;}.ds-link:hover{text-decoration-color:currentColor;} .ds-link:focus-visible{outline:3px solid var(--color-wine,#6b1424);outline-offset:2px;} .ds-whatsapp{display:inline-flex;align-items:center;gap:0.35rem;min-height:44px;font-family:var(--font-sans);font-size:1rem;font-weight:500;} .ds-whatsapp svg{flex:none;transition:transform 250ms var(--ease-out);} .ds-whatsapp:hover svg{transform:translate(2px,-2px);} @media (prefers-reduced-motion: reduce){.ds-whatsapp:hover svg{transform:none;}}"
+      "css": ":host{--color-wine:#6c0922;--color-wine-deep:#4b0618;--color-thread:#fcb4c5;--color-rose:#f4aebd;--color-endpaper:#fadae1;--color-paper:#fdfafa;--color-ink:#24161a;--color-muted:#6b585d;--color-on-wine:#fdfcfb;--color-on-wine-muted:#f4aebd;--font-serif:Piazzolla,Georgia,serif;--font-sans:Archivo,system-ui,sans-serif;--ease-out:cubic-bezier(0.16,1,0.3,1);--shadow-book:0 1px 2px rgb(36 8 14 / 0.16),0 10px 22px -10px rgb(36 8 14 / 0.45);--shadow-book-raised:0 2px 4px rgb(36 8 14 / 0.12),0 22px 34px -14px rgb(36 8 14 / 0.5);} .ds-link{color:var(--color-wine,#6c0922);text-decoration-thickness:max(1px,0.06em);text-underline-offset:0.2em;text-decoration-color:color-mix(in srgb,currentColor 40%,transparent);transition:text-decoration-color 150ms ease;}.ds-link:hover{text-decoration-color:currentColor;} .ds-link:focus-visible{outline:3px solid var(--color-wine,#6c0922);outline-offset:2px;} .ds-whatsapp{display:inline-flex;align-items:center;gap:0.35rem;min-height:44px;font-family:var(--font-sans);font-size:1rem;font-weight:500;} .ds-whatsapp svg{flex:none;transition:transform 250ms var(--ease-out);} .ds-whatsapp:hover svg{transform:translate(2px,-2px);} @media (prefers-reduced-motion: reduce){.ds-whatsapp:hover svg{transform:none;}}"
     },
     {
       "name": "Navigation",
@@ -355,23 +355,23 @@
       "refersTo": "nav-item",
       "description": "Archivo nav; hover draws a hairline from the left, the current item carries the rose highlighter stroke.",
       "html": "<nav class=\"ds-nav\"><a href=\"#\">Início</a><a href=\"#\" aria-current=\"page\">Resenhas<span class=\"ds-nav-mark\"></span></a><a href=\"#\">Equipe</a><a href=\"#\">Sobre</a><a href=\"#\">Contato</a></nav>",
-      "css": ":host{--color-wine:#6b1424;--color-wine-deep:#4a0d19;--color-thread:#c4283f;--color-rose:#f2b8c2;--color-endpaper:#f6dfe3;--color-paper:#fdfafa;--color-ink:#24161a;--color-muted:#6b585d;--color-on-wine:#fbeef0;--color-on-wine-muted:#e2b3bb;--font-serif:Piazzolla,Georgia,serif;--font-sans:Archivo,system-ui,sans-serif;--ease-out:cubic-bezier(0.16,1,0.3,1);--shadow-book:0 1px 2px rgb(36 8 14 / 0.16),0 10px 22px -10px rgb(36 8 14 / 0.45);--shadow-book-raised:0 2px 4px rgb(36 8 14 / 0.12),0 22px 34px -14px rgb(36 8 14 / 0.5);} .ds-nav{display:flex;flex-wrap:wrap;gap:0 1.5rem;background:var(--color-paper);padding:0 1rem;} .ds-nav a{position:relative;isolation:isolate;display:inline-flex;align-items:center;min-height:44px;font-family:var(--font-sans);font-size:1rem;color:var(--color-ink);text-decoration:none;} .ds-nav a::after{content:'';position:absolute;inset-inline:0;bottom:0.45rem;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform 250ms var(--ease-out);} .ds-nav a:hover{color:var(--color-wine);} .ds-nav a:not([aria-current]):hover::after{transform:scaleX(1);} .ds-nav a:focus-visible{outline:3px solid var(--color-wine);outline-offset:2px;} .ds-nav-mark{position:absolute;z-index:-1;inset-inline:-0.2em;top:calc(50% - 0.12em);height:0.55em;border-radius:2px 4px 4px 2px;background:var(--color-rose);mix-blend-mode:multiply;}"
+      "css": ":host{--color-wine:#6c0922;--color-wine-deep:#4b0618;--color-thread:#fcb4c5;--color-rose:#f4aebd;--color-endpaper:#fadae1;--color-paper:#fdfafa;--color-ink:#24161a;--color-muted:#6b585d;--color-on-wine:#fdfcfb;--color-on-wine-muted:#f4aebd;--font-serif:Piazzolla,Georgia,serif;--font-sans:Archivo,system-ui,sans-serif;--ease-out:cubic-bezier(0.16,1,0.3,1);--shadow-book:0 1px 2px rgb(36 8 14 / 0.16),0 10px 22px -10px rgb(36 8 14 / 0.45);--shadow-book-raised:0 2px 4px rgb(36 8 14 / 0.12),0 22px 34px -14px rgb(36 8 14 / 0.5);} .ds-nav{display:flex;flex-wrap:wrap;gap:0 1.5rem;background:var(--color-paper);padding:0 1rem;} .ds-nav a{position:relative;isolation:isolate;display:inline-flex;align-items:center;min-height:44px;font-family:var(--font-sans);font-size:1rem;color:var(--color-ink);text-decoration:none;} .ds-nav a::after{content:'';position:absolute;inset-inline:0;bottom:0.45rem;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform 250ms var(--ease-out);} .ds-nav a:hover{color:var(--color-wine);} .ds-nav a:not([aria-current]):hover::after{transform:scaleX(1);} .ds-nav a:focus-visible{outline:3px solid var(--color-wine);outline-offset:2px;} .ds-nav-mark{position:absolute;z-index:-1;inset-inline:-0.2em;top:calc(50% - 0.12em);height:0.55em;border-radius:2px 4px 4px 2px;background:var(--color-rose);mix-blend-mode:multiply;}"
     },
     {
       "name": "Running Stitch",
       "kind": "custom",
       "refersTo": "thread",
-      "description": "The only divider: the red thread as a running stitch (ponto corrido), an SVG line with round caps, about 11px of thread and 6px of paper.",
+      "description": "The only divider: the logo's pink thread as a running stitch (ponto corrido), an SVG line with round caps, about 11px of thread and 6px of paper.",
       "html": "<div class=\"ds-stitch-wrap\"><svg class=\"ds-stitch\" height=\"6\" aria-hidden=\"true\"><line x1=\"1.5\" y1=\"3\" x2=\"100%\" y2=\"3\"></line></svg></div>",
-      "css": ":host{--color-wine:#6b1424;--color-wine-deep:#4a0d19;--color-thread:#c4283f;--color-rose:#f2b8c2;--color-endpaper:#f6dfe3;--color-paper:#fdfafa;--color-ink:#24161a;--color-muted:#6b585d;--color-on-wine:#fbeef0;--color-on-wine-muted:#e2b3bb;--font-serif:Piazzolla,Georgia,serif;--font-sans:Archivo,system-ui,sans-serif;--ease-out:cubic-bezier(0.16,1,0.3,1);--shadow-book:0 1px 2px rgb(36 8 14 / 0.16),0 10px 22px -10px rgb(36 8 14 / 0.45);--shadow-book-raised:0 2px 4px rgb(36 8 14 / 0.12),0 22px 34px -14px rgb(36 8 14 / 0.5);} .ds-stitch-wrap{background:var(--color-paper);padding:2rem 1rem;} .ds-stitch{display:block;width:100%;height:6px;overflow:visible;color:var(--color-thread);} .ds-stitch line{stroke:currentColor;stroke-width:2.25;stroke-linecap:round;stroke-dasharray:9 8;}"
+      "css": ":host{--color-wine:#6c0922;--color-wine-deep:#4b0618;--color-thread:#fcb4c5;--color-rose:#f4aebd;--color-endpaper:#fadae1;--color-paper:#fdfafa;--color-ink:#24161a;--color-muted:#6b585d;--color-on-wine:#fdfcfb;--color-on-wine-muted:#f4aebd;--font-serif:Piazzolla,Georgia,serif;--font-sans:Archivo,system-ui,sans-serif;--ease-out:cubic-bezier(0.16,1,0.3,1);--shadow-book:0 1px 2px rgb(36 8 14 / 0.16),0 10px 22px -10px rgb(36 8 14 / 0.45);--shadow-book-raised:0 2px 4px rgb(36 8 14 / 0.12),0 22px 34px -14px rgb(36 8 14 / 0.5);} .ds-stitch-wrap{background:var(--color-paper);padding:2rem 1rem;} .ds-stitch{display:block;width:100%;height:6px;overflow:visible;color:var(--color-thread);} .ds-stitch line{stroke:currentColor;stroke-width:2.25;stroke-linecap:round;stroke-dasharray:9 8;}"
     },
     {
       "name": "Typeset Book Cover",
       "kind": "custom",
       "refersTo": "book-cover-linen",
-      "description": "A book as an object when no cover image exists: serif title, red-thread band, author, hinge crease, book shadow; lifts on hover.",
+      "description": "A book as an object when no cover image exists: serif title, thread band, author, hinge crease, book shadow; lifts on hover.",
       "html": "<div class=\"ds-shelf\"><div class=\"ds-book ds-linen\"><span class=\"ds-book-title\">O Alienista</span><span class=\"ds-book-band\">Machado de Assis</span></div><div class=\"ds-book ds-paper\"><span class=\"ds-book-title\">A Paixão segundo G.H.</span><span class=\"ds-book-band\">Clarice Lispector</span></div><div class=\"ds-book ds-ink\"><span class=\"ds-book-title\">Torto Arado</span><span class=\"ds-book-band\">Itamar Vieira Junior</span></div></div>",
-      "css": ":host{--color-wine:#6b1424;--color-wine-deep:#4a0d19;--color-thread:#c4283f;--color-rose:#f2b8c2;--color-endpaper:#f6dfe3;--color-paper:#fdfafa;--color-ink:#24161a;--color-muted:#6b585d;--color-on-wine:#fbeef0;--color-on-wine-muted:#e2b3bb;--font-serif:Piazzolla,Georgia,serif;--font-sans:Archivo,system-ui,sans-serif;--ease-out:cubic-bezier(0.16,1,0.3,1);--shadow-book:0 1px 2px rgb(36 8 14 / 0.16),0 10px 22px -10px rgb(36 8 14 / 0.45);--shadow-book-raised:0 2px 4px rgb(36 8 14 / 0.12),0 22px 34px -14px rgb(36 8 14 / 0.5);} .ds-shelf{display:flex;gap:1.5rem;padding:1.5rem;background:var(--color-paper);} .ds-book{display:flex;flex-direction:column;width:8rem;aspect-ratio:2/3;padding:1.04rem 0.88rem 0.8rem 1.2rem;border-radius:2px 4px 4px 2px;box-shadow:var(--shadow-book);background-image:linear-gradient(90deg,rgb(0 0 0 / 0.2),rgb(0 0 0 / 0.06) 3%,rgb(255 255 255 / 0.16) 4.5%,transparent 8%);font-family:var(--font-serif);overflow:hidden;transition:transform 450ms var(--ease-out),box-shadow 450ms var(--ease-out);} .ds-book:hover{transform:translateY(-4px);box-shadow:var(--shadow-book-raised);} .ds-book-title{flex:1;font-size:1.15rem;font-weight:500;line-height:1;letter-spacing:-0.02em;} .ds-book-band{padding-top:0.3rem;border-top:1.5px solid var(--color-thread);font-family:var(--font-sans);font-size:0.625rem;line-height:1.2;} .ds-linen{background-color:#d9cebf;color:var(--color-ink);} .ds-paper{background-color:#f3ebe8;color:var(--color-wine);} .ds-ink{background-color:#2b1b20;color:var(--color-on-wine);} @media (prefers-reduced-motion: reduce){.ds-book:hover{transform:none;}}"
+      "css": ":host{--color-wine:#6c0922;--color-wine-deep:#4b0618;--color-thread:#fcb4c5;--color-rose:#f4aebd;--color-endpaper:#fadae1;--color-paper:#fdfafa;--color-ink:#24161a;--color-muted:#6b585d;--color-on-wine:#fdfcfb;--color-on-wine-muted:#f4aebd;--font-serif:Piazzolla,Georgia,serif;--font-sans:Archivo,system-ui,sans-serif;--ease-out:cubic-bezier(0.16,1,0.3,1);--shadow-book:0 1px 2px rgb(36 8 14 / 0.16),0 10px 22px -10px rgb(36 8 14 / 0.45);--shadow-book-raised:0 2px 4px rgb(36 8 14 / 0.12),0 22px 34px -14px rgb(36 8 14 / 0.5);} .ds-shelf{display:flex;gap:1.5rem;padding:1.5rem;background:var(--color-paper);} .ds-book{display:flex;flex-direction:column;width:8rem;aspect-ratio:2/3;padding:1.04rem 0.88rem 0.8rem 1.2rem;border-radius:2px 4px 4px 2px;box-shadow:var(--shadow-book);background-image:linear-gradient(90deg,rgb(0 0 0 / 0.2),rgb(0 0 0 / 0.06) 3%,rgb(255 255 255 / 0.16) 4.5%,transparent 8%);font-family:var(--font-serif);overflow:hidden;transition:transform 450ms var(--ease-out),box-shadow 450ms var(--ease-out);} .ds-book:hover{transform:translateY(-4px);box-shadow:var(--shadow-book-raised);} .ds-book-title{flex:1;font-size:1.15rem;font-weight:500;line-height:1;letter-spacing:-0.02em;} .ds-book-band{padding-top:0.3rem;border-top:1.5px solid var(--color-thread);font-family:var(--font-sans);font-size:0.625rem;line-height:1.2;} .ds-linen{background-color:#d9cebf;color:var(--color-ink);} .ds-paper{background-color:#f3ebe8;color:var(--color-wine);} .ds-ink{background-color:#2b1b20;color:var(--color-on-wine);} @media (prefers-reduced-motion: reduce){.ds-book:hover{transform:none;}}"
     },
     {
       "name": "Wine Field Lead",
@@ -379,7 +379,7 @@
       "refersTo": "field-wine",
       "description": "Wine bookcloth field carrying a feature: title, credit line, byline meta and More Link in on-wine values. A field, not a card.",
       "html": "<section class=\"ds-field-wine\"><h2 class=\"ds-lead-title\"><a href=\"#\">A loucura como espelho</a></h2><p class=\"ds-credit\">sobre <cite>O Alienista</cite>, de Machado de Assis</p><p class=\"ds-meta\">por Ana Exemplo · Literatura · 12 nov. 2026 · 6&nbsp;min de leitura</p><a class=\"ds-more\" href=\"#\">Ler a resenha<svg viewBox=\"0 0 16 16\" width=\"16\" height=\"16\" aria-hidden=\"true\"><path d=\"M3 8h9.5M8.5 4l4 4-4 4\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></a></section>",
-      "css": ":host{--color-wine:#6b1424;--color-wine-deep:#4a0d19;--color-thread:#c4283f;--color-rose:#f2b8c2;--color-endpaper:#f6dfe3;--color-paper:#fdfafa;--color-ink:#24161a;--color-muted:#6b585d;--color-on-wine:#fbeef0;--color-on-wine-muted:#e2b3bb;--font-serif:Piazzolla,Georgia,serif;--font-sans:Archivo,system-ui,sans-serif;--ease-out:cubic-bezier(0.16,1,0.3,1);--shadow-book:0 1px 2px rgb(36 8 14 / 0.16),0 10px 22px -10px rgb(36 8 14 / 0.45);--shadow-book-raised:0 2px 4px rgb(36 8 14 / 0.12),0 22px 34px -14px rgb(36 8 14 / 0.5);} .ds-field-wine{background:var(--color-wine);color:var(--color-on-wine);padding:2.5rem 2rem;font-family:var(--font-serif);} .ds-field-wine a{color:var(--color-on-wine);text-underline-offset:0.2em;text-decoration-color:color-mix(in srgb,currentColor 40%,transparent);} .ds-field-wine a:hover{text-decoration-color:currentColor;} .ds-field-wine a:focus-visible{outline:3px solid var(--color-on-wine);outline-offset:2px;} .ds-lead-title{margin:0 0 0.9rem;font-size:2.5rem;font-weight:500;line-height:1.02;letter-spacing:-0.025em;} .ds-lead-title a{text-decoration:none;} .ds-lead-title a:hover{text-decoration:underline;text-decoration-thickness:0.04em;} .ds-credit{margin:0 0 1.25rem;font-size:clamp(1.125rem,2vw,1.3125rem);color:var(--color-on-wine-muted);} .ds-credit cite{color:var(--color-on-wine);} .ds-meta{margin:0 0 0.5rem;font-family:var(--font-sans);font-size:0.875rem;color:var(--color-on-wine-muted);} .ds-more{display:inline-flex;align-items:center;gap:0.35rem;min-height:44px;font-family:var(--font-sans);font-weight:500;} .ds-more svg{transition:transform 250ms var(--ease-out);} .ds-more:hover svg{transform:translateX(3px);}"
+      "css": ":host{--color-wine:#6c0922;--color-wine-deep:#4b0618;--color-thread:#fcb4c5;--color-rose:#f4aebd;--color-endpaper:#fadae1;--color-paper:#fdfafa;--color-ink:#24161a;--color-muted:#6b585d;--color-on-wine:#fdfcfb;--color-on-wine-muted:#f4aebd;--font-serif:Piazzolla,Georgia,serif;--font-sans:Archivo,system-ui,sans-serif;--ease-out:cubic-bezier(0.16,1,0.3,1);--shadow-book:0 1px 2px rgb(36 8 14 / 0.16),0 10px 22px -10px rgb(36 8 14 / 0.45);--shadow-book-raised:0 2px 4px rgb(36 8 14 / 0.12),0 22px 34px -14px rgb(36 8 14 / 0.5);} .ds-field-wine{background:var(--color-wine);color:var(--color-on-wine);padding:2.5rem 2rem;font-family:var(--font-serif);} .ds-field-wine a{color:var(--color-on-wine);text-underline-offset:0.2em;text-decoration-color:color-mix(in srgb,currentColor 40%,transparent);} .ds-field-wine a:hover{text-decoration-color:currentColor;} .ds-field-wine a:focus-visible{outline:3px solid var(--color-on-wine);outline-offset:2px;} .ds-lead-title{margin:0 0 0.9rem;font-size:2.5rem;font-weight:500;line-height:1.02;letter-spacing:-0.025em;} .ds-lead-title a{text-decoration:none;} .ds-lead-title a:hover{text-decoration:underline;text-decoration-thickness:0.04em;} .ds-credit{margin:0 0 1.25rem;font-size:clamp(1.125rem,2vw,1.3125rem);color:var(--color-on-wine-muted);} .ds-credit cite{color:var(--color-on-wine);} .ds-meta{margin:0 0 0.5rem;font-family:var(--font-sans);font-size:0.875rem;color:var(--color-on-wine-muted);} .ds-more{display:inline-flex;align-items:center;gap:0.35rem;min-height:44px;font-family:var(--font-sans);font-weight:500;} .ds-more svg{transition:transform 250ms var(--ease-out);} .ds-more:hover svg{transform:translateX(3px);}"
     },
     {
       "name": "Highlighted Passage",
@@ -387,7 +387,7 @@
       "refersTo": "rose",
       "description": "A quoted passage marked with the low rose highlighter, opening quote hung in the margin, sans caption.",
       "html": "<figure class=\"ds-excerpt\"><blockquote><p><mark>“A ciência é a minha única ocupação.”</mark></p></blockquote><figcaption>Machado de Assis, <cite>O Alienista</cite>. Trecho destacado por Ana Exemplo.</figcaption></figure>",
-      "css": ":host{--color-wine:#6b1424;--color-wine-deep:#4a0d19;--color-thread:#c4283f;--color-rose:#f2b8c2;--color-endpaper:#f6dfe3;--color-paper:#fdfafa;--color-ink:#24161a;--color-muted:#6b585d;--color-on-wine:#fbeef0;--color-on-wine-muted:#e2b3bb;--font-serif:Piazzolla,Georgia,serif;--font-sans:Archivo,system-ui,sans-serif;--ease-out:cubic-bezier(0.16,1,0.3,1);--shadow-book:0 1px 2px rgb(36 8 14 / 0.16),0 10px 22px -10px rgb(36 8 14 / 0.45);--shadow-book-raised:0 2px 4px rgb(36 8 14 / 0.12),0 22px 34px -14px rgb(36 8 14 / 0.5);} .ds-excerpt{margin:0;padding:2rem 2rem 2rem 2.5rem;background:var(--color-paper);color:var(--color-ink);} .ds-excerpt blockquote{margin:0;} .ds-excerpt p{max-width:24ch;margin:0;font-family:var(--font-serif);font-size:2rem;line-height:1.22;letter-spacing:-0.015em;text-indent:-0.42em;} .ds-excerpt mark{padding-inline:0.08em;color:inherit;background:linear-gradient(transparent 38%,var(--color-rose) 38% 90%,transparent 90%);box-decoration-break:clone;-webkit-box-decoration-break:clone;} .ds-excerpt figcaption{margin-top:1.5rem;font-family:var(--font-sans);font-size:0.875rem;line-height:1.5;color:var(--color-muted);}"
+      "css": ":host{--color-wine:#6c0922;--color-wine-deep:#4b0618;--color-thread:#fcb4c5;--color-rose:#f4aebd;--color-endpaper:#fadae1;--color-paper:#fdfafa;--color-ink:#24161a;--color-muted:#6b585d;--color-on-wine:#fdfcfb;--color-on-wine-muted:#f4aebd;--font-serif:Piazzolla,Georgia,serif;--font-sans:Archivo,system-ui,sans-serif;--ease-out:cubic-bezier(0.16,1,0.3,1);--shadow-book:0 1px 2px rgb(36 8 14 / 0.16),0 10px 22px -10px rgb(36 8 14 / 0.45);--shadow-book-raised:0 2px 4px rgb(36 8 14 / 0.12),0 22px 34px -14px rgb(36 8 14 / 0.5);} .ds-excerpt{margin:0;padding:2rem 2rem 2rem 2.5rem;background:var(--color-paper);color:var(--color-ink);} .ds-excerpt blockquote{margin:0;} .ds-excerpt p{max-width:24ch;margin:0;font-family:var(--font-serif);font-size:2rem;line-height:1.22;letter-spacing:-0.015em;text-indent:-0.42em;} .ds-excerpt mark{padding-inline:0.08em;color:inherit;background:linear-gradient(transparent 38%,var(--color-rose) 38% 90%,transparent 90%);box-decoration-break:clone;-webkit-box-decoration-break:clone;} .ds-excerpt figcaption{margin-top:1.5rem;font-family:var(--font-sans);font-size:0.875rem;line-height:1.5;color:var(--color-muted);}"
     },
     {
       "name": "Monogram Avatar",
@@ -395,15 +395,15 @@
       "refersTo": "avatar-monogram",
       "description": "Placeholder portrait until a member photo arrives: serif initials on a wine circle, inverted on wine fields.",
       "html": "<div class=\"ds-avatars\"><span class=\"ds-avatar\">AE</span><span class=\"ds-avatar ds-on-wine\">BE</span></div>",
-      "css": ":host{--color-wine:#6b1424;--color-wine-deep:#4a0d19;--color-thread:#c4283f;--color-rose:#f2b8c2;--color-endpaper:#f6dfe3;--color-paper:#fdfafa;--color-ink:#24161a;--color-muted:#6b585d;--color-on-wine:#fbeef0;--color-on-wine-muted:#e2b3bb;--font-serif:Piazzolla,Georgia,serif;--font-sans:Archivo,system-ui,sans-serif;--ease-out:cubic-bezier(0.16,1,0.3,1);--shadow-book:0 1px 2px rgb(36 8 14 / 0.16),0 10px 22px -10px rgb(36 8 14 / 0.45);--shadow-book-raised:0 2px 4px rgb(36 8 14 / 0.12),0 22px 34px -14px rgb(36 8 14 / 0.5);} .ds-avatars{display:flex;gap:1rem;padding:1rem;background:linear-gradient(90deg,var(--color-endpaper) 50%,var(--color-wine) 50%);} .ds-avatar{display:inline-grid;place-items:center;width:76px;height:76px;border-radius:50%;background:var(--color-wine);color:var(--color-on-wine);font-family:var(--font-serif);font-size:30px;font-weight:500;letter-spacing:-0.02em;} .ds-on-wine{background:var(--color-on-wine);color:var(--color-wine);margin-left:auto;}"
+      "css": ":host{--color-wine:#6c0922;--color-wine-deep:#4b0618;--color-thread:#fcb4c5;--color-rose:#f4aebd;--color-endpaper:#fadae1;--color-paper:#fdfafa;--color-ink:#24161a;--color-muted:#6b585d;--color-on-wine:#fdfcfb;--color-on-wine-muted:#f4aebd;--font-serif:Piazzolla,Georgia,serif;--font-sans:Archivo,system-ui,sans-serif;--ease-out:cubic-bezier(0.16,1,0.3,1);--shadow-book:0 1px 2px rgb(36 8 14 / 0.16),0 10px 22px -10px rgb(36 8 14 / 0.45);--shadow-book-raised:0 2px 4px rgb(36 8 14 / 0.12),0 22px 34px -14px rgb(36 8 14 / 0.5);} .ds-avatars{display:flex;gap:1rem;padding:1rem;background:linear-gradient(90deg,var(--color-endpaper) 50%,var(--color-wine) 50%);} .ds-avatar{display:inline-grid;place-items:center;width:76px;height:76px;border-radius:50%;background:var(--color-wine);color:var(--color-on-wine);font-family:var(--font-serif);font-size:30px;font-weight:500;letter-spacing:-0.02em;} .ds-on-wine{background:var(--color-on-wine);color:var(--color-wine);margin-left:auto;}"
     }
   ],
   "narrative": {
     "northStar": "The Thread-Bound Magazine",
-    "overview": "**Creative North Star: \"The Thread-Bound Magazine\"**\n\nEntre Laços is set like an independent literary magazine, and the one ornament it allows itself is the structure that binds it: the red thread of the logo's \"laço\". The thread is woven over and under the masthead wordmark and tied off in a knot after the name, it joins sections as a running stitch instead of a printer's rule, it crosses every typeset book cover as the publisher's band, and it ends tied in the same knot at the top of the wine \"Expediente\" footer. If a new surface needs a divider, a band or an ending, it uses the thread; it does not invent a second ornament.\n\nColor behaves like the materials of a bound book. Wine is the bookcloth and owns whole fields edge to edge; rose is a reader's highlighter and only marks; light rose is the endpaper, where the contributors live; everything else is warm paper and ink. Type is one press serif (Piazzolla, with its optical-size axis) carrying the masthead and the long reading text alike, with a grotesque (Archivo) speaking only for bylines, dates, navigation and links. Books are physical objects: the only things on the page that cast shadows, lift when picked up, and fly into the review page when opened.\n\nDensity is editorial, not dashboard: generous vertical air between sections, a side-head column beside a wider main column, one reading measure, asymmetric feature compositions where the book hangs over the bottom edge of its cloth. The site refuses the landing-page hero with a button, the card grid, pill buttons, and colored call-to-action boxes; actions read as underlined editorial links with a small drawn arrow.",
+    "overview": "**Creative North Star: \"The Thread-Bound Magazine\"**\n\nEntre Laços is set like an independent literary magazine, and the one ornament it allows itself is the structure that binds it: the pink thread of the logo's \"laço\". The thread is woven over and under the masthead wordmark and tied off in a knot after the name, it joins sections as a running stitch instead of a printer's rule, it crosses every typeset book cover as the publisher's band, and it ends tied in the same knot at the top of the wine \"Expediente\" footer, where pink thread on wine reproduces the logo itself. If a new surface needs a divider, a band or an ending, it uses the thread; it does not invent a second ornament.\n\nColor behaves like the materials of a bound book. Wine is the bookcloth and owns whole fields edge to edge; the logo's pink has two related jobs, the thread that binds and the reader's highlighter that marks, and never fills; light pink is the endpaper, where the contributors live; everything else is warm paper and ink. Type is one press serif (Piazzolla, with its optical-size axis) carrying the masthead and the long reading text alike, with a grotesque (Archivo) speaking only for bylines, dates, navigation and links. Books are physical objects: the only things on the page that cast shadows, lift when picked up, and fly into the review page when opened.\n\nDensity is editorial, not dashboard: generous vertical air between sections, a side-head column beside a wider main column, one reading measure, asymmetric feature compositions where the book hangs over the bottom edge of its cloth. The site refuses the landing-page hero with a button, the card grid, pill buttons, and colored call-to-action boxes; actions read as underlined editorial links with a small drawn arrow.",
     "keyCharacteristics": [
-      "One ornament, the red thread: woven wordmark ending in its knot, running stitch, cover band, footer knot.",
-      "Wine fields as bookcloth; rose strictly as highlighter; light-rose endpaper for people.",
+      "One ornament, the logo's pink thread: woven wordmark ending in its knot, running stitch, cover band, footer knot.",
+      "Wine fields as bookcloth; pink only binds (thread) or marks (highlighter), never fills; light-pink endpaper for people.",
       "Piazzolla for everything read, Archivo for everything scanned (bylines, meta, nav, links).",
       "Books are the only objects with depth; nothing else has a shadow or a card frame.",
       "Editorial links with SVG arrows instead of buttons.",
@@ -416,13 +416,13 @@
         "section": "colors"
       },
       {
-        "name": "The Highlighter Rule",
-        "body": "Rose marks; it never fills a section, a panel or a cover. Its shape is a reader's stroke: low on the line (from 38% to 90% of the line box), or the nav mark cut to the book radius, never a full rectangle behind a block.",
+        "name": "The Binds and Marks Rule",
+        "body": "Pink has two related jobs and no others: the thread binds (masthead thread, running stitch, cover band, knot) and the highlighter marks what the reader marks (the current nav item, quoted passages, `::selection`). It never fills a section, a panel or a cover; the light-pink endpaper is the only pink field. The highlighter's shape is a reader's stroke: low on the line (from 38% to 90% of the line box), or the nav mark cut to the book radius, never a full rectangle behind a block. The thread reads softly on paper (about 1.6:1, decorative, never text) and at full strength on wine.",
         "section": "colors"
       },
       {
         "name": "The Two Missing Tones Rule",
-        "body": "Typeset covers are never wine (a wine book vanishes on the wine lead field) and never rose (rose is reserved for the highlighter). New cover tones come from bookcloth, not from the brand accents.",
+        "body": "Typeset covers are never wine (a wine book vanishes on the wine lead field) and never pink (pink is reserved for the thread and the highlighter). New cover tones come from bookcloth, not from the brand accents.",
         "section": "colors"
       },
       {
@@ -437,7 +437,7 @@
       },
       {
         "name": "The Ramp Rule",
-        "body": "Every text size is a ramp step; a new element borrows the step whose role it shares (a credit line is a standfirst, a link is a label, a legend is meta) instead of minting an in-between literal.",
+        "body": "Every text size is a ramp step above; a new element borrows the step whose role it shares (a credit line is a standfirst, a link is a label, a legend is meta) instead of minting an in-between literal.",
         "section": "typography"
       },
       {
@@ -452,7 +452,7 @@
       }
     ],
     "dos": [
-      "**Do** use the red thread (stitch, band, woven line, knot) as the only ornament and the only divider.",
+      "**Do** use the thread (stitch, band, woven line, knot) as the only ornament and the only divider.",
       "**Do** give wine whole full-bleed fields and let the field supply on-wine text, meta, avatar and focus colors.",
       "**Do** mark with rose as a low highlighter stroke (38% to 90% of the line box) or the book-radius nav mark.",
       "**Do** introduce every review with its book: the cover object and the \"sobre *Título*, de Autor\" credit line.",
@@ -463,8 +463,9 @@
     "donts": [
       "**Don't** build cards: no bordered or rounded boxes around entries, contributors or sections.",
       "**Don't** use buttons or pill shapes for actions; use an editorial link with a drawn SVG arrow.",
-      "**Don't** fill a section, panel or cover with rose.",
-      "**Don't** make a typeset cover wine or rose.",
+      "**Don't** fill a section, panel or cover with pink (thread or rose); the light-pink endpaper is the only pink field.",
+      "**Don't** set text in the thread color on paper; it is decorative there (about 1.6:1).",
+      "**Don't** make a typeset cover wine or pink.",
       "**Don't** put a shadow on anything that is not a book.",
       "**Don't** add uppercase tracked kickers or eyebrows above titles; a section is named by its serif side-head.",
       "**Don't** add a third typeface or a printer's hairline rule between sections.",

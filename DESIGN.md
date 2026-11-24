@@ -1,17 +1,17 @@
 ---
 name: Entre Laços
-description: A literary magazine of book reviews by Psychology students, held together by its own red thread.
+description: A literary magazine of book reviews by Psychology students, held together by the pink thread of its logo.
 colors:
-  wine: "#6b1424"
-  wine-deep: "#4a0d19"
-  thread: "#c4283f"
-  rose: "#f2b8c2"
-  endpaper: "#f6dfe3"
+  wine: "#6c0922"
+  wine-deep: "#4b0618"
+  thread: "#fcb4c5"
+  rose: "#f4aebd"
+  endpaper: "#fadae1"
   paper: "#fdfafa"
   ink: "#24161a"
   muted: "#6b585d"
-  on-wine: "#fbeef0"
-  on-wine-muted: "#e2b3bb"
+  on-wine: "#fdfcfb"
+  on-wine-muted: "#f4aebd"
   cover-linen: "#d9cebf"
   cover-paper: "#f3ebe8"
   cover-ink: "#2b1b20"
@@ -135,33 +135,35 @@ components:
 
 **Creative North Star: "The Thread-Bound Magazine"**
 
-Entre Laços is set like an independent literary magazine, and the one ornament it allows itself is the structure that binds it: the red thread of the logo's "laço". The thread is woven over and under the masthead wordmark and tied off in a knot after the name, it joins sections as a running stitch instead of a printer's rule, it crosses every typeset book cover as the publisher's band, and it ends tied in the same knot at the top of the wine "Expediente" footer. If a new surface needs a divider, a band or an ending, it uses the thread; it does not invent a second ornament.
+Entre Laços is set like an independent literary magazine, and the one ornament it allows itself is the structure that binds it: the pink thread of the logo's "laço". The thread is woven over and under the masthead wordmark and tied off in a knot after the name, it joins sections as a running stitch instead of a printer's rule, it crosses every typeset book cover as the publisher's band, and it ends tied in the same knot at the top of the wine "Expediente" footer, where pink thread on wine reproduces the logo itself. If a new surface needs a divider, a band or an ending, it uses the thread; it does not invent a second ornament.
 
-Color behaves like the materials of a bound book. Wine is the bookcloth and owns whole fields edge to edge; rose is a reader's highlighter and only marks; light rose is the endpaper, where the contributors live; everything else is warm paper and ink. Type is one press serif (Piazzolla, with its optical-size axis) carrying the masthead and the long reading text alike, with a grotesque (Archivo) speaking only for bylines, dates, navigation and links. Books are physical objects: the only things on the page that cast shadows, lift when picked up, and fly into the review page when opened.
+Color behaves like the materials of a bound book. Wine is the bookcloth and owns whole fields edge to edge; the logo's pink has two related jobs, the thread that binds and the reader's highlighter that marks, and never fills; light pink is the endpaper, where the contributors live; everything else is warm paper and ink. Type is one press serif (Piazzolla, with its optical-size axis) carrying the masthead and the long reading text alike, with a grotesque (Archivo) speaking only for bylines, dates, navigation and links. Books are physical objects: the only things on the page that cast shadows, lift when picked up, and fly into the review page when opened.
 
 Density is editorial, not dashboard: generous vertical air between sections, a side-head column beside a wider main column, one reading measure, asymmetric feature compositions where the book hangs over the bottom edge of its cloth. The site refuses the landing-page hero with a button, the card grid, pill buttons, and colored call-to-action boxes; actions read as underlined editorial links with a small drawn arrow.
 
 **Key Characteristics:**
-- One ornament, the red thread: woven wordmark ending in its knot, running stitch, cover band, footer knot.
-- Wine fields as bookcloth; rose strictly as highlighter; light-rose endpaper for people.
+- One ornament, the logo's pink thread: woven wordmark ending in its knot, running stitch, cover band, footer knot.
+- Wine fields as bookcloth; pink only binds (thread) or marks (highlighter), never fills; light-pink endpaper for people.
 - Piazzolla for everything read, Archivo for everything scanned (bylines, meta, nav, links).
 - Books are the only objects with depth; nothing else has a shadow or a card frame.
 - Editorial links with SVG arrows instead of buttons.
 - Motion is mechanical and meaningful (thread wipe and knot tying, cover flight, highlighter slide), always gated by `prefers-reduced-motion`.
 
-**Open items (not rules):** the logo file has not arrived, so the wordmark is typeset in Piazzolla rather than the logo, and wine and thread must be recalibrated against the file. Member photos are placeholders (wine monogram avatars). Search (Pagefind) is planned and not built; no search UI exists to document. Example content (`exemplo-*`, `ana-exemplo`, `bia-exemplo`) is synthetic and will be deleted.
+**Brand assets:** the logo (`src/assets/uploads/logo-el.jpg`: a white serif "EL" on a wine circle over a pink ground, with a pink thread looping through the letters) is the calibration source of the palette and is the favicon: `public/favicon.png` (96x96, round with transparent corners, for tabs) and `public/apple-touch-icon.png` (180x180, opaque square, since iOS rounds the corners itself), both linked in BaseLayout. Astro's default favicons are gone. The wordmark stays typeset in Piazzolla rather than placing the logo image.
+
+**Open items (not rules):** the logo file is low resolution (150x150), so a higher-resolution original is still wanted. Member photos are placeholders (wine monogram avatars). Search (Pagefind) is planned and not built; no search UI exists to document. Example content (`exemplo-*`, `ana-exemplo`, `bia-exemplo`) is synthetic and will be deleted.
 
 ## Colors
 
-A reduced bookbinder's palette: one wine cloth, one red thread, one highlighter rose, warm paper and ink. Values follow the Instagram profile and are provisional until the logo file arrives; the logo is the calibration source for wine and thread.
+A reduced bookbinder's palette sampled from the logo: one wine cloth, one pink that is both the thread and the highlighter, a light-pink endpaper, warm paper and ink. Wine is the logo's circle, thread its looping thread, rose its ground and on-wine its letters (approved 2026-11-23).
 
 ### Primary
-- **Bookcloth Wine** (wine): whole-section fields (the home lead feature, the review head, the footer), link color on paper, the drop cap, the avatar monogram circle, the focus ring and `accent-color`. On paper it reads at 11.6:1, so it is safe for text.
+- **Bookcloth Wine** (wine): whole-section fields (the home lead feature, the review head, the footer), link color on paper, the drop cap, the avatar monogram circle, the focus ring and `accent-color`. On paper it reads at 11.9:1, so it is safe for text.
 - **Deep Wine** (wine-deep): the pressed state of wine (running-head brand hover) and the text color inside `::selection`.
 
 ### Secondary
-- **Red Thread** (thread): the thread only. Masthead thread and knot strokes, the running stitch, the band on typeset covers, the footer's thread and knot. Never text, never a fill.
-- **Highlighter Rose** (rose): marks, never fills a section. The stroke under the current nav item, the low highlighter behind quoted passages (`<mark>` in the home excerpt, `blockquote` in review prose), `::selection`, and the focus ring on the wine footer.
+- **Logo Thread** (thread): the logo's pink thread, and only the thread: masthead thread and knot strokes, the running stitch, the band on typeset covers, the footer's thread and knot. On paper it reads softly (about 1.6:1) and is decorative, never text; on the wine footer it is at full strength (7.3:1), and the thread and knot there reproduce the logo. Never a fill.
+- **Highlighter Rose** (rose): the logo's pink ground, used as the reader's mark, never a fill for a section. The stroke under the current nav item, the low highlighter behind quoted passages (`<mark>` in the home excerpt, `blockquote` in review prose), `::selection`, and the focus ring on the wine footer.
 
 ### Tertiary
 - **Endpaper** (endpaper): full-width fields where contributors live (home "Quem escreve", the team list, the member profile head, the "who wrote this" block under a review), and the backdrop behind an uploaded cover image while it loads.
@@ -170,15 +172,15 @@ A reduced bookbinder's palette: one wine cloth, one red thread, one highlighter 
 ### Neutral
 - **Warm Paper** (paper): the page ground.
 - **Ink** (ink): body text, headings, nav items, entry and contributor names at rest (16.8:1 on paper).
-- **Muted Ink** (muted): standfirsts, credit lines ("sobre *Livro*, de Autor"), metadata, side text, counts, figcaptions (6.4:1 on paper, 5.2:1 on endpaper).
-- **On-Wine** and **On-Wine Muted** (on-wine, on-wine-muted): text and secondary text inside wine fields (10.6:1 and 6.5:1 on wine).
+- **Muted Ink** (muted): standfirsts, credit lines ("sobre *Livro*, de Autor"), metadata, side text, counts, figcaptions (6.4:1 on paper, 5.1:1 on endpaper).
+- **On-Wine** and **On-Wine Muted** (on-wine, on-wine-muted): text and secondary text inside wine fields (12.1:1 and 6.8:1 on wine). On-wine is the logo's letters; on-wine-muted shares rose's value.
 
 ### Named Rules
 **The Bookcloth Rule.** Wine is a field, not a box. It runs edge to edge across the viewport and carries its own text, link, meta, avatar and focus colors through the field's custom properties (`--muted`, `--avatar-bg`, `--avatar-fg`), so components never need wine variants. A page whose last section is a colored field meets the footer's wine with no strip of paper between.
 
-**The Highlighter Rule.** Rose marks; it never fills a section, a panel or a cover. Its shape is a reader's stroke: low on the line (from 38% to 90% of the line box), or the nav mark cut to the book radius, never a full rectangle behind a block.
+**The Binds and Marks Rule.** Pink has two related jobs and no others: the thread binds (masthead thread, running stitch, cover band, knot) and the highlighter marks what the reader marks (the current nav item, quoted passages, `::selection`). It never fills a section, a panel or a cover; the light-pink endpaper is the only pink field. The highlighter's shape is a reader's stroke: low on the line (from 38% to 90% of the line box), or the nav mark cut to the book radius, never a full rectangle behind a block. The thread reads softly on paper (about 1.6:1, decorative, never text) and at full strength on wine.
 
-**The Two Missing Tones Rule.** Typeset covers are never wine (a wine book vanishes on the wine lead field) and never rose (rose is reserved for the highlighter). New cover tones come from bookcloth, not from the brand accents.
+**The Two Missing Tones Rule.** Typeset covers are never wine (a wine book vanishes on the wine lead field) and never pink (pink is reserved for the thread and the highlighter). New cover tones come from bookcloth, not from the brand accents.
 
 ## Typography
 
@@ -254,10 +256,10 @@ The site has no buttons. Actions are links in the wine link color with the globa
 - **Endpaper field:** full-bleed endpaper hosting contributors and author blocks.
 
 ### Running Stitch
-The ponto corrido: the red thread going in and out of the paper, joining sections under the header, above the home excerpt, between archive categories and above a member's reviews. It is the system's only divider. Drawn by `Stitch.astro` as an SVG line (`x2="100%"`, so it stretches to any width without distorting), stroke 2.25 with round caps and `stroke-dasharray: 9 8`: the caps add half the stroke at each end, giving about 11px of thread and 6px of paper per stitch, with rounded ends like real thread. It is never a CSS gradient or a dashed border.
+The ponto corrido: the logo's pink thread going in and out of the paper, joining sections under the header, above the home excerpt, between archive categories and above a member's reviews. It is the system's only divider. Drawn by `Stitch.astro` as an SVG line (`x2="100%"`, so it stretches to any width without distorting), stroke 2.25 with round caps and `stroke-dasharray: 9 8`: the caps add half the stroke at each end, giving about 11px of thread and 6px of paper per stitch, with rounded ends like real thread. It is never a CSS gradient or a dashed border.
 
 ### Book Cover (signature)
-A book as an object. An uploaded cover is shown whole, never cropped, scaled to the parent's `--book-height`. Without an image, a typeset cover at 2:3: the title in the serif owns the upper half (19cqi, 500, tight), the red thread crosses as the publisher's band (border at max(1.5px, 1.3cqi)), the author sits under it in Archivo, and a hinge crease marks the spine. At list size (under 8rem wide) the author drops and only the band remains. Sizes in use: 8.25 to 10.5rem in entries, 19rem on mobile features, clamp(24rem, 60vh, 33rem) on desktop features.
+A book as an object. An uploaded cover is shown whole, never cropped, scaled to the parent's `--book-height`. Without an image, a typeset cover at 2:3: the title in the serif owns the upper half (19cqi, 500, tight), the thread crosses as the publisher's band (border at max(1.5px, 1.3cqi)), the author sits under it in Archivo, and a hinge crease marks the spine. At list size (under 8rem wide) the author drops and only the band remains. Sizes in use: 8.25 to 10.5rem in entries, 19rem on mobile features, clamp(24rem, 60vh, 33rem) on desktop features.
 
 ### Review Entry
 One line of a table of contents: the book on the left (5.5rem column, 7.25rem from 40rem), then the title in ink (wine on hover), the credit line, the summary, and a meta line "por Autora · Categoria · data". The whole entry picks its book up on hover.
@@ -268,7 +270,7 @@ One line of a table of contents: the book on the left (5.5rem column, 7.25rem fr
 - **Monogram avatar:** until a photo arrives, light serif initials on a wine circle (inverted on wine fields), the logo's own grammar.
 
 ### Expediente Footer
-A wine field that opens with the thread entering from the left edge of the screen and ending in the shared knot at the content's right edge (2.5px non-scaling, round caps). Below: "Expediente" title, the publication statement at the standfirst clamp, the standing notice that the site offers no psychological care in Archivo meta on-wine-muted, and the footer nav.
+A wine field that opens with the thread entering from the left edge of the screen and ending in the shared knot at the content's right edge (2.5px non-scaling, round caps). Here the pink thread is at full strength, and thread and knot on wine reproduce the logo. Below: "Expediente" title, the publication statement at the standfirst clamp, the standing notice that the site offers no psychological care in Archivo meta on-wine-muted, and the footer nav.
 
 ### Motion
 Feedback is fast (150ms color, 250ms hairlines and arrows); only things that travel take longer (450ms cover flight, 350ms highlighter slide), all on cubic-bezier(0.16, 1, 0.3, 1). The masthead ties itself once on load: the thread wipes across the name (clip-path, 1.1s, 150ms delay), then the knot draws itself in one continuous stroke (stroke-dashoffset over pathLength 1, 1.1s from 1s on cubic-bezier(0.45, 0, 0.25, 1): it starts as slowly as the thread arrives, speeds through the lobes and settles at the tail; hidden until it starts so no round-cap specks show). Page changes use cross-document view transitions with no JavaScript; in lists only the book about to be opened is named. Under `prefers-reduced-motion: reduce` nothing moves: no lift, no wipe, the knot shown static and complete, no shared-element flight; pages simply crossfade.
@@ -276,7 +278,7 @@ Feedback is fast (150ms color, 250ms hairlines and arrows); only things that tra
 ## Do's and Don'ts
 
 ### Do:
-- **Do** use the red thread (stitch, band, woven line, knot) as the only ornament and the only divider.
+- **Do** use the thread (stitch, band, woven line, knot) as the only ornament and the only divider.
 - **Do** give wine whole full-bleed fields and let the field supply on-wine text, meta, avatar and focus colors.
 - **Do** mark with rose as a low highlighter stroke (38% to 90% of the line box) or the book-radius nav mark.
 - **Do** introduce every review with its book: the cover object and the "sobre *Título*, de Autor" credit line.
@@ -287,8 +289,9 @@ Feedback is fast (150ms color, 250ms hairlines and arrows); only things that tra
 ### Don't:
 - **Don't** build cards: no bordered or rounded boxes around entries, contributors or sections.
 - **Don't** use buttons or pill shapes for actions; use an editorial link with a drawn SVG arrow.
-- **Don't** fill a section, panel or cover with rose.
-- **Don't** make a typeset cover wine or rose.
+- **Don't** fill a section, panel or cover with pink (thread or rose); the light-pink endpaper is the only pink field.
+- **Don't** set text in the thread color on paper; it is decorative there (about 1.6:1).
+- **Don't** make a typeset cover wine or pink.
 - **Don't** put a shadow on anything that is not a book.
 - **Don't** add uppercase tracked kickers or eyebrows above titles; a section is named by its serif side-head.
 - **Don't** add a third typeface or a printer's hairline rule between sections.

@@ -1,26 +1,28 @@
 /*
  * Entre Laços: a literary magazine held together by its own thread.
- * Palette from the Instagram (brand commitment in PRODUCT.md), calibrate
- * against the logo file when it arrives. Wine is the bookcloth: it owns whole
- * fields. Rose is the highlighter: it marks, it never fills a section. The
- * light rose is the endpaper. The red thread is the logo's "laço".
+ * Palette sampled from the logo (src/assets/uploads/logo-el.jpg), the same
+ * one as the Instagram (brand commitment in PRODUCT.md). Wine is the
+ * bookcloth: it owns whole fields. Pink is what binds and what is marked:
+ * the thread of the logo's "laço" and the reader's highlighter. It never
+ * fills a section; the light pink endpaper does that.
  */
 :root {
   color-scheme: light;
   accent-color: var(--color-wine);
   /* Touch feedback in the brand tint instead of the browser's gray box. */
-  -webkit-tap-highlight-color: rgb(107 20 36 / 0.1);
+  -webkit-tap-highlight-color: rgb(108 9 34 / 0.1);
 
-  --color-wine: #6b1424;
-  --color-wine-deep: #4a0d19;
-  --color-thread: #c4283f;
-  --color-rose: #f2b8c2;
-  --color-endpaper: #f6dfe3;
+  /* Sampled from the logo: wine circle, pink ground, pink thread, white letters. */
+  --color-wine: #6c0922;
+  --color-wine-deep: #4b0618;
+  --color-thread: #fcb4c5;
+  --color-rose: #f4aebd;
+  --color-endpaper: #fadae1;
   --color-paper: #fdfafa;
   --color-ink: #24161a;
   --color-muted: #6b585d;
-  --color-on-wine: #fbeef0;
-  --color-on-wine-muted: #e2b3bb;
+  --color-on-wine: #fdfcfb;
+  --color-on-wine-muted: #f4aebd;
 
   --font-serif: var(--font-piazzolla, Georgia, serif);
   --font-sans: var(--font-archivo, system-ui, sans-serif);

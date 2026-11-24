@@ -53,7 +53,10 @@ const knotVars = [
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
-    <link rel="icon" type="image/svg+xml" href={href('favicon.svg')} />
+    {/* The group's logo: round with transparent corners for tabs; square and
+        opaque for iOS, which rounds the corners itself. */}
+    <link rel="icon" type="image/png" sizes="96x96" href={href('favicon.png')} />
+    <link rel="apple-touch-icon" href={href('apple-touch-icon.png')} />
     <meta property="og:type" content="website" />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
@@ -64,8 +67,8 @@ const knotVars = [
   </head>
   <body>
     <!--
-      THESIS: Entre Laços as a literary magazine held together by its own red thread: the logo's "laço" runs through the masthead, sections join with a running stitch, the page ends in a knot. Refuses the hero-with-button landing and the card grid.
-      OWN-WORLD: wine bookcloth fields, rose only as highlighter, light-rose endpaper, red thread; Piazzolla (display and reading) with Archivo for bylines; books as objects with real shadows; no cards, no pills, editorial links.
+      THESIS: Entre Laços as a literary magazine held together by its own pink thread: the logo's "laço" runs through the masthead, sections join with a running stitch, the page ends in a knot. Refuses the hero-with-button landing and the card grid.
+      OWN-WORLD: wine bookcloth fields, the logo's pink as thread and highlighter, light-pink endpaper; Piazzolla (display and reading) with Archivo for bylines; books as objects with real shadows; no cards, no pills, editorial links.
       STORY: the reader meets a publication, opens its newest review, scans the table of contents, reads a highlighted passage, meets the students who write.
       FIRST VIEWPORT: masthead wordmark at display scale with the thread woven through, description and nav; the newest review's book large on a wine field below, title and byline beside it; "Ler a resenha" link.
       FORM: independent literary magazine (brief-pinned, beats the roll; own list #1), raised by coptic exposed binding (structure as the only ornament) and patent sheet (one ink, one meaning). Seed 823439ef.
