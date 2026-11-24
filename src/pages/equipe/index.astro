@@ -1,0 +1,55 @@
+---
+import Contributor from '../../components/Contributor.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getMembers, getPublishedReviews } from '../../lib/content.ts';
+import { countByAuthor } from '../../lib/reviews.ts';
+import { SITE } from '../../lib/site.ts';
+
+const [members, reviews] = await Promise.all([getMembers(), getPublishedReviews()]);
+const reviewCounts = countByAuthor(reviews);
+---
+
+<BaseLayout
+  title="Equipe"
+  description={`Conheça as estudantes de Psicologia que escrevem o ${SITE.name}.`}
+>
+  <header class="container page-head">
+    <h1>Equipe</h1>
+    <p class="standfirst">
+      Estudantes de Psicologia da {SITE.institution} que leem, escrevem e conversam sobre livros.
+      Cada uma assina as próprias resenhas.
+    </p>
+  </header>
+
+  {/* The contributors live on the endpaper, as on the home page. */}
+  <section class="team field-endpaper flush-end" aria-label="Integrantes">
+    <ul class="container team-list">
+      {
+        members.map((member) => (
+          <Contributor
+            member={member}
+            count={reviewCounts.get(member.id) ?? 0}
+            level={2}
+            full
+          />
+        ))
+      }
+    </ul>
+  </section>
+</BaseLayout>
+
+<style>
+  .team {
+    padding-block: clamp(3rem, 8vw, 6rem);
+  }
+  .team-list {
+    display: grid;
+    gap: clamp(3.5rem, 8vw, 5.5rem);
+    margin-block: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .team-list > :global(li) {
+    max-width: 54rem;
+  }
+</style>

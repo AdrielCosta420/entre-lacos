@@ -1,0 +1,139 @@
+---
+import { Image } from 'astro:assets';
+import type { Review } from '../lib/content.ts';
+import { coverTone } from '../lib/covers.ts';
+import { coverTransitionName } from '../lib/view-transitions.ts';
+
+/*
+ * A book as an object on the page: the uploaded cover, whole (never cropped),
+ * or a typeset cover in a bookcloth tone when there is no image. The parent
+ * sets the size through the inherited --book-height custom property, so one
+ * component serves the lead feature, lists, and the review page.
+ */
+interface Props {
+  review: Review;
+  /** Empty in lists, where the title next to the book already says it. */
+  alt?: string;
+  /** Pixel height asked from the image pipeline: about 2x the largest display. */
+  imageHeight?: number;
+  eager?: boolean;
+  /** The review page names its cover always; lists name it on hover only. */
+  named?: boolean;
+}
+
+const { review, alt = '', imageHeight = 480, eager = false, named = false } = Astro.props;
+const { cover, book } = review.data;
+const style = `--cover-transition: ${coverTransitionName(review.id)}`;
+---
+
+{
+  cover ? (
+    <Image
+      class:list={['book', { named }]}
+      src={cover}
+      alt={alt}
+      height={imageHeight}
+      loading={eager ? 'eager' : 'lazy'}
+      style={style}
+    />
+  ) : (
+    <div
+      class:list={['book', 'book-typeset', `tone-${coverTone(review.id)}`, { named }]}
+      style={style}
+      role={alt ? 'img' : undefined}
+      aria-label={alt || undefined}
+      aria-hidden={alt ? undefined : 'true'}
+    >
+      <span class="typeset-title">{book.title}</span>
+      <span class="typeset-band">{book.author}</span>
+    </div>
+  )
+}
+
+<style>
+  .book {
+    display: block;
+    border-radius: var(--radius-book);
+    box-shadow: var(--shadow-book);
+    transition:
+      transform var(--duration-slow) var(--ease-out),
+      box-shadow var(--duration-slow) var(--ease-out);
+  }
+  /* Both sizes auto, so the max constraints shrink the cover in proportion,
+     portrait or landscape, without cropping it. */
+  img.book {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: var(--book-height, 12rem);
+    background: var(--color-endpaper);
+  }
+
+  /* A typeset cover, composed like a real one: the title owns the upper half,
+     the red thread runs across as the publisher's band, the author sits under
+     it. Sizes follow the cover's own width (cqi), so it scales as one object. */
+  .book-typeset {
+    container-type: inline-size;
+    display: flex;
+    flex-direction: column;
+    /* An explicit width: the inline-size container ignores its content, so a
+       width derived from the parent would collapse inside shrink-to-fit links. */
+    --book-width: calc(var(--book-height, 12rem) * 2 / 3);
+    width: var(--book-width);
+    max-width: 100%;
+    aspect-ratio: 2 / 3;
+    /* Margins derived from the book's own width: percentage padding would
+       resolve against the parent, which on phones is the full column. */
+    padding: calc(var(--book-width) * 0.13) calc(var(--book-width) * 0.11)
+      calc(var(--book-width) * 0.1) calc(var(--book-width) * 0.15);
+    /* The hinge: a crease where the board meets the spine, so it reads as a
+       bound book and not a card. */
+    background-image: linear-gradient(
+      90deg,
+      rgb(0 0 0 / 0.2),
+      rgb(0 0 0 / 0.06) 3%,
+      rgb(255 255 255 / 0.16) 4.5%,
+      transparent 8%
+    );
+    font-family: var(--font-serif);
+    overflow: hidden;
+    overflow-wrap: break-word;
+  }
+  .typeset-title {
+    flex: 1;
+    font-size: 1rem;
+    /* cqi measures the content box (padding excluded): 19cqi lets a short
+       title break onto two lines and fill the top half, as on a real cover. */
+    font-size: 19cqi;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    hyphens: auto;
+  }
+  .typeset-band {
+    padding-top: 5cqi;
+    border-top: max(1.5px, 1.3cqi) solid var(--color-thread);
+    font-family: var(--font-sans);
+    font-size: max(0.625rem, 7cqi);
+    line-height: 1.2;
+  }
+  /* At list size the author would be a smudge: keep only the band. */
+  @container (max-width: 8rem) {
+    .typeset-band {
+      padding-top: 0;
+      font-size: 0;
+    }
+  }
+  .tone-linen {
+    background-color: #d9cebf;
+    color: var(--color-ink);
+  }
+  .tone-paper {
+    background-color: #f3ebe8;
+    color: var(--color-wine);
+  }
+  .tone-ink {
+    background-color: #2b1b20;
+    color: var(--color-on-wine);
+  }
+</style>

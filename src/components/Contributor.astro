@@ -1,0 +1,146 @@
+---
+import type { Member } from '../lib/content.ts';
+import { plural } from '../lib/plural.ts';
+import { href, instagramUrl } from '../lib/site.ts';
+import Avatar from './Avatar.astro';
+import MoreLink from './MoreLink.astro';
+import WhatsAppLink from './WhatsAppLink.astro';
+
+/*
+ * A student presented as a contributor of the publication. Compact on the
+ * home page and under a review; `full` on the team page, where she also
+ * gets her approach, Instagram and a link to her profile. Lives inside a <ul>.
+ */
+interface Props {
+  member: Member;
+  /** Published reviews by her; omitted from the facts when zero. */
+  count: number;
+  level?: 2 | 3;
+  full?: boolean;
+}
+
+const { member, count, level = 3, full = false } = Astro.props;
+const Heading = level === 2 ? 'h2' : 'h3';
+const { name, institution, semester, shortBio, interests, approach, instagram } = member.data;
+const firstName = name.split(/\s+/)[0];
+const profileUrl = href(`equipe/${member.id}/`);
+const facts = [
+  'Estudante de Psicologia',
+  full ? institution : undefined,
+  semester,
+  count > 0 ? plural(count, 'resenha', 'resenhas') : undefined,
+]
+  .filter(Boolean)
+  .join(' · ');
+---
+
+<li class:list={['contributor', { full }]}>
+  <Avatar member={member} size={full ? 112 : 76} />
+  <div>
+    <Heading class="name"><a href={profileUrl}>{name}</a></Heading>
+    <p class="meta">{facts}</p>
+    <p class="bio">{shortBio}</p>
+    {
+      interests.length > 0 && (
+        <p class="interests">
+          {full && <span class="label">Áreas de interesse: </span>}
+          {interests.join(' · ')}
+        </p>
+      )
+    }
+    {
+      full && approach && (
+        <p class="interests">
+          <span class="label">Abordagem de interesse: </span>
+          {approach}
+        </p>
+      )
+    }
+    <div class="links">
+      {full && <MoreLink href={profileUrl}>Conhecer {firstName}</MoreLink>}
+      <WhatsAppLink member={member} />
+      {
+        full && instagram && (
+          <a class="instagram" href={instagramUrl(instagram)} target="_blank" rel="noopener noreferrer">
+            Instagram @{instagram}
+          </a>
+        )
+      }
+    </div>
+  </div>
+</li>
+
+<style>
+  .contributor {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 1.25rem;
+    align-items: start;
+  }
+  .name {
+    margin: 0.35rem 0 0.25rem;
+    font-size: 1.75rem;
+    letter-spacing: -0.02em;
+  }
+  .name a {
+    color: var(--color-ink);
+    text-decoration: none;
+  }
+  .name a:hover {
+    color: var(--color-wine);
+    text-decoration: underline;
+    text-decoration-thickness: 0.05em;
+  }
+  .meta {
+    margin: 0 0 0.75rem;
+  }
+  .bio {
+    max-width: 34rem;
+    margin: 0 0 0.6rem;
+    font-size: 1.125rem;
+    line-height: 1.5;
+  }
+  .interests {
+    margin: 0 0 0.2rem;
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    color: var(--color-wine);
+  }
+  .label {
+    color: var(--color-muted);
+  }
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0 1.5rem;
+    margin-top: 0.25rem;
+  }
+  .instagram {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    font-weight: 500;
+  }
+
+  /* Team page: a larger portrait and a bio set as a standfirst. */
+  .full {
+    gap: 1.5rem 2.5rem;
+  }
+  .full .name {
+    margin-top: 0.5rem;
+    font-size: clamp(1.875rem, 3vw, 2.5rem);
+  }
+  .full .bio {
+    font-size: clamp(1.125rem, 2vw, 1.3125rem);
+    line-height: 1.45;
+    margin-bottom: 1rem;
+  }
+  @media (max-width: 30rem) {
+    .full {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

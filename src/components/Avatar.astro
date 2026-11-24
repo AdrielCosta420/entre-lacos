@@ -1,0 +1,59 @@
+---
+import { Image } from 'astro:assets';
+import type { Member } from '../lib/content.ts';
+
+interface Props {
+  member: Member;
+  size?: number;
+}
+
+const { member, size = 72 } = Astro.props;
+const { name, photo } = member.data;
+
+// Members may join before sending a photo; initials keep the layout intact.
+const initials = name
+  .split(/\s+/)
+  .slice(0, 2)
+  .map((word) => word[0]?.toUpperCase() ?? '')
+  .join('');
+---
+
+{
+  photo ? (
+    <Image
+      class="avatar"
+      src={photo}
+      alt={`Foto de ${name}`}
+      width={size * 2}
+      height={size * 2}
+      style={`--size: ${size}px`}
+    />
+  ) : (
+    <span class="avatar avatar-initials" style={`--size: ${size}px`} aria-hidden="true">
+      {initials}
+    </span>
+  )
+}
+
+<style>
+  .avatar {
+    width: var(--size);
+    height: var(--size);
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+  /* Until a photo arrives: a light serif monogram on a wine circle, the same
+     grammar as the publication's logo. A wine section swaps the colors
+     through --avatar-bg / --avatar-fg. */
+  .avatar-initials {
+    display: inline-grid;
+    place-items: center;
+    background: var(--avatar-bg, var(--color-wine));
+    color: var(--avatar-fg, var(--color-on-wine));
+    font-family: var(--font-serif);
+    font-size: calc(var(--size) * 0.4);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+  }
+</style>

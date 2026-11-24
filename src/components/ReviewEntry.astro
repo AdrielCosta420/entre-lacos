@@ -1,0 +1,109 @@
+---
+import type { Member, Review } from '../lib/content.ts';
+import { formatDate, isoDate } from '../lib/dates.ts';
+import { href } from '../lib/site.ts';
+import BookCover from './BookCover.astro';
+
+/*
+ * One line of a table of contents: the book beside the title, the book it
+ * reads, a summary and the signature. Lives inside an <ol class="entries">.
+ * Lists that already state the author (her profile) or the section (the
+ * category archive) turn those parts off instead of repeating them.
+ */
+interface Props {
+  review: Review;
+  author: Member;
+  showAuthor?: boolean;
+  showCategory?: boolean;
+}
+
+const { review, author, showAuthor = true, showCategory = true } = Astro.props;
+const { title, book, summary, category, publishedAt } = review.data;
+const url = href(`resenhas/${review.id}/`);
+---
+
+<li class="entry opens-review">
+  {/* The book repeats the title link for the pointer; keyboard and screen
+      readers get the title alone. */}
+  <a class="entry-book" href={url} tabindex="-1" aria-hidden="true">
+    <BookCover review={review} imageHeight={360} />
+  </a>
+  <div>
+    <h3 class="title"><a href={url}>{title}</a></h3>
+    <p class="credit">sobre <cite>{book.title}</cite>, de {book.author}</p>
+    <p class="summary">{summary}</p>
+    <p class="meta">
+      {
+        showAuthor && (
+          <>
+            por <a href={href(`equipe/${author.id}/`)}>{author.data.name}</a>
+            {' · '}
+          </>
+        )
+      }
+      {
+        showCategory && (
+          <>
+            {category}
+            {' · '}
+          </>
+        )
+      }
+      <time datetime={isoDate(publishedAt)}>{formatDate(publishedAt)}</time>
+    </p>
+  </div>
+</li>
+
+<style>
+  .entry {
+    --book-height: 8.25rem;
+    display: grid;
+    grid-template-columns: 5.5rem minmax(0, 1fr);
+    gap: 1.25rem;
+    align-items: start;
+  }
+  /* No underline: it would run through the typeset cover's title. */
+  .entry-book {
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+  }
+  .title {
+    margin: 0 0 0.35rem;
+    font-size: clamp(1.375rem, 2.4vw, 1.875rem);
+    line-height: 1.12;
+    letter-spacing: -0.015em;
+  }
+  .title a {
+    color: var(--color-ink);
+    text-decoration: none;
+  }
+  .title a:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 0.05em;
+  }
+  @media (hover: hover) {
+    .entry:hover .title a {
+      color: var(--color-wine);
+    }
+  }
+  .credit {
+    margin: 0 0 0.5rem;
+  }
+  .summary {
+    max-width: 38rem;
+    margin: 0 0 0.6rem;
+    font-size: 1.125rem;
+    line-height: 1.5;
+  }
+  .meta {
+    margin: 0;
+  }
+  @media (min-width: 40rem) {
+    .entry {
+      --book-height: 10.5rem;
+      grid-template-columns: 7.25rem minmax(0, 1fr);
+      gap: 2rem;
+    }
+  }
+</style>

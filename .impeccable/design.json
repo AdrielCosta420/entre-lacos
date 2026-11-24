@@ -1,0 +1,464 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-23T23:53:43+00:00",
+  "title": "Design System: Entre Laços",
+  "extensions": {
+    "colorMeta": {
+      "wine": {
+        "role": "primary",
+        "displayName": "Bookcloth Wine",
+        "canonical": "#6b1424",
+        "oklch": "oklch(35.0% 0.120 16.2)",
+        "tonalRamp": [
+          "#1e0004",
+          "#4b0213",
+          "#741e2b",
+          "#994049",
+          "#bf6269",
+          "#e6858b",
+          "#fdb2b5",
+          "#ffe8e9"
+        ]
+      },
+      "wine-deep": {
+        "role": "primary",
+        "displayName": "Deep Wine",
+        "canonical": "#4a0d19",
+        "oklch": "oklch(27.4% 0.090 14.6)",
+        "tonalRamp": [
+          "#1e0004",
+          "#470a17",
+          "#692a33",
+          "#8d4a51",
+          "#b26b71",
+          "#d78e93",
+          "#feb1b7",
+          "#ffe8e9"
+        ]
+      },
+      "thread": {
+        "role": "secondary",
+        "displayName": "Red Thread",
+        "canonical": "#c4283f",
+        "oklch": "oklch(53.8% 0.190 19.2)",
+        "tonalRamp": [
+          "#1e0003",
+          "#4b020f",
+          "#7e0720",
+          "#b41032",
+          "#dd4253",
+          "#fe7279",
+          "#fdb2b2",
+          "#ffe8e8"
+        ]
+      },
+      "rose": {
+        "role": "secondary",
+        "displayName": "Highlighter Rose",
+        "canonical": "#f2b8c2",
+        "oklch": "oklch(83.8% 0.068 7.1)",
+        "tonalRamp": [
+          "#1d0007",
+          "#3f141f",
+          "#60323c",
+          "#83515a",
+          "#a6717b",
+          "#cb949d",
+          "#f1b7c1",
+          "#ffe8eb"
+        ]
+      },
+      "endpaper": {
+        "role": "tertiary",
+        "displayName": "Endpaper",
+        "canonical": "#f6dfe3",
+        "oklch": "oklch(92.3% 0.026 5.7)",
+        "tonalRamp": [
+          "#14070a",
+          "#302023",
+          "#4e3c40",
+          "#6f5b5f",
+          "#917c80",
+          "#b49fa2",
+          "#d9c3c7",
+          "#ffe8ec"
+        ]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Warm Paper",
+        "canonical": "#fdfafa",
+        "oklch": "oklch(98.7% 0.003 17.2)",
+        "tonalRamp": [
+          "#0c0b0b",
+          "#272424",
+          "#444141",
+          "#636060",
+          "#848181",
+          "#a7a4a4",
+          "#cbc8c8",
+          "#f1eeee"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "#24161a",
+        "oklch": "oklch(22.0% 0.024 0.5)",
+        "tonalRamp": [
+          "#13070b",
+          "#2f2024",
+          "#4d3d41",
+          "#6d5c60",
+          "#8f7d81",
+          "#b39fa4",
+          "#d7c3c8",
+          "#fde8ee"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Muted Ink",
+        "canonical": "#6b585d",
+        "oklch": "oklch(48.1% 0.026 0.5)",
+        "tonalRamp": [
+          "#14070b",
+          "#302024",
+          "#4e3c41",
+          "#6e5b60",
+          "#907c81",
+          "#b49fa4",
+          "#d9c3c8",
+          "#ffe8ed"
+        ]
+      },
+      "on-wine": {
+        "role": "neutral",
+        "displayName": "On-Wine",
+        "canonical": "#fbeef0",
+        "oklch": "oklch(96.0% 0.014 6.7)",
+        "tonalRamp": [
+          "#10090a",
+          "#2b2224",
+          "#493f41",
+          "#695e60",
+          "#8a7f81",
+          "#aea1a3",
+          "#d2c5c7",
+          "#f8ebed"
+        ]
+      },
+      "on-wine-muted": {
+        "role": "neutral",
+        "displayName": "On-Wine Muted",
+        "canonical": "#e2b3bb",
+        "oklch": "oklch(81.1% 0.055 7.0)",
+        "tonalRamp": [
+          "#1d0107",
+          "#3b1820",
+          "#5b353d",
+          "#7d545c",
+          "#a0757d",
+          "#c5979f",
+          "#eabbc3",
+          "#ffe8eb"
+        ]
+      },
+      "cover-linen": {
+        "role": "tertiary",
+        "displayName": "Cover Linen",
+        "canonical": "#d9cebf",
+        "oklch": "oklch(85.6% 0.024 75.8)",
+        "tonalRamp": [
+          "#110a02",
+          "#2c2418",
+          "#494034",
+          "#696052",
+          "#8b8173",
+          "#aea395",
+          "#d2c7b8",
+          "#f8eddd"
+        ]
+      },
+      "cover-paper": {
+        "role": "tertiary",
+        "displayName": "Cover Paper",
+        "canonical": "#f3ebe8",
+        "oklch": "oklch(94.5% 0.010 41.9)",
+        "tonalRamp": [
+          "#0f0a08",
+          "#292421",
+          "#47403e",
+          "#66605d",
+          "#88817e",
+          "#aba3a0",
+          "#cfc7c4",
+          "#f5ece9"
+        ]
+      },
+      "cover-ink": {
+        "role": "tertiary",
+        "displayName": "Cover Ink",
+        "canonical": "#2b1b20",
+        "oklch": "oklch(24.5% 0.027 358.9)",
+        "tonalRamp": [
+          "#14070b",
+          "#302025",
+          "#4e3c42",
+          "#6f5b61",
+          "#917c82",
+          "#b49ea5",
+          "#d9c2c9",
+          "#ffe8ee"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Home masthead wordmark only, thread woven through it."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Inner page titles in the page head."
+      },
+      "headline-feature": {
+        "displayName": "Headline Feature",
+        "purpose": "Title beside a large book on a wine field (home lead, review head)."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Side-head section names; contributor names sit in this register."
+      },
+      "title-entry": {
+        "displayName": "Title Entry",
+        "purpose": "Review titles in table-of-contents entries."
+      },
+      "quote": {
+        "displayName": "Quote",
+        "purpose": "The highlighted passage on the home page, opening quote hung in the margin."
+      },
+      "standfirst": {
+        "displayName": "Standfirst",
+        "purpose": "Muted paragraph under a page title, max 36rem."
+      },
+      "body-reading": {
+        "displayName": "Body Reading",
+        "purpose": "Review and about prose, max 38rem; three-line wine drop cap opens reviews."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Default text; summaries and bios step down to 1.0625rem."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Archivo voice for editorial links and nav items."
+      },
+      "meta": {
+        "displayName": "Meta",
+        "purpose": "Archivo bylines, categories, dates, reading time, counts; tabular numerals, muted."
+      }
+    },
+    "shadows": [
+      {
+        "name": "shadow-book",
+        "value": "0 1px 2px rgb(36 8 14 / 0.16), 0 10px 22px -10px rgb(36 8 14 / 0.45)",
+        "purpose": "A book resting on the page: every cover, uploaded or typeset."
+      },
+      {
+        "name": "shadow-book-raised",
+        "value": "0 2px 4px rgb(36 8 14 / 0.12), 0 22px 34px -14px rgb(36 8 14 / 0.5)",
+        "purpose": "A book picked up: its entry is hovered or keyboard-focused."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "The single easing for hairlines, arrows, lifts and transitions."
+      },
+      {
+        "name": "duration-fast",
+        "value": "150ms",
+        "purpose": "Color and underline feedback."
+      },
+      {
+        "name": "duration-base",
+        "value": "250ms",
+        "purpose": "Nav hairline, arrow nudges, unpaired cover fade."
+      },
+      {
+        "name": "duration-slow",
+        "value": "450ms",
+        "purpose": "Things that travel: book lift and the cover flying into the review page."
+      },
+      {
+        "name": "nav-mark-slide",
+        "value": "350ms",
+        "purpose": "Highlighter sliding to the next nav item across page navigations."
+      },
+      {
+        "name": "pull-thread",
+        "value": "1.1s ease-out, 150ms delay, clip-path wipe",
+        "purpose": "Masthead thread drawn in once on load."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "prefers-reduced-motion: no-preference gate",
+        "purpose": "All movement and shared-element naming apply only when motion is welcome; otherwise pages crossfade."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "entry",
+        "value": "40rem"
+      },
+      {
+        "name": "footer",
+        "value": "48rem"
+      },
+      {
+        "name": "side-head",
+        "value": "52rem"
+      },
+      {
+        "name": "masthead",
+        "value": "56rem"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "More Link",
+      "kind": "button",
+      "refersTo": "link-more",
+      "description": "The system's primary action: an editorial link with a drawn arrow that nudges forward on hover. There are no buttons.",
+      "html": "<a class=\"ds-link ds-more\" href=\"#\">Ler a resenha<svg viewBox=\"0 0 16 16\" width=\"16\" height=\"16\" aria-hidden=\"true\"><path d=\"M3 8h9.5M8.5 4l4 4-4 4\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></a>",
+      "css": ":host{--color-wine:#6b1424;--color-wine-deep:#4a0d19;--color-thread:#c4283f;--color-rose:#f2b8c2;--color-endpaper:#f6dfe3;--color-paper:#fdfafa;--color-ink:#24161a;--color-muted:#6b585d;--color-on-wine:#fbeef0;--color-on-wine-muted:#e2b3bb;--font-serif:Piazzolla,Georgia,serif;--font-sans:Archivo,system-ui,sans-serif;--ease-out:cubic-bezier(0.16,1,0.3,1);--shadow-book:0 1px 2px rgb(36 8 14 / 0.16),0 10px 22px -10px rgb(36 8 14 / 0.45);--shadow-book-raised:0 2px 4px rgb(36 8 14 / 0.12),0 22px 34px -14px rgb(36 8 14 / 0.5);} .ds-link{color:var(--color-wine,#6b1424);text-decoration-thickness:max(1px,0.06em);text-underline-offset:0.2em;text-decoration-color:color-mix(in srgb,currentColor 40%,transparent);transition:text-decoration-color 150ms ease;}.ds-link:hover{text-decoration-color:currentColor;} .ds-link:focus-visible{outline:3px solid var(--color-wine,#6b1424);outline-offset:2px;} .ds-more{display:inline-flex;align-items:center;gap:0.35rem;min-height:44px;font-family:var(--font-sans);font-size:1rem;font-weight:500;} .ds-more svg{flex-shrink:0;transition:transform 250ms var(--ease-out);} .ds-more:hover svg{transform:translateX(3px);} @media (prefers-reduced-motion: reduce){.ds-more svg{transition:none;}.ds-more:hover svg{transform:none;}}"
+    },
+    {
+      "name": "WhatsApp Link",
+      "kind": "button",
+      "refersTo": "link-whatsapp",
+      "description": "Off-site contact action: smaller editorial link with a diagonal arrow meaning it leaves the site.",
+      "html": "<a class=\"ds-link ds-whatsapp\" href=\"#\">Conversar com Ana no WhatsApp<svg viewBox=\"0 0 16 16\" width=\"14\" height=\"14\" aria-hidden=\"true\"><path d=\"M5 11 11 5M6 5h5v5\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></a>",
+      "css": ":host{--color-wine:#6b1424;--color-wine-deep:#4a0d19;--color-thread:#c4283f;--color-rose:#f2b8c2;--color-endpaper:#f6dfe3;--color-paper:#fdfafa;--color-ink:#24161a;--color-muted:#6b585d;--color-on-wine:#fbeef0;--color-on-wine-muted:#e2b3bb;--font-serif:Piazzolla,Georgia,serif;--font-sans:Archivo,system-ui,sans-serif;--ease-out:cubic-bezier(0.16,1,0.3,1);--shadow-book:0 1px 2px rgb(36 8 14 / 0.16),0 10px 22px -10px rgb(36 8 14 / 0.45);--shadow-book-raised:0 2px 4px rgb(36 8 14 / 0.12),0 22px 34px -14px rgb(36 8 14 / 0.5);} .ds-link{color:var(--color-wine,#6b1424);text-decoration-thickness:max(1px,0.06em);text-underline-offset:0.2em;text-decoration-color:color-mix(in srgb,currentColor 40%,transparent);transition:text-decoration-color 150ms ease;}.ds-link:hover{text-decoration-color:currentColor;} .ds-link:focus-visible{outline:3px solid var(--color-wine,#6b1424);outline-offset:2px;} .ds-whatsapp{display:inline-flex;align-items:center;gap:0.35rem;min-height:44px;font-family:var(--font-sans);font-size:0.9375rem;font-weight:500;} .ds-whatsapp svg{flex:none;transition:transform 250ms var(--ease-out);} .ds-whatsapp:hover svg{transform:translate(2px,-2px);} @media (prefers-reduced-motion: reduce){.ds-whatsapp:hover svg{transform:none;}}"
+    },
+    {
+      "name": "Navigation",
+      "kind": "nav",
+      "refersTo": "nav-item",
+      "description": "Archivo nav; hover draws a hairline from the left, the current item carries the rose highlighter stroke.",
+      "html": "<nav class=\"ds-nav\"><a href=\"#\">Início</a><a href=\"#\" aria-current=\"page\">Resenhas<span class=\"ds-nav-mark\"></span></a><a href=\"#\">Equipe</a><a href=\"#\">Sobre</a><a href=\"#\">Contato</a></nav>",
+      "css": ":host{--color-wine:#6b1424;--color-wine-deep:#4a0d19;--color-thread:#c4283f;--color-rose:#f2b8c2;--color-endpaper:#f6dfe3;--color-paper:#fdfafa;--color-ink:#24161a;--color-muted:#6b585d;--color-on-wine:#fbeef0;--color-on-wine-muted:#e2b3bb;--font-serif:Piazzolla,Georgia,serif;--font-sans:Archivo,system-ui,sans-serif;--ease-out:cubic-bezier(0.16,1,0.3,1);--shadow-book:0 1px 2px rgb(36 8 14 / 0.16),0 10px 22px -10px rgb(36 8 14 / 0.45);--shadow-book-raised:0 2px 4px rgb(36 8 14 / 0.12),0 22px 34px -14px rgb(36 8 14 / 0.5);} .ds-nav{display:flex;flex-wrap:wrap;gap:0 1.5rem;background:var(--color-paper);padding:0 1rem;} .ds-nav a{position:relative;isolation:isolate;display:inline-flex;align-items:center;min-height:44px;font-family:var(--font-sans);font-size:1rem;color:var(--color-ink);text-decoration:none;} .ds-nav a::after{content:'';position:absolute;inset-inline:0;bottom:0.45rem;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform 250ms var(--ease-out);} .ds-nav a:hover{color:var(--color-wine);} .ds-nav a:not([aria-current]):hover::after{transform:scaleX(1);} .ds-nav a:focus-visible{outline:3px solid var(--color-wine);outline-offset:2px;} .ds-nav-mark{position:absolute;z-index:-1;inset-inline:-0.2em;top:calc(50% - 0.12em);height:0.55em;border-radius:2px 6px 3px 5px;background:var(--color-rose);mix-blend-mode:multiply;}"
+    },
+    {
+      "name": "Running Stitch",
+      "kind": "custom",
+      "refersTo": "thread",
+      "description": "The only divider: a 2px red-thread running stitch, 11px on, 6px off.",
+      "html": "<div class=\"ds-stitch-wrap\"><div class=\"ds-stitch\" aria-hidden=\"true\"></div></div>",
+      "css": ":host{--color-wine:#6b1424;--color-wine-deep:#4a0d19;--color-thread:#c4283f;--color-rose:#f2b8c2;--color-endpaper:#f6dfe3;--color-paper:#fdfafa;--color-ink:#24161a;--color-muted:#6b585d;--color-on-wine:#fbeef0;--color-on-wine-muted:#e2b3bb;--font-serif:Piazzolla,Georgia,serif;--font-sans:Archivo,system-ui,sans-serif;--ease-out:cubic-bezier(0.16,1,0.3,1);--shadow-book:0 1px 2px rgb(36 8 14 / 0.16),0 10px 22px -10px rgb(36 8 14 / 0.45);--shadow-book-raised:0 2px 4px rgb(36 8 14 / 0.12),0 22px 34px -14px rgb(36 8 14 / 0.5);} .ds-stitch-wrap{background:var(--color-paper);padding:2rem 1rem;} .ds-stitch{height:2px;color:var(--color-thread);background:linear-gradient(90deg,currentColor 0 11px,transparent 11px) 0 0 / 17px 2px repeat-x;}"
+    },
+    {
+      "name": "Typeset Book Cover",
+      "kind": "custom",
+      "refersTo": "book-cover-linen",
+      "description": "A book as an object when no cover image exists: serif title, red-thread band, author, hinge crease, book shadow; lifts on hover.",
+      "html": "<div class=\"ds-shelf\"><div class=\"ds-book ds-linen\"><span class=\"ds-book-title\">O Alienista</span><span class=\"ds-book-band\">Machado de Assis</span></div><div class=\"ds-book ds-paper\"><span class=\"ds-book-title\">A Paixão segundo G.H.</span><span class=\"ds-book-band\">Clarice Lispector</span></div><div class=\"ds-book ds-ink\"><span class=\"ds-book-title\">Torto Arado</span><span class=\"ds-book-band\">Itamar Vieira Junior</span></div></div>",
+      "css": ":host{--color-wine:#6b1424;--color-wine-deep:#4a0d19;--color-thread:#c4283f;--color-rose:#f2b8c2;--color-endpaper:#f6dfe3;--color-paper:#fdfafa;--color-ink:#24161a;--color-muted:#6b585d;--color-on-wine:#fbeef0;--color-on-wine-muted:#e2b3bb;--font-serif:Piazzolla,Georgia,serif;--font-sans:Archivo,system-ui,sans-serif;--ease-out:cubic-bezier(0.16,1,0.3,1);--shadow-book:0 1px 2px rgb(36 8 14 / 0.16),0 10px 22px -10px rgb(36 8 14 / 0.45);--shadow-book-raised:0 2px 4px rgb(36 8 14 / 0.12),0 22px 34px -14px rgb(36 8 14 / 0.5);} .ds-shelf{display:flex;gap:1.5rem;padding:1.5rem;background:var(--color-paper);} .ds-book{display:flex;flex-direction:column;width:8rem;aspect-ratio:2/3;padding:1.04rem 0.88rem 0.8rem 1.2rem;border-radius:2px 4px 4px 2px;box-shadow:var(--shadow-book);background-image:linear-gradient(90deg,rgb(0 0 0 / 0.2),rgb(0 0 0 / 0.06) 3%,rgb(255 255 255 / 0.16) 4.5%,transparent 8%);font-family:var(--font-serif);overflow:hidden;transition:transform 450ms var(--ease-out),box-shadow 450ms var(--ease-out);} .ds-book:hover{transform:translateY(-4px);box-shadow:var(--shadow-book-raised);} .ds-book-title{flex:1;font-size:1.15rem;font-weight:500;line-height:1;letter-spacing:-0.02em;} .ds-book-band{padding-top:0.3rem;border-top:1.5px solid var(--color-thread);font-family:var(--font-sans);font-size:0.625rem;line-height:1.2;} .ds-linen{background-color:#d9cebf;color:var(--color-ink);} .ds-paper{background-color:#f3ebe8;color:var(--color-wine);} .ds-ink{background-color:#2b1b20;color:var(--color-on-wine);} @media (prefers-reduced-motion: reduce){.ds-book:hover{transform:none;}}"
+    },
+    {
+      "name": "Wine Field Lead",
+      "kind": "card",
+      "refersTo": "field-wine",
+      "description": "Wine bookcloth field carrying a feature: title, credit line, byline meta and More Link in on-wine values. A field, not a card.",
+      "html": "<section class=\"ds-field-wine\"><h2 class=\"ds-lead-title\"><a href=\"#\">A loucura como espelho</a></h2><p class=\"ds-credit\">sobre <cite>O Alienista</cite>, de Machado de Assis</p><p class=\"ds-meta\">por Ana Exemplo · Literatura · 12 nov. 2026 · 6&nbsp;min de leitura</p><a class=\"ds-more\" href=\"#\">Ler a resenha<svg viewBox=\"0 0 16 16\" width=\"16\" height=\"16\" aria-hidden=\"true\"><path d=\"M3 8h9.5M8.5 4l4 4-4 4\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></a></section>",
+      "css": ":host{--color-wine:#6b1424;--color-wine-deep:#4a0d19;--color-thread:#c4283f;--color-rose:#f2b8c2;--color-endpaper:#f6dfe3;--color-paper:#fdfafa;--color-ink:#24161a;--color-muted:#6b585d;--color-on-wine:#fbeef0;--color-on-wine-muted:#e2b3bb;--font-serif:Piazzolla,Georgia,serif;--font-sans:Archivo,system-ui,sans-serif;--ease-out:cubic-bezier(0.16,1,0.3,1);--shadow-book:0 1px 2px rgb(36 8 14 / 0.16),0 10px 22px -10px rgb(36 8 14 / 0.45);--shadow-book-raised:0 2px 4px rgb(36 8 14 / 0.12),0 22px 34px -14px rgb(36 8 14 / 0.5);} .ds-field-wine{background:var(--color-wine);color:var(--color-on-wine);padding:2.5rem 2rem;font-family:var(--font-serif);} .ds-field-wine a{color:var(--color-on-wine);text-underline-offset:0.2em;text-decoration-color:color-mix(in srgb,currentColor 40%,transparent);} .ds-field-wine a:hover{text-decoration-color:currentColor;} .ds-field-wine a:focus-visible{outline:3px solid var(--color-on-wine);outline-offset:2px;} .ds-lead-title{margin:0 0 0.9rem;font-size:2.5rem;font-weight:500;line-height:1.02;letter-spacing:-0.025em;} .ds-lead-title a{text-decoration:none;} .ds-lead-title a:hover{text-decoration:underline;text-decoration-thickness:0.04em;} .ds-credit{margin:0 0 1.25rem;font-size:1.25rem;color:var(--color-on-wine-muted);} .ds-credit cite{color:var(--color-on-wine);} .ds-meta{margin:0 0 0.5rem;font-family:var(--font-sans);font-size:0.875rem;color:var(--color-on-wine-muted);} .ds-more{display:inline-flex;align-items:center;gap:0.35rem;min-height:44px;font-family:var(--font-sans);font-weight:500;} .ds-more svg{transition:transform 250ms var(--ease-out);} .ds-more:hover svg{transform:translateX(3px);}"
+    },
+    {
+      "name": "Highlighted Passage",
+      "kind": "custom",
+      "refersTo": "rose",
+      "description": "A quoted passage marked with the low rose highlighter, opening quote hung in the margin, sans caption.",
+      "html": "<figure class=\"ds-excerpt\"><blockquote><p><mark>“A ciência é a minha única ocupação.”</mark></p></blockquote><figcaption>Machado de Assis, <cite>O Alienista</cite>. Trecho destacado por Ana Exemplo.</figcaption></figure>",
+      "css": ":host{--color-wine:#6b1424;--color-wine-deep:#4a0d19;--color-thread:#c4283f;--color-rose:#f2b8c2;--color-endpaper:#f6dfe3;--color-paper:#fdfafa;--color-ink:#24161a;--color-muted:#6b585d;--color-on-wine:#fbeef0;--color-on-wine-muted:#e2b3bb;--font-serif:Piazzolla,Georgia,serif;--font-sans:Archivo,system-ui,sans-serif;--ease-out:cubic-bezier(0.16,1,0.3,1);--shadow-book:0 1px 2px rgb(36 8 14 / 0.16),0 10px 22px -10px rgb(36 8 14 / 0.45);--shadow-book-raised:0 2px 4px rgb(36 8 14 / 0.12),0 22px 34px -14px rgb(36 8 14 / 0.5);} .ds-excerpt{margin:0;padding:2rem 2rem 2rem 2.5rem;background:var(--color-paper);color:var(--color-ink);} .ds-excerpt blockquote{margin:0;} .ds-excerpt p{max-width:24ch;margin:0;font-family:var(--font-serif);font-size:2rem;line-height:1.22;letter-spacing:-0.015em;text-indent:-0.42em;} .ds-excerpt mark{padding-inline:0.08em;color:inherit;background:linear-gradient(transparent 38%,var(--color-rose) 38% 90%,transparent 90%);box-decoration-break:clone;-webkit-box-decoration-break:clone;} .ds-excerpt figcaption{margin-top:1.5rem;font-family:var(--font-sans);font-size:0.9375rem;line-height:1.5;color:var(--color-muted);}"
+    },
+    {
+      "name": "Monogram Avatar",
+      "kind": "chip",
+      "refersTo": "avatar-monogram",
+      "description": "Placeholder portrait until a member photo arrives: serif initials on a wine circle, inverted on wine fields.",
+      "html": "<div class=\"ds-avatars\"><span class=\"ds-avatar\">AE</span><span class=\"ds-avatar ds-on-wine\">BE</span></div>",
+      "css": ":host{--color-wine:#6b1424;--color-wine-deep:#4a0d19;--color-thread:#c4283f;--color-rose:#f2b8c2;--color-endpaper:#f6dfe3;--color-paper:#fdfafa;--color-ink:#24161a;--color-muted:#6b585d;--color-on-wine:#fbeef0;--color-on-wine-muted:#e2b3bb;--font-serif:Piazzolla,Georgia,serif;--font-sans:Archivo,system-ui,sans-serif;--ease-out:cubic-bezier(0.16,1,0.3,1);--shadow-book:0 1px 2px rgb(36 8 14 / 0.16),0 10px 22px -10px rgb(36 8 14 / 0.45);--shadow-book-raised:0 2px 4px rgb(36 8 14 / 0.12),0 22px 34px -14px rgb(36 8 14 / 0.5);} .ds-avatars{display:flex;gap:1rem;padding:1rem;background:linear-gradient(90deg,var(--color-endpaper) 50%,var(--color-wine) 50%);} .ds-avatar{display:inline-grid;place-items:center;width:76px;height:76px;border-radius:50%;background:var(--color-wine);color:var(--color-on-wine);font-family:var(--font-serif);font-size:30px;font-weight:500;letter-spacing:-0.02em;} .ds-on-wine{background:var(--color-on-wine);color:var(--color-wine);margin-left:auto;}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Thread-Bound Magazine",
+    "overview": "**Creative North Star: \"The Thread-Bound Magazine\"**\n\nEntre Laços is set like an independent literary magazine, and the one ornament it allows itself is the structure that binds it: the red thread of the logo's \"laço\". The thread is woven over and under the masthead wordmark, it joins sections as a running stitch instead of a printer's rule, it crosses every typeset book cover as the publisher's band, and it ends tied in a knot at the top of the wine \"Expediente\" footer. If a new surface needs a divider, a band or an ending, it uses the thread; it does not invent a second ornament.\n\nColor behaves like the materials of a bound book. Wine is the bookcloth and owns whole fields edge to edge; rose is a reader's highlighter and only marks; light rose is the endpaper, where the contributors live; everything else is warm paper and ink. Type is one press serif (Piazzolla, with its optical-size axis) carrying the masthead and the long reading text alike, with a grotesque (Archivo) speaking only for bylines, dates, navigation and links. Books are physical objects: the only things on the page that cast shadows, lift when picked up, and fly into the review page when opened.\n\nDensity is editorial, not dashboard: generous vertical air between sections, a side-head column beside a wider main column, one reading measure, asymmetric feature compositions where the book hangs over the bottom edge of its cloth. The site refuses the landing-page hero with a button, the card grid, pill buttons, and colored call-to-action boxes; actions read as underlined editorial links with a small drawn arrow.",
+    "keyCharacteristics": [
+      "One ornament, the red thread: woven wordmark, running stitch, cover band, footer knot.",
+      "Wine fields as bookcloth; rose strictly as highlighter; light-rose endpaper for people.",
+      "Piazzolla for everything read, Archivo for everything scanned (bylines, meta, nav, links).",
+      "Books are the only objects with depth; nothing else has a shadow or a card frame.",
+      "Editorial links with SVG arrows instead of buttons.",
+      "Motion is mechanical and meaningful (thread wipe, cover flight, highlighter slide), always gated by `prefers-reduced-motion`."
+    ],
+    "rules": [
+      {
+        "name": "The Bookcloth Rule",
+        "body": "Wine is a field, not a box. It runs edge to edge across the viewport and carries its own text, link, meta, avatar and focus colors through the field's custom properties (`--muted`, `--avatar-bg`, `--avatar-fg`), so components never need wine variants. A page whose last section is a colored field meets the footer's wine with no strip of paper between.",
+        "section": "colors"
+      },
+      {
+        "name": "The Highlighter Rule",
+        "body": "Rose marks; it never fills a section, a panel or a cover. Its shape is a reader's stroke: low on the line (from 38% to 90% of the line box), or the irregular nav mark, never a full rectangle behind a block.",
+        "section": "colors"
+      },
+      {
+        "name": "The Two Missing Tones Rule",
+        "body": "Typeset covers are never wine (a wine book vanishes on the wine lead field) and never rose (rose is reserved for the highlighter). New cover tones come from bookcloth, not from the brand accents.",
+        "section": "colors"
+      },
+      {
+        "name": "The Two Voices Rule",
+        "body": "Piazzolla is what you read; Archivo is what you scan. Titles, summaries, bios, quotes and prose are serif; bylines, dates, categories, nav, links and figcaptions are sans. No third family, and no all-caps tracked labels.",
+        "section": "typography"
+      },
+      {
+        "name": "The Credit Line Rule",
+        "body": "A review is always introduced with the book it reads, set as \"sobre *Título*, de Autor\" in the serif, muted, with the book title in italic `cite` (on wine, the cite switches to on-wine).",
+        "section": "typography"
+      },
+      {
+        "name": "The One Reading Line Rule",
+        "body": "Main-column content on wide screens starts at the same x as the main column of the side-head grid. A new section either uses the side-head or aligns to its main column; it does not center itself.",
+        "section": "layout"
+      },
+      {
+        "name": "The Only Objects Rule",
+        "body": "Shadows are for books. If something that is not a book needs emphasis, it gets a field, a highlighter or the thread, never a shadow.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** use the red thread (stitch, band, woven line, knot) as the only ornament and the only divider.",
+      "**Do** give wine whole full-bleed fields and let the field supply on-wine text, meta, avatar and focus colors.",
+      "**Do** mark with rose as a low highlighter stroke (38% to 90% of the line box) or the uneven nav mark.",
+      "**Do** introduce every review with its book: the cover object and the \"sobre *Título*, de Autor\" credit line.",
+      "**Do** set reading in Piazzolla at 1.1875rem / 1.7 within 38rem, and scanned apparatus in Archivo.",
+      "**Do** keep every link and nav target at least 44px tall, with the 3px wine focus ring (on-wine or rose on wine).",
+      "**Do** gate every movement behind `prefers-reduced-motion: no-preference`, keeping state changes (deeper shadow, color) without the motion."
+    ],
+    "donts": [
+      "**Don't** build cards: no bordered or rounded boxes around entries, contributors or sections.",
+      "**Don't** use buttons or pill shapes for actions; use an editorial link with a drawn SVG arrow.",
+      "**Don't** fill a section, panel or cover with rose.",
+      "**Don't** make a typeset cover wine or rose.",
+      "**Don't** put a shadow on anything that is not a book.",
+      "**Don't** add uppercase tracked kickers or eyebrows above titles; a section is named by its serif side-head.",
+      "**Don't** add a third typeface or a printer's hairline rule between sections.",
+      "**Don't** crop an uploaded book cover."
+    ]
+  }
+}

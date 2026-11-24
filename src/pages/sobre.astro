@@ -1,0 +1,45 @@
+---
+import MoreLink from '../components/MoreLink.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE, href } from '../lib/site.ts';
+---
+
+<BaseLayout title="Sobre" description={`O que é o ${SITE.name} e quem está por trás do projeto.`}>
+  <header class="container page-head">
+    <h1>Sobre o {SITE.name}</h1>
+  </header>
+
+  <div class="container">
+    <!-- Placeholder copy: replace with the group's own text. -->
+    <div class="prose lede offset-main">
+      <p>
+        O {SITE.name} é um projeto de estudantes de Psicologia da {SITE.institution}. Aqui
+        compartilhamos resenhas de livros lidos sob o olhar da Psicologia, para inspirar, acolher e
+        provocar reflexões sobre a vida, as emoções e as relações.
+      </p>
+      <p>
+        As resenhas são escritas por estudantes e não substituem acompanhamento psicológico
+        profissional.
+      </p>
+    </div>
+    <div class="offset-main next">
+      <MoreLink href={href('resenhas/')}>Ler as resenhas</MoreLink>
+      <MoreLink href={href('equipe/')}>Conhecer a equipe</MoreLink>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  /* The opening paragraph is the page's standfirst. */
+  .lede > p:first-child {
+    font-size: clamp(1.375rem, 2.6vw, 1.75rem);
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+  }
+  .next {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 2rem;
+    margin-top: 1rem;
+  }
+</style>

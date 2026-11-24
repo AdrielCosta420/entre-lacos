@@ -1,0 +1,254 @@
+---
+import BookCover from '../components/BookCover.astro';
+import Byline from '../components/Byline.astro';
+import Contributor from '../components/Contributor.astro';
+import MoreLink from '../components/MoreLink.astro';
+import ReviewEntry from '../components/ReviewEntry.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getMembers, getPublishedReviews, withAuthors } from '../lib/content.ts';
+import { firstQuote } from '../lib/quotes.ts';
+import { countByAuthor } from '../lib/reviews.ts';
+import { SITE, href } from '../lib/site.ts';
+
+// The newest review is this edition's cover; the next ones fill the contents.
+const RECENT_COUNT = 4;
+
+const [reviews, members] = await Promise.all([getPublishedReviews(), getMembers()]);
+const [lead, ...recent] = await withAuthors(reviews.slice(0, 1 + RECENT_COUNT));
+const reviewCounts = countByAuthor(reviews);
+
+const reviewUrl = (id: string) => href(`resenhas/${id}/`);
+
+// The highlighted passage comes from a review other than the lead when one
+// has a quote, so the page doesn't repeat itself; the lead is the fallback.
+const excerpt = [...recent, ...(lead ? [lead] : [])]
+  .map((entry) => ({ ...entry, quote: firstQuote(entry.review.body ?? '') }))
+  .find((entry) => entry.quote);
+---
+
+<BaseLayout masthead>
+  {
+    lead ? (
+      <section class="lead field-wine opens-review" aria-labelledby="lead-title">
+        <div class="container lead-grid">
+          <a class="lead-book" href={reviewUrl(lead.review.id)} tabindex="-1" aria-hidden="true">
+            <BookCover review={lead.review} imageHeight={960} eager />
+          </a>
+          <div class="lead-text">
+            <h2 id="lead-title" class="lead-title">
+              <a href={reviewUrl(lead.review.id)}>{lead.review.data.title}</a>
+            </h2>
+            <p class="credit">
+              sobre <cite>{lead.review.data.book.title}</cite>, de {lead.review.data.book.author}
+            </p>
+            <p class="lead-summary">{lead.review.data.summary}</p>
+            <Byline review={lead.review} author={lead.author} />
+            <MoreLink href={reviewUrl(lead.review.id)}>
+              Ler a resenha<span class="visually-hidden">: {lead.review.data.title}</span>
+            </MoreLink>
+          </div>
+        </div>
+      </section>
+    ) : (
+      <section class="container empty">
+        <p>As primeiras resenhas chegam em breve.</p>
+      </section>
+    )
+  }
+
+  {
+    recent.length > 0 && (
+      <section class="container recent with-side" aria-labelledby="recent-title">
+        <div class="side">
+          <h2 id="recent-title">Leituras recentes</h2>
+          <MoreLink href={href('resenhas/')}>Todas as resenhas</MoreLink>
+        </div>
+        <ol class="entries">
+          {recent.map(({ review, author }) => (
+            <ReviewEntry review={review} author={author} />
+          ))}
+        </ol>
+      </section>
+    )
+  }
+
+  {
+    excerpt && (
+      <section class="excerpt" aria-label="Trecho em destaque">
+        <div class="container">
+          <div class="stitch" aria-hidden="true" />
+          <figure class="offset-main">
+            <blockquote>
+              <p>
+                <mark>“{excerpt.quote}”</mark>
+              </p>
+            </blockquote>
+            <figcaption>
+              {excerpt.review.data.book.author}, <cite>{excerpt.review.data.book.title}</cite>.
+              Trecho destacado por{' '}
+              <a href={href(`equipe/${excerpt.author.id}/`)}>{excerpt.author.data.name}</a> em{' '}
+              <a href={reviewUrl(excerpt.review.id)}>{excerpt.review.data.title}</a>.
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+    )
+  }
+
+  <section class="contributors field-endpaper flush-end" aria-labelledby="equipe-title">
+    <div class="container with-side">
+      <div class="side">
+        <h2 id="equipe-title">Quem escreve</h2>
+        <p class="side-text">
+          Estudantes de Psicologia da {SITE.institution} que leem, escrevem e conversam sobre livros.
+        </p>
+        <MoreLink href={href('equipe/')}>Conheça a equipe</MoreLink>
+      </div>
+      <ul class="people">
+        {
+          members.map((member) => (
+            <Contributor member={member} count={reviewCounts.get(member.id) ?? 0} />
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* ---- This edition's cover: the newest review on wine bookcloth ---- */
+  .lead {
+    --book-height: 19rem;
+    margin-top: clamp(1.5rem, 4vw, 2.5rem);
+    padding-block: 2.5rem 3rem;
+  }
+  .lead-grid {
+    display: grid;
+    gap: 2.25rem;
+  }
+  /* No underline: it would run through the typeset cover's title. */
+  .lead-book {
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+  }
+  .lead-title {
+    margin: 0 0 0.9rem;
+    font-size: clamp(2.25rem, 4.6vw, 4rem);
+    line-height: 1.02;
+    letter-spacing: -0.025em;
+  }
+  .lead-title a {
+    text-decoration: none;
+  }
+  .lead-title a:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 0.04em;
+  }
+  .lead .credit {
+    margin: 0 0 1.25rem;
+    font-size: clamp(1.125rem, 2vw, 1.3125rem);
+  }
+  .lead .credit cite {
+    color: var(--color-on-wine);
+  }
+  .lead-summary {
+    max-width: 34rem;
+    margin: 0 0 1.75rem;
+    font-size: 1.1875rem;
+    line-height: 1.55;
+  }
+  .lead-text :global(.byline) {
+    margin-bottom: 0.75rem;
+  }
+  @media (min-width: 52rem) {
+    /* The book starts level with the title and is taller than its cloth:
+       it hangs over the bottom edge. */
+    .lead {
+      --book-height: clamp(24rem, 60vh, 33rem);
+      margin-top: 1.5rem;
+      padding-block: clamp(2.5rem, 5vw, 3.75rem) 0;
+    }
+    .lead-grid {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+      align-items: start;
+      column-gap: clamp(2.5rem, 6vw, 6rem);
+    }
+    .lead-book {
+      margin-bottom: -4.5rem;
+    }
+    .lead-text {
+      padding-block: 0.5rem clamp(3rem, 6vw, 4.5rem);
+    }
+  }
+
+  .empty {
+    padding-block: 4rem;
+  }
+
+  .recent {
+    padding-top: clamp(3rem, 8vw, 7rem);
+  }
+
+  /* ---- A highlighted passage ---- */
+  .excerpt {
+    padding-top: clamp(3.5rem, 8vw, 6.5rem);
+  }
+  .excerpt figure {
+    margin-block: clamp(2.5rem, 6vw, 4.5rem) 0;
+    margin-right: 0;
+  }
+  .excerpt blockquote {
+    margin: 0;
+  }
+  .excerpt blockquote p {
+    max-width: 24ch;
+    margin: 0;
+    font-size: clamp(1.75rem, 4.2vw, 3.25rem);
+    line-height: 1.22;
+    letter-spacing: -0.015em;
+    /* The opening quote hangs in the margin, as in print. */
+    text-indent: -0.42em;
+  }
+  /* Narrow screens have no margin to hang the quote mark in: indent the
+     block by the mark's width so it stays inside the gutter. */
+  @media (max-width: 51.99rem) {
+    .excerpt blockquote {
+      padding-left: 0.5em;
+      font-size: clamp(1.75rem, 4.2vw, 3.25rem);
+    }
+    .excerpt blockquote p {
+      font-size: 1em;
+    }
+  }
+  /* A reader's highlighter stroke, not a full box: it sits low on the line. */
+  .excerpt mark {
+    padding-inline: 0.08em;
+    color: inherit;
+    background: linear-gradient(transparent 38%, var(--color-rose) 38% 90%, transparent 90%);
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+  }
+  .excerpt figcaption {
+    max-width: 34rem;
+    margin-top: 1.5rem;
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: var(--color-muted);
+  }
+
+  /* ---- Contributors, on the endpaper ---- */
+  .contributors {
+    margin-top: clamp(4rem, 9vw, 7rem);
+    padding-block: clamp(3.5rem, 8vw, 6rem);
+  }
+  .people {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));
+    gap: 2.75rem 3.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+</style>

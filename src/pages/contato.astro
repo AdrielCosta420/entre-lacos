@@ -1,0 +1,78 @@
+---
+import Avatar from '../components/Avatar.astro';
+import WhatsAppLink from '../components/WhatsAppLink.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getMembers } from '../lib/content.ts';
+import { SITE, href, instagramUrl } from '../lib/site.ts';
+
+const members = await getMembers();
+---
+
+<BaseLayout title="Contato" description={`Fale com a equipe do ${SITE.name}.`}>
+  <header class="container page-head">
+    <h1>Contato</h1>
+    <p class="standfirst">
+      Acompanhe o projeto no Instagram{' '}
+      <a href={instagramUrl(SITE.instagram)} target="_blank" rel="noopener noreferrer"
+        >@{SITE.instagram}</a
+      > ou converse diretamente com uma das integrantes.
+    </p>
+  </header>
+
+  <section class="container with-side" aria-labelledby="integrantes">
+    <div class="side">
+      <h2 id="integrantes">Integrantes</h2>
+    </div>
+    <ul class="contacts">
+      {
+        members.map((member) => (
+          <li>
+            <Avatar member={member} size={64} />
+            <div>
+              <a class="name" href={href(`equipe/${member.id}/`)}>
+                {member.data.name}
+              </a>
+              {member.data.interests.length > 0 && (
+                <p class="meta">{member.data.interests.join(' · ')}</p>
+              )}
+              <WhatsAppLink member={member} />
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</BaseLayout>
+
+<style>
+  .contacts {
+    display: grid;
+    gap: 2.25rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .contacts li {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 1.25rem;
+    align-items: start;
+  }
+  .name {
+    display: inline-block;
+    margin-top: 0.25rem;
+    font-size: 1.75rem;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    color: var(--color-ink);
+    text-decoration: none;
+  }
+  .name:hover {
+    color: var(--color-wine);
+    text-decoration: underline;
+    text-decoration-thickness: 0.05em;
+  }
+  .meta {
+    margin: 0.25rem 0 0;
+  }
+</style>

@@ -1,0 +1,187 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { render } from 'astro:content';
+import BookCover from '../../components/BookCover.astro';
+import Byline from '../../components/Byline.astro';
+import Contributor from '../../components/Contributor.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { categoryAnchor } from '../../lib/categories.ts';
+import {
+  getPublishedReviews,
+  getPublishedReviewsBy,
+  getReviewAuthor,
+  type Review,
+} from '../../lib/content.ts';
+import { href } from '../../lib/site.ts';
+
+// Built from published reviews only: a draft gets no page at all, not just
+// a hidden link.
+export const getStaticPaths = (async () => {
+  const reviews = await getPublishedReviews();
+  return reviews.map((review) => ({ params: { id: review.id }, props: { review } }));
+}) satisfies GetStaticPaths;
+
+interface Props {
+  review: Review;
+}
+
+const { review } = Astro.props;
+const { title, book, themes, summary, category } = review.data;
+const author = await getReviewAuthor(review);
+const [{ Content }, authorReviews] = await Promise.all([
+  render(review),
+  getPublishedReviewsBy(author.id),
+]);
+---
+
+<BaseLayout title={title} description={summary}>
+  <article>
+    {/* Same composition as the home page's lead: the book opened from there
+        lands where the reader expects it. */}
+    <header class="review-head field-wine">
+      <div class="container head-grid">
+        <div class="head-book">
+          <BookCover
+            review={review}
+            alt={`Capa do livro ${book.title}`}
+            imageHeight={1000}
+            eager
+            named
+          />
+        </div>
+        <div class="head-text">
+          <h1>{title}</h1>
+          <p class="credit">sobre <cite>{book.title}</cite>, de {book.author}</p>
+          <Byline review={review} author={author} />
+        </div>
+      </div>
+    </header>
+
+    <div class="container body-grid">
+      <div class="prose dropcap">
+        <Content />
+      </div>
+      <aside class="margin" aria-label="Sobre esta resenha">
+        <p class="meta">
+          <span class="label">Categoria</span>
+          <a href={href(`resenhas/#${categoryAnchor(category)}`)}>{category}</a>
+        </p>
+        {
+          themes.length > 0 && (
+            <p class="meta">
+              <span class="label">Temas</span>
+              {themes.join(' · ')}
+            </p>
+          )
+        }
+      </aside>
+    </div>
+  </article>
+
+  <aside class="author-block field-endpaper flush-end" aria-labelledby="quem-escreveu">
+    <div class="container with-side">
+      <div class="side">
+        <h2 id="quem-escreveu">Quem escreveu</h2>
+      </div>
+      <ul class="author">
+        <Contributor member={author} count={authorReviews.length} />
+      </ul>
+    </div>
+  </aside>
+</BaseLayout>
+
+<style>
+  .review-head {
+    --book-height: 20rem;
+    padding-block: 2.5rem 3rem;
+  }
+  .head-grid {
+    display: grid;
+    gap: 2.25rem;
+  }
+  .head-book {
+    display: flex;
+    justify-content: center;
+  }
+  h1 {
+    margin: 0 0 0.9rem;
+    font-size: clamp(2.25rem, 4.6vw, 4rem);
+    line-height: 1.02;
+    letter-spacing: -0.025em;
+  }
+  .credit {
+    margin: 0 0 1.5rem;
+    font-size: clamp(1.125rem, 2vw, 1.3125rem);
+  }
+  .credit cite {
+    color: var(--color-on-wine);
+  }
+
+  .body-grid {
+    display: grid;
+    gap: 2.5rem;
+    padding-top: clamp(2.5rem, 6vw, 4rem);
+  }
+  .margin {
+    display: grid;
+    gap: 0.75rem;
+    align-content: start;
+  }
+  .margin .meta {
+    display: grid;
+    gap: 0.1rem;
+    margin: 0;
+  }
+  .label {
+    color: var(--color-ink);
+    font-weight: 600;
+  }
+
+  .author-block {
+    margin-top: clamp(4rem, 9vw, 6.5rem);
+    padding-block: clamp(3rem, 7vw, 5rem);
+  }
+  .author {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  @media (min-width: 52rem) {
+    /* Columns shared by the head and the body: the text starts exactly
+       below the title, and the book's overhang falls in the margin. */
+    .review-head {
+      --book-height: clamp(24rem, 60vh, 33rem);
+      padding-block: clamp(2.5rem, 5vw, 3.75rem) 0;
+    }
+    .head-grid,
+    .body-grid {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+      column-gap: clamp(2.5rem, 6vw, 6rem);
+    }
+    .head-grid {
+      align-items: start;
+    }
+    .head-book {
+      margin-bottom: -4.5rem;
+    }
+    .head-text {
+      padding-block: 0.5rem clamp(3rem, 6vw, 4.5rem);
+    }
+    .prose {
+      grid-column: 2;
+      grid-row: 1;
+    }
+    .margin {
+      grid-column: 1;
+      grid-row: 1;
+      position: sticky;
+      top: 2rem;
+      align-self: start;
+      justify-items: end;
+      /* Clear the book that hangs over from the head. */
+      margin-top: 4.5rem;
+      text-align: right;
+    }
+  }
+</style>

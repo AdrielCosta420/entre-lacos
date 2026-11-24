@@ -1,0 +1,160 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { render } from 'astro:content';
+import Avatar from '../../components/Avatar.astro';
+import ReviewEntry from '../../components/ReviewEntry.astro';
+import WhatsAppLink from '../../components/WhatsAppLink.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getMembers, getPublishedReviewsBy, type Member } from '../../lib/content.ts';
+import { plural } from '../../lib/plural.ts';
+import { instagramUrl } from '../../lib/site.ts';
+
+export const getStaticPaths = (async () => {
+  const members = await getMembers();
+  return members.map((member) => ({ params: { id: member.id }, props: { member } }));
+}) satisfies GetStaticPaths;
+
+interface Props {
+  member: Member;
+}
+
+const { member } = Astro.props;
+const { name, shortBio, institution, semester, interests, approach, instagram } = member.data;
+const [{ Content }, reviews] = await Promise.all([
+  render(member),
+  getPublishedReviewsBy(member.id),
+]);
+const firstName = name.split(/\s+/)[0];
+const studies = ['Estudante de Psicologia', institution, semester].filter(Boolean).join(' · ');
+---
+
+<BaseLayout title={name} description={shortBio}>
+  <header class="profile-head field-endpaper">
+    <div class="container head-grid">
+      <Avatar member={member} size={168} />
+      <div>
+        <h1>{name}</h1>
+        <p class="meta">{studies}</p>
+        <p class="standfirst">{shortBio}</p>
+        {
+          interests.length > 0 && (
+            <p class="fact">
+              <span class="label">Áreas de interesse: </span>
+              {interests.join(' · ')}
+            </p>
+          )
+        }
+        {
+          approach && (
+            <p class="fact">
+              <span class="label">Abordagem de interesse: </span>
+              {approach}
+            </p>
+          )
+        }
+        <div class="links">
+          <WhatsAppLink member={member} />
+          {
+            instagram && (
+              <a class="instagram" href={instagramUrl(instagram)} target="_blank" rel="noopener noreferrer">
+                Instagram @{instagram}
+              </a>
+            )
+          }
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="container with-side presentation" aria-labelledby="apresentacao">
+    <div class="side">
+      <h2 id="apresentacao">Apresentação</h2>
+    </div>
+    <div class="prose">
+      <Content />
+    </div>
+  </section>
+
+  {
+    reviews.length > 0 && (
+      <section class="container her-reviews" aria-labelledby="resenhas-dela">
+        <div class="stitch" aria-hidden="true" />
+        <div class="with-side">
+          <div class="side">
+            <h2 id="resenhas-dela">Resenhas de {firstName}</h2>
+            <p class="meta">{plural(reviews.length, 'resenha', 'resenhas')}</p>
+          </div>
+          <ol class="entries">
+            {reviews.map((review) => (
+              <ReviewEntry review={review} author={member} showAuthor={false} />
+            ))}
+          </ol>
+        </div>
+      </section>
+    )
+  }
+</BaseLayout>
+
+<style>
+  .profile-head {
+    padding-block: clamp(2.5rem, 7vw, 5rem);
+  }
+  .head-grid {
+    display: grid;
+    gap: 1.75rem;
+    align-items: start;
+  }
+  @media (min-width: 52rem) {
+    .head-grid {
+      grid-template-columns: minmax(0, 3fr) minmax(0, 8fr);
+      column-gap: var(--side-gap);
+    }
+    .head-grid > :global(.avatar) {
+      justify-self: end;
+    }
+  }
+  h1 {
+    margin: 0 0 0.5rem;
+    font-size: clamp(2.75rem, 7vw, 5rem);
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+  .standfirst {
+    margin: 1rem 0 1.25rem;
+    color: var(--color-ink);
+  }
+  .fact {
+    margin: 0 0 0.25rem;
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    color: var(--color-wine);
+  }
+  .label {
+    color: var(--color-muted);
+  }
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0 1.5rem;
+    margin-top: 0.5rem;
+  }
+  .instagram {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    font-weight: 500;
+  }
+
+  .presentation {
+    padding-top: clamp(3rem, 7vw, 5rem);
+  }
+  .her-reviews {
+    margin-top: clamp(3.5rem, 8vw, 5.5rem);
+  }
+  .her-reviews .stitch {
+    margin-bottom: clamp(2rem, 5vw, 3rem);
+  }
+</style>

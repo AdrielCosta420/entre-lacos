@@ -1,0 +1,402 @@
+/*
+ * Entre Laços: a literary magazine held together by its own thread.
+ * Palette from the Instagram (brand commitment in PRODUCT.md), calibrate
+ * against the logo file when it arrives. Wine is the bookcloth: it owns whole
+ * fields. Rose is the highlighter: it marks, it never fills a section. The
+ * light rose is the endpaper. The red thread is the logo's "laço".
+ */
+:root {
+  color-scheme: light;
+  accent-color: var(--color-wine);
+  /* Touch feedback in the brand tint instead of the browser's gray box. */
+  -webkit-tap-highlight-color: rgb(107 20 36 / 0.1);
+
+  --color-wine: #6b1424;
+  --color-wine-deep: #4a0d19;
+  --color-thread: #c4283f;
+  --color-rose: #f2b8c2;
+  --color-endpaper: #f6dfe3;
+  --color-paper: #fdfafa;
+  --color-ink: #24161a;
+  --color-muted: #6b585d;
+  --color-on-wine: #fbeef0;
+  --color-on-wine-muted: #e2b3bb;
+
+  --font-serif: var(--font-piazzolla, Georgia, serif);
+  --font-sans: var(--font-archivo, system-ui, sans-serif);
+
+  /* Book covers: square-ish spine on the left, softer fore-edge. */
+  --radius-book: 2px 4px 4px 2px;
+  --content-width: 74rem;
+  --reading-width: 38rem;
+  --gutter: clamp(1.25rem, 4vw, 2.5rem);
+  --side-gap: clamp(2.5rem, 5vw, 5rem);
+
+  /* A book resting on the page: contact shadow plus a soft cast, wine-tinted. */
+  --shadow-book: 0 1px 2px rgb(36 8 14 / 0.16), 0 10px 22px -10px rgb(36 8 14 / 0.45);
+  --shadow-book-raised: 0 2px 4px rgb(36 8 14 / 0.12), 0 22px 34px -14px rgb(36 8 14 / 0.5);
+
+  /* Motion. Feedback is fast; only things that travel take longer. */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 150ms;
+  --duration-base: 250ms;
+  --duration-slow: 450ms;
+}
+
+::selection {
+  background: var(--color-rose);
+  color: var(--color-wine-deep);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-serif);
+  font-optical-sizing: auto;
+  font-size: 1.125rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+a {
+  color: var(--color-wine);
+  text-decoration-thickness: max(1px, 0.06em);
+  text-underline-offset: 0.2em;
+  /* The underline stays (links can't rely on color alone) but sits back
+     until hover. */
+  text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
+  transition:
+    color var(--duration-fast) ease,
+    text-decoration-color var(--duration-fast) ease;
+}
+
+a:hover {
+  text-decoration-color: currentColor;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-wine);
+  outline-offset: 2px;
+}
+
+cite {
+  font-style: italic;
+}
+
+.container {
+  width: min(100% - 2 * var(--gutter), var(--content-width));
+  margin-inline: auto;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Bylines, dates, navigation: the sans voice of the page. */
+.sans {
+  font-family: var(--font-sans);
+}
+
+.meta {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--muted, var(--color-muted));
+}
+
+.meta a {
+  color: inherit;
+}
+
+/* "sobre O Alienista, de Machado de Assis" under a review title. */
+.credit {
+  color: var(--muted, var(--color-muted));
+}
+
+/* A page whose last section is a colored field (.flush-end) meets the
+   footer's wine directly, with no strip of paper between them. */
+main:has(> .flush-end:last-child) + .site-footer {
+  margin-top: 0;
+}
+
+/* Running stitch: how sections are joined, instead of printer's rules. Long
+   stitch, short gap, like thread going in and out of the paper. */
+.stitch {
+  height: 2px;
+  border: 0;
+  margin: 0;
+  color: var(--color-thread);
+  background: linear-gradient(90deg, currentColor 0 11px, transparent 11px) 0 0 / 17px 2px
+    repeat-x;
+}
+
+/* ---- Colored fields ---- */
+
+/* Wine bookcloth: text, links, metadata, avatars and the focus ring all
+   switch to their on-wine values, so components need no wine variants. */
+.field-wine {
+  --muted: var(--color-on-wine-muted);
+  --avatar-bg: var(--color-on-wine);
+  --avatar-fg: var(--color-wine);
+  background: var(--color-wine);
+  color: var(--color-on-wine);
+}
+
+.field-wine a {
+  color: var(--color-on-wine);
+}
+
+.field-wine :focus-visible {
+  outline-color: var(--color-on-wine);
+}
+
+/* Endpaper: where the contributors live. */
+.field-endpaper {
+  background: var(--color-endpaper);
+}
+
+/* ---- Page structure ---- */
+
+.page-head {
+  padding-block: clamp(2.5rem, 7vw, 5rem) clamp(2rem, 5vw, 3.5rem);
+}
+
+.page-head h1 {
+  margin: 0;
+  font-size: clamp(2.75rem, 7vw, 5rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.standfirst {
+  max-width: 36rem;
+  margin: 1.25rem 0 0;
+  font-size: clamp(1.125rem, 2vw, 1.3125rem);
+  line-height: 1.5;
+  color: var(--color-muted);
+}
+
+/* A side-head column (section name, a link) beside the main column. The
+   main column's left edge is shared by .offset-main. */
+.with-side {
+  display: grid;
+  gap: 1.75rem;
+}
+
+.side h2 {
+  margin: 0 0 0.25rem;
+  font-size: clamp(1.875rem, 3vw, 2.5rem);
+  letter-spacing: -0.02em;
+}
+
+.side-text {
+  max-width: 22rem;
+  margin: 0.5rem 0 0.25rem;
+  color: var(--color-muted);
+}
+
+.offset-main {
+  margin-left: 0;
+}
+
+@media (min-width: 52rem) {
+  .with-side {
+    grid-template-columns: minmax(0, 3fr) minmax(0, 8fr);
+    column-gap: var(--side-gap);
+  }
+
+  .side {
+    position: sticky;
+    top: 2rem;
+    align-self: start;
+  }
+
+  .offset-main {
+    margin-left: calc((100% - var(--side-gap)) * 3 / 11 + var(--side-gap));
+  }
+}
+
+/* Lists of reviews (ReviewEntry.astro). */
+.entries {
+  display: grid;
+  gap: clamp(2rem, 4vw, 3rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* ---- Reading ---- */
+
+.prose {
+  max-width: var(--reading-width);
+  font-size: 1.1875rem;
+  line-height: 1.7;
+}
+
+.prose > :first-child {
+  margin-top: 0;
+}
+
+.prose p,
+.prose ul,
+.prose ol {
+  margin: 0 0 1.15em;
+}
+
+.prose li + li {
+  margin-top: 0.35em;
+}
+
+.prose h2 {
+  margin: 2.1em 0 0.6em;
+  font-size: clamp(1.375rem, 2.4vw, 1.875rem);
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+}
+
+/* A passage from the book, marked the way a reader marks it: highlighter,
+   low on the line, with the opening quote hanging in the margin. */
+.prose blockquote {
+  margin: 1.8em 0;
+  font-size: clamp(1.125rem, 2vw, 1.3125rem);
+  line-height: 1.45;
+  text-indent: -0.42em;
+}
+
+.prose blockquote p {
+  display: inline;
+  padding-inline: 0.06em;
+  background: linear-gradient(transparent 38%, var(--color-rose) 38% 90%, transparent 90%);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+.prose blockquote p::before {
+  content: '“';
+}
+
+.prose blockquote p::after {
+  content: '”';
+}
+
+/* Narrow screens have no margin to hang the quote mark in. */
+@media (max-width: 51.99rem) {
+  .prose blockquote {
+    padding-left: 0.42em;
+  }
+}
+
+/*
+ * Books (BookCover.astro) inside anything that opens a review. Hover or
+ * keyboard focus picks the book up; states only set --lift, and the movement
+ * applies when motion is welcome, so reduced motion keeps the deeper shadow
+ * without the jump.
+ */
+.opens-review:has(a:focus-visible) .book {
+  --lift: -4px;
+  box-shadow: var(--shadow-book-raised);
+}
+
+@media (hover: hover) {
+  .opens-review:hover .book {
+    --lift: -4px;
+    box-shadow: var(--shadow-book-raised);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .book {
+    transform: translateY(var(--lift, 0));
+  }
+
+  /* Opening the book: its cover flies into the review page. In lists only
+     the book about to be opened gets a name (naming every cover would make
+     the browser snapshot all of them on each navigation); taps leave the
+     entry in :hover, keyboard leaves it in :focus-within. The review page
+     marks its own cover .named. */
+  .opens-review:is(:hover, :focus-within) .book,
+  .book.named {
+    view-transition-name: var(--cover-transition, none);
+    view-transition-class: book-cover;
+  }
+}
+
+/*
+ * Page transitions: cross-document view transitions, no JS. Browsers without
+ * support simply navigate. Shared elements are named only when motion is
+ * welcome (.nav-mark in BaseLayout, the books above), so with reduced motion
+ * pages just crossfade.
+ */
+@view-transition {
+  navigation: auto;
+}
+
+/* The book travels from its entry into the review page, and back. */
+::view-transition-group(.book-cover) {
+  animation-duration: var(--duration-slow);
+  animation-timing-function: var(--ease-out);
+}
+
+/* A cover with no partner on the other page (leaving a review for the team
+   page, say) fades out with the page instead of lingering over it. */
+::view-transition-old(.book-cover):only-child,
+::view-transition-new(.book-cover):only-child {
+  animation-duration: var(--duration-base);
+}
+
+/* The highlighter under the current nav item slides to the next section. */
+::view-transition-group(nav-mark) {
+  animation-duration: 350ms;
+  animation-timing-function: var(--ease-out);
+}
+
+/* Stretch instead of scaling, so the stroke keeps its thickness while its
+   length changes between labels of different widths. */
+::view-transition-old(nav-mark),
+::view-transition-new(nav-mark) {
+  height: 100%;
+}
+
+/* A drop cap opens the review text, three lines deep, in the bookcloth wine.
+   Browsers without initial-letter simply start with a normal letter. */
+@supports (initial-letter: 3) or (-webkit-initial-letter: 3) {
+  .dropcap > p:first-of-type::first-letter {
+    -webkit-initial-letter: 3;
+    initial-letter: 3;
+    margin-right: 0.12em;
+    font-weight: 500;
+    color: var(--color-wine);
+  }
+}

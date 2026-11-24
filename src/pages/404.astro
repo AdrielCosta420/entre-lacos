@@ -1,0 +1,21 @@
+---
+import MoreLink from '../components/MoreLink.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { href } from '../lib/site.ts';
+---
+
+<BaseLayout title="Página não encontrada">
+  <header class="container page-head">
+    <h1>Página não encontrada</h1>
+    <p class="standfirst">O endereço pode ter mudado ou a resenha não está mais publicada.</p>
+    <p class="back">
+      <MoreLink href={href('resenhas/')}>Ver todas as resenhas</MoreLink>
+    </p>
+  </header>
+</BaseLayout>
+
+<style>
+  .back {
+    margin: 1rem 0 0;
+  }
+</style>

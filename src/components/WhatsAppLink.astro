@@ -1,0 +1,62 @@
+---
+import type { Member } from '../lib/content.ts';
+import { SITE } from '../lib/site.ts';
+import { buildWhatsAppUrl } from '../lib/whatsapp.ts';
+
+interface Props {
+  member: Member;
+}
+
+const { name, whatsapp } = Astro.props.member.data;
+const firstName = name.split(/\s+/)[0];
+
+// The site offers no appointments (questionnaire answer 5), so the copy
+// invites a conversation instead of "booking".
+const url = whatsapp
+  ? buildWhatsAppUrl(
+      whatsapp,
+      `Olá, ${firstName}! Conheci seu perfil no site ${SITE.name} e gostaria de conversar.`,
+    )
+  : undefined;
+---
+
+{
+  url && (
+    <a class="whatsapp" href={url} target="_blank" rel="noopener noreferrer">
+      Conversar com {firstName} no WhatsApp
+      <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" focusable="false">
+        <path
+          d="M5 11 11 5M6 5h5v5"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"></path>
+      </svg>
+    </a>
+  )
+}
+
+<style>
+  /* An editorial link, not a colored button: the action reads in the text.
+     The diagonal arrow says it leaves the site. */
+  .whatsapp {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    min-height: 44px;
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    font-weight: 500;
+  }
+  svg {
+    flex: none;
+    transition: transform var(--duration-base) var(--ease-out);
+  }
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    .whatsapp:hover svg {
+      transform: translate(2px, -2px);
+    }
+  }
+</style>
+

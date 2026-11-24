@@ -1,0 +1,48 @@
+---
+import type { Member, Review } from '../lib/content.ts';
+import { formatDate, isoDate } from '../lib/dates.ts';
+import { estimateReadingMinutes } from '../lib/reviews.ts';
+import { href } from '../lib/site.ts';
+import Avatar from './Avatar.astro';
+
+// Signature line of a featured review: who wrote it, in what section, when,
+// and how long it takes. Colors come from the field it sits on.
+interface Props {
+  review: Review;
+  author: Member;
+}
+
+const { review, author } = Astro.props;
+const { category, publishedAt } = review.data;
+---
+
+<div class="byline">
+  <Avatar member={author} size={48} />
+  <p>
+    <span class="name">por <a href={href(`equipe/${author.id}/`)}>{author.data.name}</a></span>
+    <span class="meta">
+      {category}
+      {' · '}
+      <time datetime={isoDate(publishedAt)}>{formatDate(publishedAt)}</time>
+      {' · '}
+      {estimateReadingMinutes(review.body ?? '')}&nbsp;min de leitura
+    </span>
+  </p>
+</div>
+
+<style>
+  .byline {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+  }
+  p {
+    display: grid;
+    gap: 0.1rem;
+    margin: 0;
+  }
+  .name {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+  }
+</style>

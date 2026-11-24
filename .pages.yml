@@ -1,0 +1,152 @@
+# Pages CMS configuration (https://pagescms.org/docs/configuration/).
+# Field rules mirror src/content.config.ts: the CMS validates while typing,
+# the Astro schema validates again at build time.
+
+media:
+  # Uploads live in src/ (not public/) so Astro can resize and convert them
+  # to WebP. The root-relative output path resolves from the project root.
+  input: src/assets/uploads
+  output: /src/assets/uploads
+  rename: safe
+  categories: [image]
+
+content:
+  - name: resenhas
+    label: Resenhas
+    type: collection
+    path: src/content/resenhas
+    filename: '{primary}.md'
+    view:
+      fields: [title, author, publishedAt, draft]
+      primary: title
+      default:
+        sort: publishedAt
+        order: desc
+    fields:
+      - name: title
+        label: Título da resenha
+        type: string
+        required: true
+        options:
+          maxlength: 120
+      - name: draft
+        label: Rascunho (marcado = não aparece no site)
+        type: boolean
+        # New reviews start hidden; publishing is a deliberate act.
+        default: true
+      - name: author
+        label: Autora
+        type: reference
+        required: true
+        options:
+          collection: integrantes
+          # Saves the file path; src/lib/entry-id.ts turns it into the entry id.
+          value: '{path}'
+          label: '{primary}'
+      - name: book
+        label: Livro
+        type: object
+        required: true
+        fields:
+          - name: title
+            label: Título do livro
+            type: string
+            required: true
+          - name: author
+            label: Autor(a) do livro
+            type: string
+            required: true
+      - name: cover
+        label: Capa do livro
+        type: image
+      - name: category
+        label: Categoria
+        type: string
+        required: true
+      - name: themes
+        label: 'Temas (ex.: ansiedade, luto, autoestima)'
+        type: string
+        list: true
+      - name: summary
+        label: Resumo (aparece na lista de resenhas)
+        type: text
+        required: true
+        options:
+          maxlength: 200
+      - name: publishedAt
+        label: Data de publicação
+        type: date
+        required: true
+        options:
+          format: yyyy-MM-dd
+      - name: body
+        label: Texto da resenha
+        type: rich-text
+        options:
+          format: markdown
+          # Images inside the text would need a separate media setup; only
+          # the cover takes an image for now.
+          media: false
+
+  - name: integrantes
+    label: Integrantes
+    type: collection
+    path: src/content/integrantes
+    filename: '{primary}.md'
+    # Deleting or renaming a member would break every review that points to
+    # her (the build fails on a missing author). The developer handles it.
+    operations:
+      delete: false
+      rename: false
+    view:
+      fields: [name, institution]
+      primary: name
+    fields:
+      - name: name
+        label: Nome como aparece no site
+        type: string
+        required: true
+        options:
+          maxlength: 60
+      - name: photo
+        label: Foto de perfil
+        type: image
+      - name: shortBio
+        label: Minibiografia (aparece nos cartões)
+        type: text
+        required: true
+        options:
+          maxlength: 200
+      - name: institution
+        label: Instituição
+        type: string
+        required: true
+      - name: semester
+        label: 'Período atual (ex.: 7º semestre)'
+        type: string
+      - name: interests
+        label: Áreas de interesse (até 3)
+        type: string
+        list:
+          max: 3
+      - name: approach
+        label: Abordagem teórica de interesse
+        type: string
+      - name: instagram
+        label: Instagram (só o usuário, sem @)
+        type: string
+        pattern:
+          regex: '^[A-Za-z0-9._]+$'
+          message: 'Use só o nome de usuário, sem @ e sem link.'
+      - name: whatsapp
+        label: WhatsApp
+        type: string
+        pattern:
+          regex: '^55\d{10,11}$'
+          message: 'Só números, começando com 55 e o DDD. Ex.: 5585999998888'
+      - name: body
+        label: Apresentação (aparece na página individual)
+        type: rich-text
+        options:
+          format: markdown
+          media: false
