@@ -2,6 +2,7 @@
 import { Font } from 'astro:assets';
 import '../styles/global.css';
 import Stitch from '../components/Stitch.astro';
+import { STORAGE_KEY, TEXT_SCALES } from '../lib/reading-settings.ts';
 import { NAV, SITE, href, instagramUrl } from '../lib/site.ts';
 
 interface Props {
@@ -64,6 +65,27 @@ const knotVars = [
     <meta property="og:locale" content="pt_BR" />
     <Font cssVariable="--font-piazzolla" preload />
     <Font cssVariable="--font-archivo" preload />
+    {/* The reader's saved settings, applied before the first paint so the page
+        never flashes at the default size or contrast. Mirrors parseSettings
+        (src/lib/reading-settings.ts) at its simplest; the panel script below
+        does the full validation. */}
+    <script is:inline define:vars={{ storageKey: STORAGE_KEY, scales: TEXT_SCALES }}>
+      const root = document.documentElement;
+      let saved = {};
+      try {
+        saved = JSON.parse(localStorage.getItem(storageKey) || '{}') || {};
+      } catch {
+        // Storage blocked (private mode, disabled) or unreadable: the page
+        // keeps its defaults, which is the right fallback.
+      }
+      const multiplier = scales[saved.scale];
+      if (typeof multiplier === 'number' && multiplier !== 1) {
+        root.style.setProperty('--text-scale', String(multiplier));
+      }
+      if (saved.contrast === true || matchMedia('(prefers-contrast: more)').matches) root.dataset.contrast = 'high';
+      if (saved.spacing === true) root.dataset.spacing = 'wide';
+      if (saved.motion === true) root.dataset.motion = 'reduced';
+    </script>
   </head>
   <body>
     <!--
@@ -125,6 +147,53 @@ const knotVars = [
             }
           </ul>
         </nav>
+        {/* Reading settings, in the header so the button never covers the text
+            being read. The native Popover API opens and closes the panel (Esc,
+            tapping outside, focus back to the button); the script below only
+            applies and saves the settings. The panel follows the button in the
+            DOM, so Tab moves straight into it. */}
+        <button class="reading-button" type="button" popovertarget="leitura" aria-label="Ajustes de leitura">
+          <span class="reading-mark" aria-hidden="true">Aa</span>
+        </button>
+        <div id="leitura" class="reading-panel" popover role="dialog" aria-labelledby="leitura-titulo">
+          <div class="panel-head">
+            <h2 id="leitura-titulo">Leitura</h2>
+            <button class="panel-link" type="button" popovertarget="leitura" popovertargetaction="hide">
+              Fechar
+            </button>
+          </div>
+          <p class="panel-note">Para ler com mais conforto. Vale para todo o site e fica salvo neste navegador.</p>
+
+          <div class="setting" role="group" aria-labelledby="leitura-tamanho">
+            <span id="leitura-tamanho" class="setting-name">Tamanho do texto</span>
+            <div class="stepper">
+              <button type="button" class="step" data-step="-1" aria-label="Diminuir o texto" autofocus>
+                <span class="step-small" aria-hidden="true">A−</span>
+              </button>
+              <output class="step-value" aria-live="polite" data-scale-value>100%</output>
+              <button type="button" class="step" data-step="1" aria-label="Aumentar o texto">
+                <span aria-hidden="true">A+</span>
+              </button>
+            </div>
+          </div>
+
+          <label class="setting check">
+            <input type="checkbox" data-setting="contrast" />
+            <span class="setting-name">Alto contraste</span>
+            <span class="system-note" data-system-note="contrast" hidden>ligado pelo seu sistema</span>
+          </label>
+          <label class="setting check">
+            <input type="checkbox" data-setting="spacing" />
+            <span class="setting-name">Mais espaço entre as linhas</span>
+          </label>
+          <label class="setting check">
+            <input type="checkbox" data-setting="motion" />
+            <span class="setting-name">Reduzir animações</span>
+            <span class="system-note" data-system-note="motion" hidden>ligado pelo seu sistema</span>
+          </label>
+
+          <button class="panel-link panel-reset" type="button" data-reset>Restaurar o padrão</button>
+        </div>
       </div>
       <Stitch />
     </header>
@@ -169,6 +238,7 @@ const knotVars = [
         </nav>
       </div>
     </footer>
+
   </body>
 </html>
 
@@ -188,13 +258,37 @@ const knotVars = [
   }
 
   /* ---- Running head (inner pages) ---- */
+  /* Phones: name and the reading button on one row, the nav below.
+     Wider: name, nav and button on one row. DOM order (name, nav, button,
+     panel) is the reading and Tab order in both. */
   .header-inner {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      'brand settings'
+      'nav nav';
     align-items: center;
-    justify-content: space-between;
-    gap: 0.25rem 2rem;
+    gap: 0.25rem 1rem;
     padding-block: 0.75rem;
+  }
+  .brand {
+    grid-area: brand;
+  }
+  .site-nav {
+    grid-area: nav;
+  }
+  .reading-button {
+    grid-area: settings;
+  }
+  @media (min-width: 48rem) {
+    .header-inner {
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      grid-template-areas: 'brand nav settings';
+      column-gap: 1.5rem;
+    }
+    .site-nav {
+      justify-self: end;
+    }
   }
   .brand {
     font-family: var(--font-serif);
@@ -209,17 +303,31 @@ const knotVars = [
   }
 
   /* ---- Masthead (home) ---- */
+  /* Phones: the name, then the description with the reading button beside
+     it, then the nav. Wider: name and description, then nav and button. */
   .masthead .header-inner {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      'word word'
+      'line settings'
+      'nav nav';
+    align-items: start;
     gap: 1rem;
     padding-block: clamp(1.25rem, 3.5vw, 2.5rem) 0.25rem;
+  }
+  .wordmark-block {
+    grid-area: word;
+  }
+  .masthead-line {
+    grid-area: line;
   }
   .wordmark-block {
     margin: 0;
     /* The word plus its knot measure about 5.9em: sized so they always fit
        the column, and a phone never scrolls sideways. */
-    font-size: clamp(3rem, calc((100vw - 2 * var(--gutter)) / 5.9), 9.75rem);
+    /* No lower bound in rem: with a larger text setting it would push the
+       word and its knot past the edge of a phone. */
+    font-size: min(calc((100vw - 2 * var(--gutter)) / 5.9), 9.75rem);
     font-weight: 500;
     line-height: 0.9;
     letter-spacing: -0.035em;
@@ -290,7 +398,10 @@ const knotVars = [
   }
   @media (min-width: 56rem) {
     .masthead .header-inner {
-      grid-template-columns: auto minmax(0, 1fr);
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      grid-template-areas:
+        'word line line'
+        'nav nav settings';
       align-items: end;
       /* The knot already separates the name from the description. */
       column-gap: clamp(1.25rem, 2.5vw, 2.25rem);
@@ -298,8 +409,8 @@ const knotVars = [
     .masthead-line {
       margin-bottom: 1.1em;
     }
-    .masthead .site-nav {
-      grid-column: 1 / -1;
+    .masthead .reading-button {
+      align-self: center;
     }
   }
   @media (prefers-reduced-motion: no-preference) {
@@ -482,4 +593,279 @@ const knotVars = [
   .site-footer a:focus-visible {
     outline-color: var(--color-rose);
   }
+
+  /* ---- Reading settings ---- */
+
+  /* A 44px target around a smaller mark in the logo's grammar: a wine circle
+     with light serif letters. */
+  .reading-button {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: none;
+    cursor: pointer;
+  }
+  .reading-mark {
+    display: grid;
+    place-items: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 50%;
+    background: var(--color-wine);
+    color: var(--color-on-wine);
+    font: 500 1rem/1 var(--font-serif);
+    letter-spacing: -0.02em;
+    transition: background-color var(--duration-fast) ease;
+  }
+  /* Darker while hovered or while its panel (the next element) is open. */
+  .reading-button:hover .reading-mark,
+  .reading-button:has(+ .reading-panel:popover-open) .reading-mark {
+    background: var(--color-wine-deep);
+  }
+
+  /* A wine field, square like every field; the thin light edge separates
+     it from the wine footer when the panel opens over it. */
+  .reading-panel {
+    position: fixed;
+    inset: auto;
+    top: max(0.75rem, env(safe-area-inset-top));
+    right: max(0.75rem, env(safe-area-inset-right));
+    width: min(21rem, 100vw - 1.5rem);
+    max-height: calc(100dvh - 1.5rem);
+    margin: 0;
+    padding: 1.25rem 1.25rem 0.75rem;
+    overflow: auto;
+    border: 1px solid var(--color-on-wine-muted);
+    background: var(--color-wine);
+    color: var(--color-on-wine);
+    accent-color: var(--color-rose);
+  }
+  .reading-panel :focus-visible {
+    outline-color: var(--color-on-wine);
+  }
+  .panel-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .panel-head h2 {
+    margin: 0;
+    font-size: clamp(1.375rem, 2.4vw, 1.875rem);
+  }
+  .panel-note {
+    margin: 0.25rem 0 0.75rem;
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    line-height: 1.4;
+    color: var(--color-on-wine-muted);
+  }
+  .setting {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.25rem 0.75rem;
+    min-height: 44px;
+    border-top: 1px solid rgb(244 174 189 / 0.35);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+  }
+  /* Box and words side by side; long labels (large text) wrap beside the
+     box, never under it. */
+  .setting.check {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    column-gap: 0.75rem;
+    padding-block: 0.5rem;
+    cursor: pointer;
+  }
+  .setting input {
+    width: 1.25rem;
+    height: 1.25rem;
+    margin: 0;
+    cursor: pointer;
+  }
+  .setting input:disabled {
+    cursor: not-allowed;
+  }
+  .system-note {
+    grid-column: 2;
+    font-size: 0.875rem;
+    color: var(--color-on-wine-muted);
+  }
+  .stepper {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .step {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: 1px solid var(--color-on-wine-muted);
+    background: transparent;
+    color: var(--color-on-wine);
+    font: 500 1.125rem/1 var(--font-serif);
+    cursor: pointer;
+  }
+  .step-small {
+    font-size: 0.8em;
+  }
+  /* aria-disabled, not disabled: a disabled button would drop the reader's
+     focus the moment it reaches the end of the scale. */
+  .step[aria-disabled='true'] {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+  .step-value {
+    min-width: 3.25rem;
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+  }
+  .panel-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--color-on-wine);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    text-decoration: underline;
+    text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
+    text-underline-offset: 0.2em;
+    cursor: pointer;
+  }
+  .panel-link:hover {
+    text-decoration-color: currentColor;
+  }
+  .panel-reset {
+    margin-top: 0.25rem;
+  }
+  .panel-reset[aria-disabled='true'] {
+    opacity: 0.6;
+    text-decoration: none;
+    cursor: default;
+  }
 </style>
+
+<script>
+  /*
+   * The reading panel's controls. Settings are applied as attributes and a
+   * custom property on <html> (styles in global.css), saved to localStorage,
+   * and the controls mirror them. The system's own preferences (less motion,
+   * more contrast) win and show as switched on and locked.
+   */
+  import {
+    DEFAULTS,
+    STORAGE_KEY,
+    TEXT_SCALES,
+    isDefault,
+    parseSettings,
+    scaleLabel,
+    stepScale,
+    type ReadingSettings,
+  } from '../lib/reading-settings.ts';
+
+  const panel = document.getElementById('leitura');
+
+  if (panel) {
+    const root = document.documentElement;
+    const systemMotion = matchMedia('(prefers-reduced-motion: reduce)');
+    const systemContrast = matchMedia('(prefers-contrast: more)');
+    const value = panel.querySelector<HTMLOutputElement>('[data-scale-value]')!;
+    const steps = [...panel.querySelectorAll<HTMLButtonElement>('[data-step]')];
+    const reset = panel.querySelector<HTMLButtonElement>('[data-reset]')!;
+    const box = (name: 'contrast' | 'spacing' | 'motion') =>
+      panel.querySelector<HTMLInputElement>(`[data-setting="${name}"]`)!;
+    const note = (name: 'contrast' | 'motion') =>
+      panel.querySelector<HTMLElement>(`[data-system-note="${name}"]`)!;
+
+    let settings: ReadingSettings = load();
+
+    function load(): ReadingSettings {
+      try {
+        return parseSettings(localStorage.getItem(STORAGE_KEY));
+      } catch {
+        // Storage blocked: settings still work, for this page only.
+        return { ...DEFAULTS };
+      }
+    }
+
+    function save() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(settings));
+      } catch {
+        // Storage blocked: the change applies to this page and isn't kept.
+      }
+    }
+
+    function setFlag(name: string, on: boolean, value: string) {
+      if (on) root.dataset[name] = value;
+      else delete root.dataset[name];
+    }
+
+    function apply() {
+      const scale = TEXT_SCALES[settings.scale] ?? 1;
+      if (scale === 1) root.style.removeProperty('--text-scale');
+      else root.style.setProperty('--text-scale', String(scale));
+      setFlag('contrast', settings.contrast || systemContrast.matches, 'high');
+      setFlag('spacing', settings.spacing, 'wide');
+      setFlag('motion', settings.motion, 'reduced');
+      render();
+    }
+
+    function render() {
+      value.textContent = scaleLabel(settings.scale);
+      steps.forEach((button) => {
+        const atEnd =
+          Number(button.dataset.step) < 0
+            ? settings.scale === 0
+            : settings.scale === TEXT_SCALES.length - 1;
+        button.setAttribute('aria-disabled', String(atEnd));
+      });
+      for (const [name, system] of [
+        ['contrast', systemContrast],
+        ['motion', systemMotion],
+      ] as const) {
+        box(name).checked = settings[name] || system.matches;
+        box(name).disabled = system.matches;
+        note(name).hidden = !system.matches;
+      }
+      box('spacing').checked = settings.spacing;
+      reset.setAttribute('aria-disabled', String(isDefault(settings)));
+    }
+
+    function update(next: ReadingSettings) {
+      settings = next;
+      save();
+      apply();
+    }
+
+    steps.forEach((button) =>
+      button.addEventListener('click', () => {
+        if (button.getAttribute('aria-disabled') === 'true') return;
+        update(stepScale(settings, Number(button.dataset.step) as 1 | -1));
+      }),
+    );
+    (['contrast', 'spacing', 'motion'] as const).forEach((name) =>
+      box(name).addEventListener('change', () => update({ ...settings, [name]: box(name).checked })),
+    );
+    reset.addEventListener('click', () => {
+      if (reset.getAttribute('aria-disabled') === 'true') return;
+      update({ ...DEFAULTS });
+    });
+    systemMotion.addEventListener('change', render);
+    systemContrast.addEventListener('change', apply);
+
+    render();
+  }
+</script>

@@ -56,6 +56,13 @@
   box-sizing: border-box;
 }
 
+/* Text size from the reading panel: a multiple of the reader's own browser
+   setting, so it adds to their zoom and font size instead of replacing it.
+   Every size on the site is in rem, so the whole page follows. */
+html {
+  font-size: calc(100% * var(--text-scale, 1));
+}
+
 body {
   margin: 0;
   background: var(--color-paper);
@@ -436,4 +443,64 @@ main:has(> .flush-end:last-child) + .site-footer {
     font-weight: 500;
     color: var(--color-wine);
   }
+}
+
+/*
+ * Reading settings (the panel in BaseLayout). Applied as attributes on <html>
+ * by the inline script in <head> before the first paint.
+ */
+
+/* More contrast: secondary text becomes ink, the thread becomes wine so the
+   stitch and the reading thread read clearly on paper, links keep a full
+   underline. Also switched on by the system's "more contrast" setting. */
+:root[data-contrast='high'] {
+  --color-muted: var(--color-ink);
+  --color-thread: var(--color-wine);
+  --color-on-wine-muted: var(--color-on-wine);
+}
+
+:root[data-contrast='high'] .site-footer {
+  --color-thread: var(--color-on-wine);
+}
+
+:root[data-contrast='high'] a {
+  text-decoration-color: currentColor;
+}
+
+:root[data-contrast='high'] :focus-visible {
+  outline-width: 4px;
+}
+
+/* More room between lines, and between paragraphs and words. */
+:root[data-spacing='wide'] body {
+  line-height: 1.85;
+  word-spacing: 0.08em;
+}
+
+:root[data-spacing='wide'] .prose {
+  line-height: 2;
+}
+
+:root[data-spacing='wide'] .prose p {
+  margin-bottom: 1.6em;
+}
+
+/* Fewer animations, chosen by the reader on top of the system setting. The
+   !important is deliberate: it is the reader's explicit choice and has to
+   win over any component's motion. Content is identical without motion: the
+   masthead thread and knot show complete, passages show marked. */
+:root[data-motion='reduced'] *,
+:root[data-motion='reduced'] *::before,
+:root[data-motion='reduced'] *::after {
+  animation: none !important;
+  transition: none !important;
+}
+
+:root[data-motion='reduced'] .book {
+  transform: none !important;
+  view-transition-name: none !important;
+}
+
+:root[data-motion='reduced'] .nav-mark {
+  view-transition-name: none !important;
 }
