@@ -35,7 +35,10 @@ const [{ Content }, authorReviews] = await Promise.all([
 ---
 
 <BaseLayout title={title} description={summary}>
-  <article>
+  <article class="reading">
+    {/* The logo's thread across the top of the screen, as long as the part of
+        the text already read. Decorative: the scroll position says the same. */}
+    <div class="reading-thread" aria-hidden="true"></div>
     {/* Same composition as the home page's lead: the book opened from there
         lands where the reader expects it. */}
     <header class="review-head field-wine">
@@ -91,6 +94,44 @@ const [{ Content }, authorReviews] = await Promise.all([
 </BaseLayout>
 
 <style>
+  /* Progress follows the review text only (not the author block or the
+     footer): from the text's top reaching the top of the screen to its end
+     reaching the bottom. Browsers without scroll-driven animations show no
+     thread at all. */
+  .reading {
+    timeline-scope: --reading;
+  }
+  .prose {
+    view-timeline: --reading block;
+  }
+  .reading-thread {
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 30;
+    height: 3px;
+    background: var(--color-thread);
+    transform: scaleX(0);
+    transform-origin: left;
+    pointer-events: none;
+  }
+  @supports (animation-timeline: view()) {
+    /* Longhands only: the build's minifier folds an `animation` shorthand and
+       `animation-timeline` into one shorthand, which Chrome rejects whole. */
+    .reading-thread {
+      animation-name: reading-progress;
+      animation-duration: auto;
+      animation-timing-function: linear;
+      animation-fill-mode: both;
+      animation-timeline: --reading;
+      animation-range: contain 0% contain 100%;
+    }
+  }
+  @keyframes reading-progress {
+    to {
+      transform: scaleX(1);
+    }
+  }
+
   .review-head {
     --book-height: 20rem;
     padding-block: 2.5rem 3rem;

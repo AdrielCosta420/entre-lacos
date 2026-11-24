@@ -26,6 +26,7 @@ const { cover, book } = review.data;
 const style = `--cover-transition: ${coverTransitionName(review.id)}`;
 ---
 
+<span class="book-object">
 {
   cover ? (
     <Image
@@ -49,12 +50,26 @@ const style = `--cover-transition: ${coverTransitionName(review.id)}`;
     </div>
   )
 }
+</span>
 
 <style>
+  /* The book as an object with depth: the cover is hinged at its spine and,
+     when the book is picked up (hover or keyboard focus, global.css), turns a
+     little on it, away from the reader, with a deeper shadow. Perspective
+     follows the book's size, so a thumbnail and the lead book turn alike. */
+  .book-object {
+    position: relative;
+    display: inline-block;
+    max-width: 100%;
+    vertical-align: top;
+    perspective: calc(var(--book-height, 12rem) * 2);
+  }
   .book {
+    position: relative;
     display: block;
     border-radius: var(--radius-book);
     box-shadow: var(--shadow-book);
+    transform-origin: left center;
     transition:
       transform var(--duration-slow) var(--ease-out),
       box-shadow var(--duration-slow) var(--ease-out);

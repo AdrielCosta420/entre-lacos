@@ -286,12 +286,46 @@ main:has(> .flush-end:last-child) + .site-footer {
   text-indent: -0.42em;
 }
 
+.prose blockquote {
+  view-timeline: --quote block;
+}
+
 .prose blockquote p {
   display: inline;
   padding-inline: 0.06em;
-  background: linear-gradient(transparent 38%, var(--color-rose) 38% 90%, transparent 90%);
-  box-decoration-break: clone;
-  -webkit-box-decoration-break: clone;
+  background: linear-gradient(transparent 38%, var(--color-rose) 38% 90%, transparent 90%) no-repeat
+    0 0 / 100% 100%;
+}
+
+/*
+ * The highlighter passes over a quoted passage while it rises into view, the
+ * way a reader marks a line: from the quote a quarter in to its middle at the
+ * centre of the screen, so it is fully marked before it is read. The text is
+ * never hidden; only the mark is drawn. Line by line, because a multi-line
+ * inline box paints its background as if its lines were laid end to end
+ * (box-decoration-break: slice). Without scroll-driven animations, or with
+ * reduced motion, the passage is simply marked.
+ */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    /* Longhands only: the build's minifier folds an `animation` shorthand and
+       `animation-timeline` into one shorthand, which Chrome rejects whole. */
+    .prose blockquote p,
+    .highlight-sweep {
+      animation-name: highlight-sweep;
+      animation-duration: auto;
+      animation-timing-function: linear;
+      animation-fill-mode: both;
+      animation-timeline: --quote;
+      animation-range: entry 25% cover 50%;
+    }
+  }
+}
+
+@keyframes highlight-sweep {
+  from {
+    background-size: 0% 100%;
+  }
 }
 
 .prose blockquote p::before {
@@ -311,25 +345,27 @@ main:has(> .flush-end:last-child) + .site-footer {
 
 /*
  * Books (BookCover.astro) inside anything that opens a review. Hover or
- * keyboard focus picks the book up; states only set --lift, and the movement
- * applies when motion is welcome, so reduced motion keeps the deeper shadow
- * without the jump.
+ * keyboard focus picks the book up and turns it a little on its spine,
+ * showing the pages. States only set --lift and --turn; the movement applies
+ * when motion is welcome, so reduced motion keeps the deeper shadow alone.
  */
 .opens-review:has(a:focus-visible) .book {
   --lift: -4px;
+  --turn: 12deg;
   box-shadow: var(--shadow-book-raised);
 }
 
 @media (hover: hover) {
   .opens-review:hover .book {
     --lift: -4px;
+    --turn: 12deg;
     box-shadow: var(--shadow-book-raised);
   }
 }
 
 @media (prefers-reduced-motion: no-preference) {
   .book {
-    transform: translateY(var(--lift, 0));
+    transform: translateY(var(--lift, 0)) rotateY(var(--turn, 0deg));
   }
 
   /* Opening the book: its cover flies into the review page. In lists only

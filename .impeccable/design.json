@@ -311,6 +311,21 @@
         "name": "reduced-motion",
         "value": "prefers-reduced-motion: no-preference gate",
         "purpose": "All movement and shared-element naming apply only when motion is welcome; otherwise pages crossfade."
+      },
+      {
+        "name": "book-turn",
+        "value": "translateY(--lift: -4px) rotateY(--turn: 12deg), origin left, perspective 2x book height, 450ms ease-out",
+        "purpose": "A listed book picked up on hover or keyboard focus; touch skips it; no movement under reduced motion (shadow only)."
+      },
+      {
+        "name": "reading-thread",
+        "value": "scaleX 0 to 1 on a view timeline of the review prose, animation-range: contain; longhands only",
+        "purpose": "Reading progress drawn with the logo's thread; decorative; absent without scroll-driven animation support."
+      },
+      {
+        "name": "highlight-sweep",
+        "value": "background-size 0% to 100% on the quote's view timeline, animation-range: entry 25% cover 50%; longhands only",
+        "purpose": "Quoted passages marked line by line as they rise into view; static and fully marked under reduced motion or without support."
       }
     ],
     "breakpoints": [

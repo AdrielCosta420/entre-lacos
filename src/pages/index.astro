@@ -78,10 +78,10 @@ const excerpt = [...recent, ...(lead ? [lead] : [])]
       <section class="excerpt" aria-label="Trecho em destaque">
         <div class="container">
           <Stitch />
-          <figure class="offset-main">
+          <figure class="offset-main quote-timeline">
             <blockquote>
               <p>
-                <mark>“{excerpt.quote}”</mark>
+                <mark class="highlight-sweep">“{excerpt.quote}”</mark>
               </p>
             </blockquote>
             <figcaption>
@@ -223,12 +223,15 @@ const excerpt = [...recent, ...(lead ? [lead] : [])]
     }
   }
   /* A reader's highlighter stroke, not a full box: it sits low on the line. */
+  /* The sweep itself lives in global.css (.highlight-sweep). */
+  .quote-timeline {
+    view-timeline: --quote block;
+  }
   .excerpt mark {
     padding-inline: 0.08em;
     color: inherit;
-    background: linear-gradient(transparent 38%, var(--color-rose) 38% 90%, transparent 90%);
-    box-decoration-break: clone;
-    -webkit-box-decoration-break: clone;
+    background: linear-gradient(transparent 38%, var(--color-rose) 38% 90%, transparent 90%) no-repeat
+      0 0 / 100% 100%;
   }
   .excerpt figcaption {
     max-width: 34rem;
