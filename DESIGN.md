@@ -18,7 +18,7 @@ colors:
 typography:
   display:
     fontFamily: "Piazzolla, Georgia, serif"
-    fontSize: "clamp(3.4rem, 16.5vw, 9.75rem)"
+    fontSize: "clamp(3rem, calc((100vw - 2 * var(--gutter)) / 5.9), 9.75rem)"
     fontWeight: 500
     lineHeight: 0.9
     letterSpacing: "-0.035em"
@@ -135,21 +135,21 @@ components:
 
 **Creative North Star: "The Thread-Bound Magazine"**
 
-Entre Laços is set like an independent literary magazine, and the one ornament it allows itself is the structure that binds it: the red thread of the logo's "laço". The thread is woven over and under the masthead wordmark, it joins sections as a running stitch instead of a printer's rule, it crosses every typeset book cover as the publisher's band, and it ends tied in a knot at the top of the wine "Expediente" footer. If a new surface needs a divider, a band or an ending, it uses the thread; it does not invent a second ornament.
+Entre Laços is set like an independent literary magazine, and the one ornament it allows itself is the structure that binds it: the red thread of the logo's "laço". The thread is woven over and under the masthead wordmark and tied off in a knot after the name, it joins sections as a running stitch instead of a printer's rule, it crosses every typeset book cover as the publisher's band, and it ends tied in the same knot at the top of the wine "Expediente" footer. If a new surface needs a divider, a band or an ending, it uses the thread; it does not invent a second ornament.
 
 Color behaves like the materials of a bound book. Wine is the bookcloth and owns whole fields edge to edge; rose is a reader's highlighter and only marks; light rose is the endpaper, where the contributors live; everything else is warm paper and ink. Type is one press serif (Piazzolla, with its optical-size axis) carrying the masthead and the long reading text alike, with a grotesque (Archivo) speaking only for bylines, dates, navigation and links. Books are physical objects: the only things on the page that cast shadows, lift when picked up, and fly into the review page when opened.
 
 Density is editorial, not dashboard: generous vertical air between sections, a side-head column beside a wider main column, one reading measure, asymmetric feature compositions where the book hangs over the bottom edge of its cloth. The site refuses the landing-page hero with a button, the card grid, pill buttons, and colored call-to-action boxes; actions read as underlined editorial links with a small drawn arrow.
 
 **Key Characteristics:**
-- One ornament, the red thread: woven wordmark, running stitch, cover band, footer knot.
+- One ornament, the red thread: woven wordmark ending in its knot, running stitch, cover band, footer knot.
 - Wine fields as bookcloth; rose strictly as highlighter; light-rose endpaper for people.
 - Piazzolla for everything read, Archivo for everything scanned (bylines, meta, nav, links).
 - Books are the only objects with depth; nothing else has a shadow or a card frame.
 - Editorial links with SVG arrows instead of buttons.
-- Motion is mechanical and meaningful (thread wipe, cover flight, highlighter slide), always gated by `prefers-reduced-motion`.
+- Motion is mechanical and meaningful (thread wipe and knot tying, cover flight, highlighter slide), always gated by `prefers-reduced-motion`.
 
-**Open items (not rules):** the logo file has not arrived, so the wordmark is typeset in Piazzolla rather than the logo, and wine and thread must be recalibrated against the file. Member photos are placeholders (wine monogram avatars). Search (Pagefind) is planned and not built; no search UI exists to document. Example content (`exemplo-*`, `ana-exemplo`, `bia-exemplo`) is synthetic and will be deleted. The Impeccable hook flags the running stitch as a grid background; it is a single 2px running stitch, and whether to suppress the flag is undecided.
+**Open items (not rules):** the logo file has not arrived, so the wordmark is typeset in Piazzolla rather than the logo, and wine and thread must be recalibrated against the file. Member photos are placeholders (wine monogram avatars). Search (Pagefind) is planned and not built; no search UI exists to document. Example content (`exemplo-*`, `ana-exemplo`, `bia-exemplo`) is synthetic and will be deleted.
 
 ## Colors
 
@@ -160,7 +160,7 @@ A reduced bookbinder's palette: one wine cloth, one red thread, one highlighter 
 - **Deep Wine** (wine-deep): the pressed state of wine (running-head brand hover) and the text color inside `::selection`.
 
 ### Secondary
-- **Red Thread** (thread): the thread only. Masthead thread strokes, the running stitch, the band on typeset covers, the footer's thread and knot. Never text, never a fill.
+- **Red Thread** (thread): the thread only. Masthead thread and knot strokes, the running stitch, the band on typeset covers, the footer's thread and knot. Never text, never a fill.
 - **Highlighter Rose** (rose): marks, never fills a section. The stroke under the current nav item, the low highlighter behind quoted passages (`<mark>` in the home excerpt, `blockquote` in review prose), `::selection`, and the focus ring on the wine footer.
 
 ### Tertiary
@@ -176,7 +176,7 @@ A reduced bookbinder's palette: one wine cloth, one red thread, one highlighter 
 ### Named Rules
 **The Bookcloth Rule.** Wine is a field, not a box. It runs edge to edge across the viewport and carries its own text, link, meta, avatar and focus colors through the field's custom properties (`--muted`, `--avatar-bg`, `--avatar-fg`), so components never need wine variants. A page whose last section is a colored field meets the footer's wine with no strip of paper between.
 
-**The Highlighter Rule.** Rose marks; it never fills a section, a panel or a cover. Its shape is a reader's stroke: low on the line (from 38% to 90% of the line box), or the irregular nav mark, never a full rectangle behind a block.
+**The Highlighter Rule.** Rose marks; it never fills a section, a panel or a cover. Its shape is a reader's stroke: low on the line (from 38% to 90% of the line box), or the nav mark cut to the book radius, never a full rectangle behind a block.
 
 **The Two Missing Tones Rule.** Typeset covers are never wine (a wine book vanishes on the wine lead field) and never rose (rose is reserved for the highlighter). New cover tones come from bookcloth, not from the brand accents.
 
@@ -191,22 +191,24 @@ Both families are self-hosted through Astro Fonts at build time; the reader's br
 **Character:** A press serif with real optical sizes doing all the reading and all the headlines, set tight and balanced at display sizes and open at reading sizes; a neutral grotesque reserved for the voice of the apparatus (who, when, where to go).
 
 ### Hierarchy
-- **Display** (500, clamp(3.4rem, 16.5vw, 9.75rem), 0.9, -0.035em): the masthead wordmark on the home page only, with the thread woven through it. Inner pages get a running head instead (the name at 1.625rem, 600, wine).
+- **Display** (500, clamp(3rem, calc((100vw - 2 * var(--gutter)) / 5.9), 9.75rem), 0.9, -0.035em): the masthead wordmark on the home page only, with the thread woven through it and tied off in the knot. The size is derived from the column, not the viewport alone: word plus knot measure about 5.9em, so they always fit and a phone never scrolls sideways; the wordmark reserves 0.95em on its right for the knot. Inner pages get a running head instead (the name at the title-entry clamp, 600, wine).
 - **Headline** (500, clamp(2.75rem, 7vw, 5rem), 1, -0.03em): page titles in the page head of inner pages.
-- **Headline Feature** (500, clamp(2.25rem, 4.6vw, 4rem), 1.02, -0.025em): the title beside a large book on a wine field (home lead; the review page uses the same shape capped at 3.75rem).
-- **Title** (500, clamp(1.875rem, 3vw, 2.5rem), 1.1, -0.02em): side-head section names ("Leituras recentes", "Quem escreve"). Contributor names sit at the same register (1.75rem).
-- **Title Entry** (500, clamp(1.375rem, 2.4vw, 1.875rem), 1.12, -0.015em): review titles in table-of-contents entries.
-- **Quote** (400, clamp(1.75rem, 4.2vw, 3.25rem), 1.22, max 24ch): the highlighted passage on the home page, opening quote hung in the margin (text-indent -0.42em). In review prose the passage is 1.4375rem / 1.45.
-- **Standfirst** (400, clamp(1.125rem, 2vw, 1.3125rem), 1.5, max 36rem, muted): the paragraph under a page title.
-- **Body Reading** (400, 1.1875rem, 1.7, max 38rem): review and about prose. Prose subheads 1.625rem / 1.2. A three-line drop cap in wine opens each review where `initial-letter` is supported.
-- **Body** (400, 1.125rem, 1.6): default text. Summaries and bios step down to 1.0625rem / 1.5.
-- **Label** (Archivo 500, 1rem): editorial links and nav items; 0.9375rem for secondary links (WhatsApp, Instagram).
-- **Meta** (Archivo 400, 0.875rem, tabular numerals, muted): bylines, categories, dates, reading time, counts.
+- **Headline Feature** (500, clamp(2.25rem, 4.6vw, 4rem), 1.02, -0.025em): the title beside a large book on a wine field (home lead and the review page h1).
+- **Title** (500, clamp(1.875rem, 3vw, 2.5rem), 1.1, -0.02em): side-head section names ("Leituras recentes", "Quem escreve"). Compact contributor names sit just under it at 1.75rem; the team-page name uses the title clamp itself.
+- **Title Entry** (500, clamp(1.375rem, 2.4vw, 1.875rem), 1.12, -0.015em): review titles in table-of-contents entries, prose subheads (line-height 1.2), the running-head brand and the archive category index.
+- **Quote** (400, clamp(1.75rem, 4.2vw, 3.25rem), 1.22, max 24ch): the highlighted passage on the home page, opening quote hung in the margin (text-indent -0.42em). In review prose the passage drops to the standfirst clamp at 1.45.
+- **Standfirst** (400, clamp(1.125rem, 2vw, 1.3125rem), 1.5, max 36rem, muted): the paragraph under a page title. The same clamp sets credit lines, the team-page bio, the footer statement and in-prose blockquotes.
+- **Body Reading** (400, 1.1875rem, 1.7, max 38rem): review and about prose. Prose subheads use title entry. A three-line drop cap in wine opens each review where `initial-letter` is supported.
+- **Body** (400, 1.125rem, 1.6): default text, and the size of summaries, bios and the masthead description (at line-height 1.5 / 1.45).
+- **Label** (Archivo 500, 1rem): every editorial link (More, WhatsApp, Instagram) and nav item. No secondary link size.
+- **Meta** (Archivo 400, 0.875rem, tabular numerals, muted): bylines, categories, dates, reading time, facts and their legends, counts, figcaptions, the footer note.
 
 ### Named Rules
 **The Two Voices Rule.** Piazzolla is what you read; Archivo is what you scan. Titles, summaries, bios, quotes and prose are serif; bylines, dates, categories, nav, links and figcaptions are sans. No third family, and no all-caps tracked labels.
 
 **The Credit Line Rule.** A review is always introduced with the book it reads, set as "sobre *Título*, de Autor" in the serif, muted, with the book title in italic `cite` (on wine, the cite switches to on-wine).
+
+**The Ramp Rule.** Every text size is a ramp step above; a new element borrows the step whose role it shares (a credit line is a standfirst, a link is a label, a legend is meta) instead of minting an in-between literal.
 
 ## Layout
 
@@ -232,19 +234,19 @@ The page is flat paper. Depth belongs to books alone: a book resting on the page
 
 ## Shapes
 
-Square by default: fields, sections, the footer and the page have no rounding. Two curves exist and both are physical. Books have a square-ish spine and a softer fore-edge (2px 4px 4px 2px). Avatars, photos and monograms are circles, echoing the logo's monogram-on-a-circle. The nav highlighter has a deliberately uneven radius (2px 6px 3px 5px) so it reads as a hand stroke. The thread itself is drawn with round caps and joins, and the running stitch is long stitch, short gap (11px on, 6px off, 2px tall).
+Square by default: fields, sections, the footer and the page have no rounding. Two curves exist and both are physical. Books have a square-ish spine and a softer fore-edge (2px 4px 4px 2px). Avatars, photos and monograms are circles, echoing the logo's monogram-on-a-circle. The nav highlighter borrows the book radius (2px 4px 4px 2px), so the only curves besides circles are the book's. The thread itself is drawn with round caps and joins, and so are the running stitch's stitches (about 11px of thread, 6px of paper).
 
 ## Components
 
 ### Editorial Links (instead of buttons)
 The site has no buttons. Actions are links in the wine link color with the global underline (thickness max(1px, 0.06em), offset 0.2em, 40% opacity at rest, full on hover).
 - **More link** (MoreLink): Archivo 500, 1rem, 44px tall, a 16px drawn right arrow (1.5px stroke, round caps) that nudges 3px forward on hover. Used for "Ler a resenha", "Todas as resenhas", "Conheça a equipe".
-- **WhatsApp link** (WhatsAppLink): Archivo 500, 0.9375rem, a 14px diagonal arrow that moves up-right 2px on hover, meaning "leaves the site". The copy is always "Conversar com {nome} no WhatsApp".
+- **WhatsApp link** (WhatsAppLink): Archivo 500, 1rem, a 14px diagonal arrow that moves up-right 2px on hover, meaning "leaves the site". The copy is always "Conversar com {nome} no WhatsApp".
 - **Focus:** 3px solid wine outline, 2px offset; on wine fields the ring switches to on-wine, and on the footer to rose.
 
 ### Navigation
-- **Masthead (home):** the display wordmark with the thread drawn twice through it, once behind the letters and once in front in irregular dashes, so it passes over and under the strokes; the description sits beside it in muted serif; the nav runs under both; a running stitch closes the header.
-- **Running head (inner pages):** the name at 1.625rem serif 600 in wine on the left, nav on the right, running stitch below.
+- **Masthead (home):** the display wordmark with the thread drawn twice through it, once behind the letters and once in front in irregular dashes, so it passes over and under the strokes. The thread runs level out of the name into the footer's knot, so the publication opens and closes on the same knot. The knot is one shared drawing (`KNOT` in BaseLayout: a 115x87 box, thread entering at y=46.2) and a single continuous stroke: a figure eight whose two lobes only meet where they cross, like a ribbon bow, ending in a loose tail. Its box reaches the CSS as custom properties (`--knot-units`, `--knot-aspect`, `--knot-entry`), so a new drawing needs no recalculated numbers. In the masthead it is 0.95em wide, starting 4% past the word, and the wordmark reserves 1.15em on its right for it. The thread stroke is 0.02em in screen space (non-scaling, because its box stretches); the knot scales uniformly with a stroke of `--knot-units * 0.02 / 0.95` user units, which equals 0.02em at any size. The description sits beside it in muted serif at body size; the nav runs under both; a running stitch closes the header.
+- **Running head (inner pages):** the name at the title-entry clamp, serif 600, in wine on the left, nav on the right, running stitch below.
 - **Items:** Archivo 1rem, ink, 44px tall, gaps clamp(1rem, 3vw, 1.5rem). Hover turns wine and draws a 1px hairline from the left. The current item carries the rose highlighter stroke behind its label (multiply blend), which slides to the next section across page navigations.
 
 ### Fields
@@ -252,7 +254,7 @@ The site has no buttons. Actions are links in the wine link color with the globa
 - **Endpaper field:** full-bleed endpaper hosting contributors and author blocks.
 
 ### Running Stitch
-A 2px red-thread dashed line (11px stitch, 6px gap) that joins sections: under the header, above the home excerpt, between archive categories, above a member's reviews. It is the system's only divider.
+The ponto corrido: the red thread going in and out of the paper, joining sections under the header, above the home excerpt, between archive categories and above a member's reviews. It is the system's only divider. Drawn by `Stitch.astro` as an SVG line (`x2="100%"`, so it stretches to any width without distorting), stroke 2.25 with round caps and `stroke-dasharray: 9 8`: the caps add half the stroke at each end, giving about 11px of thread and 6px of paper per stitch, with rounded ends like real thread. It is never a CSS gradient or a dashed border.
 
 ### Book Cover (signature)
 A book as an object. An uploaded cover is shown whole, never cropped, scaled to the parent's `--book-height`. Without an image, a typeset cover at 2:3: the title in the serif owns the upper half (19cqi, 500, tight), the red thread crosses as the publisher's band (border at max(1.5px, 1.3cqi)), the author sits under it in Archivo, and a hinge crease marks the spine. At list size (under 8rem wide) the author drops and only the band remains. Sizes in use: 8.25 to 10.5rem in entries, 19rem on mobile features, clamp(24rem, 60vh, 33rem) on desktop features.
@@ -266,17 +268,17 @@ One line of a table of contents: the book on the left (5.5rem column, 7.25rem fr
 - **Monogram avatar:** until a photo arrives, light serif initials on a wine circle (inverted on wine fields), the logo's own grammar.
 
 ### Expediente Footer
-A wine field that opens with the thread entering from the left edge of the screen and ending in a drawn knot at the content's right edge (2.5px, round caps). Below: "Expediente" title, the publication statement, the standing notice that the site offers no psychological care in Archivo on-wine-muted, and the footer nav.
+A wine field that opens with the thread entering from the left edge of the screen and ending in the shared knot at the content's right edge (2.5px non-scaling, round caps). Below: "Expediente" title, the publication statement at the standfirst clamp, the standing notice that the site offers no psychological care in Archivo meta on-wine-muted, and the footer nav.
 
 ### Motion
-Feedback is fast (150ms color, 250ms hairlines and arrows); only things that travel take longer (450ms cover flight, 350ms highlighter slide), all on cubic-bezier(0.16, 1, 0.3, 1). The masthead thread wipes in once on load (1.1s, 150ms delay). Page changes use cross-document view transitions with no JavaScript; in lists only the book about to be opened is named. Under `prefers-reduced-motion: reduce` nothing moves: no lift, no wipe, no shared-element flight; pages simply crossfade.
+Feedback is fast (150ms color, 250ms hairlines and arrows); only things that travel take longer (450ms cover flight, 350ms highlighter slide), all on cubic-bezier(0.16, 1, 0.3, 1). The masthead ties itself once on load: the thread wipes across the name (clip-path, 1.1s, 150ms delay), then the knot draws itself in one continuous stroke (stroke-dashoffset over pathLength 1, 1.1s from 1s on cubic-bezier(0.45, 0, 0.25, 1): it starts as slowly as the thread arrives, speeds through the lobes and settles at the tail; hidden until it starts so no round-cap specks show). Page changes use cross-document view transitions with no JavaScript; in lists only the book about to be opened is named. Under `prefers-reduced-motion: reduce` nothing moves: no lift, no wipe, the knot shown static and complete, no shared-element flight; pages simply crossfade.
 
 ## Do's and Don'ts
 
 ### Do:
 - **Do** use the red thread (stitch, band, woven line, knot) as the only ornament and the only divider.
 - **Do** give wine whole full-bleed fields and let the field supply on-wine text, meta, avatar and focus colors.
-- **Do** mark with rose as a low highlighter stroke (38% to 90% of the line box) or the uneven nav mark.
+- **Do** mark with rose as a low highlighter stroke (38% to 90% of the line box) or the book-radius nav mark.
 - **Do** introduce every review with its book: the cover object and the "sobre *Título*, de Autor" credit line.
 - **Do** set reading in Piazzolla at 1.1875rem / 1.7 within 38rem, and scanned apparatus in Archivo.
 - **Do** keep every link and nav target at least 44px tall, with the 3px wine focus ring (on-wine or rose on wine).

@@ -151,17 +151,6 @@ main:has(> .flush-end:last-child) + .site-footer {
   margin-top: 0;
 }
 
-/* Running stitch: how sections are joined, instead of printer's rules. Long
-   stitch, short gap, like thread going in and out of the paper. */
-.stitch {
-  height: 2px;
-  border: 0;
-  margin: 0;
-  color: var(--color-thread);
-  background: linear-gradient(90deg, currentColor 0 11px, transparent 11px) 0 0 / 17px 2px
-    repeat-x;
-}
-
 /* ---- Colored fields ---- */
 
 /* Wine bookcloth: text, links, metadata, avatars and the focus ring all

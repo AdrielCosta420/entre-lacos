@@ -3,6 +3,7 @@ import type { GetStaticPaths } from 'astro';
 import { render } from 'astro:content';
 import Avatar from '../../components/Avatar.astro';
 import ReviewEntry from '../../components/ReviewEntry.astro';
+import Stitch from '../../components/Stitch.astro';
 import WhatsAppLink from '../../components/WhatsAppLink.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getMembers, getPublishedReviewsBy, type Member } from '../../lib/content.ts';
@@ -78,7 +79,7 @@ const studies = ['Estudante de Psicologia', institution, semester].filter(Boolea
   {
     reviews.length > 0 && (
       <section class="container her-reviews" aria-labelledby="resenhas-dela">
-        <div class="stitch" aria-hidden="true" />
+        <Stitch />
         <div class="with-side">
           <div class="side">
             <h2 id="resenhas-dela">Resenhas de {firstName}</h2>
@@ -154,7 +155,7 @@ const studies = ['Estudante de Psicologia', institution, semester].filter(Boolea
   .her-reviews {
     margin-top: clamp(3.5rem, 8vw, 5.5rem);
   }
-  .her-reviews .stitch {
+  .her-reviews :global(.stitch) {
     margin-bottom: clamp(2rem, 5vw, 3rem);
   }
 </style>

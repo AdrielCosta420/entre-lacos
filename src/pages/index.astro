@@ -4,6 +4,7 @@ import Byline from '../components/Byline.astro';
 import Contributor from '../components/Contributor.astro';
 import MoreLink from '../components/MoreLink.astro';
 import ReviewEntry from '../components/ReviewEntry.astro';
+import Stitch from '../components/Stitch.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getMembers, getPublishedReviews, withAuthors } from '../lib/content.ts';
 import { firstQuote } from '../lib/quotes.ts';
@@ -76,7 +77,7 @@ const excerpt = [...recent, ...(lead ? [lead] : [])]
     excerpt && (
       <section class="excerpt" aria-label="Trecho em destaque">
         <div class="container">
-          <div class="stitch" aria-hidden="true" />
+          <Stitch />
           <figure class="offset-main">
             <blockquote>
               <p>
