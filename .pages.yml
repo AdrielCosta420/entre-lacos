@@ -15,7 +15,15 @@ content:
     label: Resenhas
     type: collection
     path: src/content/resenhas
-    filename: '{primary}.md'
+    # The file name is the review's URL, and that URL gets shared on
+    # Instagram. The book title keeps it short and stable
+    # (/resenhas/dom-casmurro/); the CMS slugifies it (no accents) and
+    # suffixes a second review of the same book (dom-casmurro-1).
+    filename: '{fields.book.title}.md'
+    # Renaming the file changes the URL, and GitHub Pages has no redirects,
+    # so every shared link would break. The developer handles renames.
+    operations:
+      rename: false
     view:
       fields: [title, author, publishedAt, draft]
       primary: title

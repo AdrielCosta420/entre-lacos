@@ -48,7 +48,10 @@ Fontes: respostas do grupo em [levantamento.md](levantamento.md); operação (ro
 | Build falha por dado inválido | O deploy não acontece e a versão anterior segue no ar. Corrige-se pelo painel | `.github/workflows/deploy.yml` |
 | Data `2026-11-20` em outro fuso | Formatada em UTC: mesmo dia em qualquer máquina (há teste) | `lib/dates.ts` |
 | Duas autoras salvam arquivos diferentes ao mesmo tempo | Dois commits, deploys em fila (`concurrency: pages`). O site final reflete o último commit | workflow |
-| Duas autoras salvam o mesmo arquivo | A API do GitHub recusa a gravação com SHA desatualizado, em vez de sobrescrever. **Não verificado:** como o Pages CMS mostra essa recusa | GitHub API |
+| Duas autoras salvam o mesmo arquivo | A API do GitHub recusa a gravação com SHA desatualizado, em vez de sobrescrever. O Pages CMS não tenta de novo e mostra "File has changed since you last loaded it. Please refresh the page and try again." (em inglês) | GitHub API, Pages CMS |
+| Duas resenhas do mesmo livro | O arquivo leva o título do livro, e a segunda ganha sufixo (`dom-casmurro-1`) | `.pages.yml` (`filename`), Pages CMS |
+| Mudar a URL de uma resenha publicada | Renomear está bloqueado no CMS, porque quebraria links já compartilhados (o Pages não tem redirecionamento). Editar o título não renomeia o arquivo | `.pages.yml` (`operations`) |
+| Campo opcional vazio no CMS (capa, temas, WhatsApp) | O CMS tira a chave do arquivo em vez de gravar `""` ou `null`, e o `.optional()` do schema aceita | Pages CMS, `content.config.ts` |
 | Salvar sem mudanças ou rodar o deploy de novo | Idempotente: o build depende só do conteúdo do commit | — |
 | Acesso ao painel | Só colaboradoras do repositório. Tirar o acesso = remover a colaboradora | GitHub |
 | Foto pesada (celular) | O Astro gera WebP em vários tamanhos. O original fica no repositório e o deixa mais pesado | `media` em `.pages.yml` |
@@ -83,6 +86,8 @@ O schema em `src/content.config.ts` e o formulário em `.pages.yml` descrevem os
 - **`author`:** o CMS salva o caminho do arquivo (`value: '{path}'`). `toEntryId` converte esse caminho para o id antes do `reference('integrantes')`. Também aceita o id puro, para arquivos escritos à mão.
 - **Imagens:** ficam em `src/assets/uploads`, e o CMS grava `/src/assets/uploads/<arquivo>` (caminho a partir da raiz do projeto). Isso faz o Astro otimizar a imagem, o que foi verificado no build com a capa de exemplo.
 - **`draft`:** no CMS o padrão é `true` (resenha nova nasce oculta). No schema o padrão é `false` (arquivo escrito à mão sem o campo é publicado).
+- **Nome do arquivo = URL da resenha.** Vem do título do livro, em slug sem acento (`dom-casmurro.md`). É definido na criação e não muda depois, para que o link compartilhado no Instagram continue valendo (decidido em 24/11/2026; a alternativa descartada, o título da resenha, dava URLs longas e presas ao título provisório).
+- **O CMS reescreve o arquivo inteiro** a partir do `.pages.yml` (`settings.content` no padrão). Um campo que exista só no schema é apagado sem aviso no próximo salvamento, e comentários YAML também somem. É mais um motivo para os dois arquivos mudarem juntos.
 - **WhatsApp:** `55` + DDD + número, só dígitos. A regra vive em `WHATSAPP_PATTERN` (`lib/whatsapp.ts`) e é repetida no `.pages.yml`.
 
 ### 4.4 Dependências
@@ -142,7 +147,7 @@ Ordem proposta. Cada passo começa com o OK do Adriel.
 
 ## 8. Riscos e dívidas
 
-- **Formatos do Pages CMS não verificados.** A documentação não diz o valor padrão do `reference`, nem o formato exato do `list` e do `date`. Mitigação: `toEntryId` e o passo 2 do plano.
+- **Formatos do Pages CMS verificados só em parte.** Lidos no código-fonte do CMS em 24/11/2026, porque a documentação não diz: campos vazios são omitidos, a data sai no `format` configurado (`yyyy-MM-dd`), o nome do arquivo é slug e não muda ao editar. Falta ver num salvamento real o texto exato do `reference` (`{path}`), se o WhatsApp sai entre aspas e o caminho gravado para a capa. Mitigação: `toEntryId` aceita caminho ou id, e o passo 2 do plano.
 - **Logo em baixa resolução.** O arquivo tem 150×150 px: serve de favicon, mas não para usos grandes. Pedir o original ao grupo.
 - **Repositório público.** Rascunhos e histórico ficam visíveis no GitHub (nunca no site). Por enquanto só há conteúdo de exemplo; se o grupo quiser privacidade, ver o README.
 - **Fotos originais pesadas** se acumulam no repositório. Se pesar, considerar compressão automática no upload.

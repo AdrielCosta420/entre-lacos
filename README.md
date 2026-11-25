@@ -32,6 +32,7 @@ npm run build    # gera dist/
 - **Rascunho:** `draft: true` esconde a resenha. Ela não ganha página nem aparece em listas. Toda página lê as resenhas por `getPublishedReviews()` (`src/lib/content.ts`), que é o único lugar com esse filtro.
 - **Autora:** o painel salva o caminho do arquivo da integrante, e `toEntryId` (`src/lib/entry-id.ts`) converte para o id. Uma autora inexistente quebra o build de propósito.
 - **Excluir integrante** está bloqueado no painel, porque quebraria as resenhas dela. Faça pelo repositório, reatribuindo as resenhas antes.
+- **Renomear resenha** está bloqueado no painel. O nome do arquivo é a URL (vem do título do livro), e renomear quebraria os links já compartilhados. Se precisar, renomeie pelo repositório sabendo que o link antigo deixa de funcionar.
 - **Rascunhos e excluídos continuam no histórico do git.** Com o repositório privado, só colaboradores veem esse histórico.
 
 ## Deploy
