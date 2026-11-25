@@ -4,14 +4,18 @@ import { render } from 'astro:content';
 import BookCover from '../../components/BookCover.astro';
 import Byline from '../../components/Byline.astro';
 import Contributor from '../../components/Contributor.astro';
+import ReviewEntry from '../../components/ReviewEntry.astro';
+import Stitch from '../../components/Stitch.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { categoryAnchor } from '../../lib/categories.ts';
 import {
   getPublishedReviews,
   getPublishedReviewsBy,
   getReviewAuthor,
+  withAuthors,
   type Review,
 } from '../../lib/content.ts';
+import { relatedReviews } from '../../lib/related.ts';
 import { href } from '../../lib/site.ts';
 
 // Built from published reviews only: a draft gets no page at all, not just
@@ -28,10 +32,12 @@ interface Props {
 const { review } = Astro.props;
 const { title, book, themes, summary, category } = review.data;
 const author = await getReviewAuthor(review);
-const [{ Content }, authorReviews] = await Promise.all([
+const [{ Content }, authorReviews, allReviews] = await Promise.all([
   render(review),
   getPublishedReviewsBy(author.id),
+  getPublishedReviews(),
 ]);
+const related = await withAuthors(relatedReviews(review, allReviews));
 ---
 
 <BaseLayout title={title} description={summary}>
@@ -80,6 +86,25 @@ const [{ Content }, authorReviews] = await Promise.all([
       </aside>
     </div>
   </article>
+
+  {
+    related.length > 0 && (
+      <section class="container related" aria-labelledby="leituras-ligadas">
+        <Stitch />
+        <div class="with-side">
+          <div class="side">
+            <h2 id="leituras-ligadas">Leituras que se ligam</h2>
+            <p class="side-text">Da mesma categoria, com temas em comum ou da mesma autora.</p>
+          </div>
+          <ol class="entries">
+            {related.map((entry) => (
+              <ReviewEntry review={entry.review} author={entry.author} />
+            ))}
+          </ol>
+        </div>
+      </section>
+    )
+  }
 
   <aside class="author-block field-endpaper flush-end" aria-labelledby="quem-escreveu">
     <div class="container with-side">
@@ -157,6 +182,13 @@ const [{ Content }, authorReviews] = await Promise.all([
     display: inline-flex;
     align-items: center;
     min-height: 44px;
+  }
+
+  .related {
+    margin-top: clamp(4rem, 9vw, 6.5rem);
+  }
+  .related :global(.stitch) {
+    margin-bottom: clamp(2rem, 5vw, 3rem);
   }
 
   .author-block {

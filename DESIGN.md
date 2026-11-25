@@ -271,6 +271,9 @@ A book as an object. An uploaded cover is shown whole, never cropped, scaled to 
 ### Review Entry
 One line of a table of contents: the book on the left (5.5rem column, 7.25rem from 40rem), then the title in ink (wine on hover), the credit line, the summary, and a meta line "por Autora · Categoria · data". The whole entry picks its book up on hover.
 
+### Leituras que se ligam
+At the end of a review, after the text and before "Quem escreveu": up to three other reviews linked to it, as Review Entries under a side-head, joined by a running stitch. Linked means, strongest first, the same category, more themes in common, the same author (`src/lib/related.ts`, categories and themes normalized like the archive); the newest first among equals. Reviews linked by nothing are left out instead of padding the list, and the section disappears when none remain.
+
 ### Contributor and Byline
 - **Contributor:** circular avatar (76px compact, 112px full) beside the name (serif, ink, wine on hover), a meta line of facts, the bio, interests in Archivo wine, and the editorial links.
 - **Byline:** 48px avatar beside "por Nome" in Archivo and a meta line of category, date and reading time; colors come from the field it sits on.
