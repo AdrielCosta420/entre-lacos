@@ -63,7 +63,8 @@ const knotVars = [
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:locale" content="pt_BR" />
-    <Font cssVariable="--font-piazzolla" preload />
+    {/* Preload the roman only: the italic sets book titles and can arrive later. */}
+    <Font cssVariable="--font-piazzolla" preload={[{ style: 'normal' }]} />
     <Font cssVariable="--font-archivo" preload />
     {/* The reader's saved settings, applied before the first paint so the page
         never flashes at the default size or contrast. Mirrors parseSettings
@@ -152,7 +153,8 @@ const knotVars = [
             tapping outside, focus back to the button); the script below only
             applies and saves the settings. The panel follows the button in the
             DOM, so Tab moves straight into it. */}
-        <button class="reading-button" type="button" popovertarget="leitura" aria-label="Ajustes de leitura">
+        {/* The name starts with the visible "Aa", so voice control users can say it (WCAG 2.5.3). */}
+        <button class="reading-button" type="button" popovertarget="leitura" aria-label="Aa, ajustes de leitura">
           <span class="reading-mark" aria-hidden="true">Aa</span>
         </button>
         <div id="leitura" class="reading-panel" popover role="dialog" aria-labelledby="leitura-titulo">
@@ -231,7 +233,7 @@ const knotVars = [
             }
             <li>
               <a href={instagramUrl(SITE.instagram)} rel="noopener noreferrer" target="_blank">
-                Instagram @{SITE.instagram}
+                Instagram @{SITE.instagram}<span class="visually-hidden"> (abre em nova aba)</span>
               </a>
             </li>
           </ul>
@@ -249,7 +251,7 @@ const knotVars = [
     top: -3rem;
     padding: 0.5rem 1rem;
     background: var(--color-wine);
-    color: #fff;
+    color: var(--color-on-wine);
     font-family: var(--font-sans);
     z-index: 10;
   }
@@ -585,9 +587,6 @@ const knotVars = [
     min-height: 44px;
     font-family: var(--font-sans);
     color: var(--color-on-wine);
-  }
-  .footer-nav a:hover {
-    color: #fff;
   }
   /* The global wine ring disappears on the wine footer. */
   .site-footer a:focus-visible {

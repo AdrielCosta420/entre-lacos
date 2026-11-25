@@ -152,6 +152,12 @@ const [{ Content }, authorReviews] = await Promise.all([
     color: var(--color-ink);
     font-weight: 600;
   }
+  /* A standalone link, not one inside a sentence: it needs a full target. */
+  .margin .meta a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
 
   .author-block {
     margin-top: clamp(4rem, 9vw, 6.5rem);
